@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nodo Personal — Tu copiloto de IA. En tu máquina.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','sans-serif'], mono: ['"JetBrains Mono"','monospace'] },
+          colors: { dark: '#141414' }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg-dark:#141414;--bg-dark-2:#1a1a1a;--bg-dark-3:#1e1e1e;
+      --bg-light:#F6F6F6;--border-dark:#2c2c2c;--border-light:#e0e0e0;
+      --text-primary:#f6f6f6;--text-secondary:#999;--text-dark:#1a1a1a;
+      --accent-green:#34d399;--accent-blue:#0089ff;
+      --accent-teal:#3fffdd;--accent-purple:#8B5CF6;--accent-orange:#D87756;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg-dark);color:var(--text-primary);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+
+    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+    .pulse-dot{animation:pulse-dot 2s ease-in-out infinite}
+
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .cursor-blink{animation:blink 1s step-end infinite}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    .fade-target{opacity:0}
+    .fade-target.visible{animation:fadeInUp .65s ease forwards}
+
+    @keyframes shimmer{from{background-position:-200% center}to{background-position:200% center}}
+    .btn-shimmer{background:linear-gradient(90deg,#fff 40%,#e0e0e0 50%,#fff 60%);background-size:200% auto;animation:shimmer 3s linear infinite}
+    .btn-shimmer:hover{animation-duration:1.2s}
+
+    .hero-gradient{background:linear-gradient(90deg,#f6f6f6 0%,rgba(246,246,246,.35) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    .terminal{background:var(--bg-dark-3);border:1px solid rgba(255,255,255,.1);border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.65);font-family:'JetBrains Mono',monospace;font-size:12px;overflow:hidden}
+    .terminal-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+    .t-dot{width:10px;height:10px;border-radius:50%}
+    .t-title{margin:0 auto;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase}
+
+    .c-kw{color:#5b9cf4}.c-str{color:#a5d6a7}.c-fn{color:#D87756}
+    .c-cmt{color:rgba(255,255,255,.28)}.c-num{color:#3fffdd}
+    .c-ok{color:#34d399}.c-warn{color:#febc2e}
+
+    .ornament-divider{display:flex;height:14px;width:100%}
+    .ornament-divider span{flex:1;border:1px solid var(--border-dark)}
+
+    .nav-blur{background:rgba(20,20,20,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .code-mask{mask-image:linear-gradient(to bottom,black 72%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 72%,transparent 100%)}
+
+    .card-hover{transition:background .2s,border-color .2s}
+    .card-hover:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
+
+    .nodo-card{transition:all .25s}
+    .nodo-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(52,211,153,.08)}
+
+    .compare-row:nth-child(odd){background:rgba(255,255,255,.02)}
+
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+    #terminal-body::-webkit-scrollbar{display:none}
+    #terminal-body{scrollbar-width:none;-ms-overflow-style:none}
+
+    @media(max-width:640px){.hero-terminal-wrap{transform:scale(.6);transform-origin:top center}}
+    @media(min-width:641px) and (max-width:768px){.hero-terminal-wrap{transform:scale(.78);transform-origin:top center}}
+  </style>
+</head>
+<body class="bg-dark">
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="nav-blur fixed top-0 left-0 right-0 z-50 border-b border-[var(--border-dark)]" style="height:56px">
+  <div class="max-w-[1200px] mx-auto px-5 h-full flex items-center justify-between">
+    <a href="nodo23-v3.html" class="flex items-center gap-2">
+      <span class="font-mono text-[15px] font-medium">Nodo<span style="color:var(--accent-green)">23</span></span>
+      <span class="pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--accent-green)]"></span>
+    </a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="nodo23-v3.html" class="font-mono text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">← Comunidad</a>
+      <a href="#como" class="font-mono text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Cómo funciona</a>
+      <a href="#skills" class="font-mono text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Skills</a>
+      <a href="#soberania" class="font-mono text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Soberanía</a>
+      <a href="#precios" class="font-mono text-[13px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Precios</a>
+    </div>
+    <a href="#consulta" class="btn-shimmer rounded-full px-5 py-2 text-[13px] font-medium text-[#141414]">Consulta Gratis →</a>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-dark pt-[56px]">
+  <div class="pointer-events-none absolute inset-0 opacity-[0.03]"
+       style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px"></div>
+  <div class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full"
+       style="background:radial-gradient(ellipse at center,rgba(52,211,153,.07) 0%,transparent 70%);filter:blur(40px)"></div>
+
+  <div class="relative z-10 flex flex-col items-center text-center px-5 max-w-[820px] mx-auto pt-10">
+    <!-- eyebrow -->
+    <div class="fade-target mb-7 inline-flex items-center gap-2 border border-[var(--border-dark)] rounded-full px-4 py-1.5">
+      <span class="pulse-dot w-[6px] h-[6px] rounded-full bg-[var(--accent-green)]"></span>
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">Nodo Personal · Skills de IA · Soberanía&nbsp;Digital</span>
+    </div>
+
+    <!-- headline -->
+    <h1 class="fade-target font-medium tracking-[-0.025em]" style="animation-delay:.1s;line-height:1.08">
+      <span style="display:block;font-size:clamp(15px,1.6vw,22px);color:rgba(255,255,255,.38);font-weight:400;letter-spacing:.01em;margin-bottom:10px">
+        El 60% lo monta cualquiera.
+      </span>
+      <span class="hero-gradient" style="font-size:clamp(38px,5.8vw,74px)">El otro 40%<br/>es lo que funciona.</span>
+    </h1>
+
+    <!-- sub -->
+    <p class="fade-target mt-6 max-w-[580px] leading-[1.65]"
+       style="font-size:17px;color:rgba(255,255,255,.5);animation-delay:.2s">
+      Te construimos un Nodo Personal — un conjunto de skills de IA que se ejecuta en tu máquina. Empieza por el que más te duela. Lo configuramos en 48h, lo mejoramos cada mes, y tus datos nunca salen de tu infraestructura.
+    </p>
+
+    <!-- CTAs -->
+    <div class="fade-target flex flex-wrap justify-center gap-3 mt-9" style="animation-delay:.3s">
+      <a href="#consulta" class="btn-shimmer rounded-full px-7 py-3 text-[14px] font-medium text-[#141414]">Consulta Gratuita →</a>
+      <a href="#como" class="rounded-full px-7 py-3 text-[14px] font-medium border border-[var(--border-dark)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#444] transition-all">Cómo funciona</a>
+    </div>
+    <p class="fade-target mt-5 font-mono text-[11px] text-[var(--text-secondary)]" style="animation-delay:.35s">
+      €300 setup · €120/mes · sin contrato
+    </p>
+  </div>
+
+  <!-- Terminal -->
+  <div class="fade-target relative mt-14 w-full max-w-[660px] px-5 mx-auto" style="animation-delay:.45s">
+    <div class="hero-terminal-wrap">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="t-dot" style="background:#ff5f57"></span>
+          <span class="t-dot" style="background:#febc2e"></span>
+          <span class="t-dot" style="background:#28c840"></span>
+          <span class="t-title">nodo personal · skills activos</span>
+          <span class="flex items-center gap-1.5 ml-auto">
+            <span class="pulse-dot w-[6px] h-[6px] rounded-full bg-[var(--accent-green)]"></span>
+            <span style="font-size:10px;color:rgba(255,255,255,.2)">live</span>
+          </span>
+        </div>
+        <div id="terminal-body" class="p-4 code-mask" style="height:310px;overflow-y:auto">
+          <div id="terminal-output" class="leading-[2] text-[12px]"></div>
+          <span id="cursor" class="cursor-blink font-mono text-[var(--accent-green)]">▋</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+         style="background:linear-gradient(to bottom,transparent,var(--bg-dark))"></div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:#1a1a1a"></span><span style="background:rgba(255,255,255,.04)"></span>
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.02)"></span>
+</div>
+
+<!-- ══════════════ EL PROBLEMA ══════════════ -->
+<section id="como" class="relative w-full flex justify-center px-5 py-24" style="background:var(--bg-dark-2)">
+  <div class="max-w-[760px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// el problema</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15]" style="font-size:clamp(26px,3.5vw,42px)">
+      Sabes que la IA puede hacer esto.<br/><span style="color:var(--accent-green)">¿Por qué no lo está haciendo?</span>
+    </h2>
+    <div class="fade-target mt-8 space-y-5 text-[16px] leading-[1.75]" style="color:rgba(255,255,255,.55)">
+      <p>Porque hay un abismo brutal entre "la IA puede organizar tu email" y tener un skill que organiza tu email, filtra lo importante, te prepara el brief del día y te recuerda que llevas cuatro días sin contestar a ese contacto — sin que tú toques&nbsp;nada.</p>
+      <p>Llegar ahí significa configurar prompts, conectar APIs, montar un sistema de memoria, elegir dónde ejecutarlo, arreglar lo que se rompe e iterar durante semanas hasta que el resultado es realmente bueno. La mayoría empieza, llega al 60% y lo&nbsp;deja.</p>
+      <p style="color:var(--text-primary);font-weight:500">Nosotros hacemos el 100%.</p>
+      <p>Nos dices cómo trabajas. Construimos los skills, te guiamos para desplegarlos en la infraestructura más segura para tu caso, y después — la parte que nadie más hace — los seguimos mejorando cada mes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+  <span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ TABLA DE TIEMPO ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark)">
+  <div class="max-w-[860px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// lo que recuperas</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-10" style="font-size:clamp(26px,3.5vw,42px)">
+      Lo que hace tu Nodo<br/><span style="color:rgba(255,255,255,.35)">mientras tú haces lo demás.</span>
+    </h2>
+
+    <div class="fade-target rounded-lg overflow-hidden border border-[var(--border-dark)]">
+      <table class="w-full text-[13px]">
+        <thead>
+          <tr style="background:rgba(255,255,255,.04)">
+            <th class="py-3 px-4 text-left font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider">Tarea</th>
+            <th class="py-3 px-4 text-left font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider">Sin tu Nodo</th>
+            <th class="py-3 px-4 text-left font-mono text-[11px] uppercase tracking-wider" style="color:var(--accent-green)">Con tu Nodo</th>
+          </tr>
+        </thead>
+        <tbody style="color:rgba(255,255,255,.7)">
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Empezar el día</td>
+            <td class="py-3 px-4">Abres el email y ya perdiste el foco</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Te dice qué importa hoy, en orden</td>
+          </tr>
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Después de cada reunión</td>
+            <td class="py-3 px-4">Tú transcribes, tú asignas, tú recuerdas</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Resumido y los seguimientos anotados</td>
+          </tr>
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Bandeja de entrada</td>
+            <td class="py-3 px-4">45 minutos cada mañana, mínimo</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Filtrado y priorizado antes de que te despiertes</td>
+          </tr>
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Seguimiento de proyectos</td>
+            <td class="py-3 px-4">Abres cuatro apps, preguntas, buscas</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Le preguntas al Nodo. Te responde en segundos.</td>
+          </tr>
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Control de gastos</td>
+            <td class="py-3 px-4">Fin de mes, con sorpresas</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Monitorizado en tiempo real</td>
+          </tr>
+          <tr class="compare-row border-t border-[var(--border-dark)]">
+            <td class="py-3 px-4 font-medium text-[var(--text-primary)]">Final del día</td>
+            <td class="py-3 px-4">No sabes bien qué hiciste ni qué queda</td>
+            <td class="py-3 px-4" style="color:var(--accent-green)">Resumen listo, mañana ya preparada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fade-target mt-6 font-mono text-[13px]" style="color:rgba(255,255,255,.4)">
+      // Entre 8 y 12 horas a la semana haciendo cosas que no necesitan tu cabeza.
+    </p>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:#1a1a1a"></span><span style="background:rgba(255,255,255,.04)"></span>
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ MEJORA CONTINUA ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark-2)">
+  <div class="max-w-[760px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// la parte que lo hace diferente</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-6" style="font-size:clamp(26px,3.5vw,42px)">
+      Tu Nodo tiene un equipo detrás.
+    </h2>
+    <div class="fade-target space-y-5 text-[16px] leading-[1.75]" style="color:rgba(255,255,255,.55)">
+      <p>ChatGPT mejora cada mes. Notion también. Pero mejoran para millones de usuarios, no para cómo trabajas tú.</p>
+      <p>Tu Nodo sí. Cada mes revisamos tu sistema: ajustamos prompts, mejoramos la memoria y añadimos skills nuevos con lo que aprendemos gestionando otros Nodos.</p>
+      <p>Cuando encontramos una forma más rápida de procesar reuniones, tu Nodo la recibe. Cuando un skill de otro cliente aprende algo útil, llega al tuyo.</p>
+      <p class="font-medium" style="color:var(--accent-green)">Un copiloto que mejora para ti. No para el usuario medio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+</div>
+
+<!-- ══════════════ 3 OPCIONES ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark)">
+  <div class="max-w-[1100px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// tres formas de tener IA personal</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-12" style="font-size:clamp(26px,3.5vw,42px)">
+      Solo una la quieres de&nbsp;verdad.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Opción 1 -->
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 flex flex-col">
+        <span class="font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider mb-3">Opción 1</span>
+        <h3 class="text-[18px] font-medium mb-4">Instalarlo tú</h3>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.5)">
+          <div><span style="color:var(--accent-green)">✓</span> Control total</div>
+          <div><span style="color:#ff5f57">✗</span> Tú configuras cada skill</div>
+          <div><span style="color:#ff5f57">✗</span> Tú debuggeas cada fallo</div>
+          <div><span style="color:#ff5f57">✗</span> No mejora a menos que tú lo mejores</div>
+          <div><span style="color:#ff5f57">✗</span> Semanas hasta calidad real</div>
+        </div>
+        <p class="mt-5 font-mono text-[11px]" style="color:rgba(255,255,255,.3)">Genial si eres técnico y tienes tiempo infinito.</p>
+      </div>
+      <!-- Opción 2 -->
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 flex flex-col">
+        <span class="font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider mb-3">Opción 2</span>
+        <h3 class="text-[18px] font-medium mb-4">Un SaaS "con IA"</h3>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.5)">
+          <div><span style="color:var(--accent-green)">✓</span> Fácil de empezar</div>
+          <div><span style="color:#ff5f57">✗</span> Skills genéricos, no hechos para ti</div>
+          <div><span style="color:#ff5f57">✗</span> Tus datos en servidores de otro</div>
+          <div><span style="color:#ff5f57">✗</span> Si cierran o cambian precios, te jodes</div>
+          <div><span style="color:#ff5f57">✗</span> No te puedes llevar nada</div>
+        </div>
+        <p class="mt-5 font-mono text-[11px]" style="color:rgba(255,255,255,.3)">Cómodo. Hasta que no lo es.</p>
+      </div>
+      <!-- Opción 3 -->
+      <div class="fade-target rounded-lg border p-6 flex flex-col" style="border-color:var(--accent-green);background:rgba(52,211,153,.03)">
+        <span class="font-mono text-[11px] uppercase tracking-wider mb-3" style="color:var(--accent-green)">Opción 3</span>
+        <h3 class="text-[18px] font-medium mb-4">Nodo Personal</h3>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.6)">
+          <div><span style="color:var(--accent-green)">✓</span> Skills construidos para cómo trabajas tú</div>
+          <div><span style="color:var(--accent-green)">✓</span> Se ejecuta en tu infraestructura</div>
+          <div><span style="color:var(--accent-green)">✓</span> Los mejoramos cada mes</div>
+          <div><span style="color:var(--accent-green)">✓</span> Lo que aprenden otros Nodos, llega al tuyo</div>
+          <div><span style="color:var(--accent-green)">✓</span> Calidad de producción desde el día uno</div>
+          <div><span style="color:var(--accent-green)">✓</span> Tuyo desde el minuto cero</div>
+        </div>
+        <p class="mt-5 font-mono text-[11px]" style="color:var(--accent-green)">Tú recibes los skills. Tú controlas dónde se ejecutan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+  <span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ LO QUE INCLUYE ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark-2)">
+  <div class="max-w-[1100px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// lo que recibes</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-12" style="font-size:clamp(26px,3.5vw,42px)">
+      Lo que una instalación estándar<br/><span style="color:rgba(255,255,255,.35)">no incluye.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 card-hover">
+        <span class="text-[20px] mb-3 block">🧠</span>
+        <h3 class="text-[16px] font-medium mb-2">Se acuerda de todo</h3>
+        <p class="text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Nombres, proyectos, cómo te gusta que haga las cosas. No le explicas nada dos veces.</p>
+      </div>
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 card-hover">
+        <span class="text-[20px] mb-3 block">🔧</span>
+        <h3 class="text-[16px] font-medium mb-2">Conectado a tus herramientas</h3>
+        <p class="text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Gmail, WhatsApp, Calendar, Notion, Drive, Slack… funcionando desde el día uno. Si usas algo más, lo conectamos.</p>
+      </div>
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 card-hover">
+        <span class="text-[20px] mb-3 block">👤</span>
+        <h3 class="text-[16px] font-medium mb-2">Sabe cuándo preguntar</h3>
+        <p class="text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">No todo es automático. Sabe qué puede resolver solo y cuándo necesita tu OK antes de actuar.</p>
+      </div>
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 card-hover">
+        <span class="text-[20px] mb-3 block">🏠</span>
+        <h3 class="text-[16px] font-medium mb-2">Tu infraestructura, tu elección</h3>
+        <p class="text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Te ayudamos a elegir dónde ejecutarlo: un Mac Mini, un VPS europeo, un servidor dedicado. No vendemos hosting — te enseñamos a elegirlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:#1a1a1a"></span><span style="background:rgba(255,255,255,.04)"></span>
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ SOBERANÍA (LIGHT) ══════════════ -->
+<section id="soberania" class="w-full flex justify-center px-5 py-24" style="background:var(--bg-light)">
+  <div class="max-w-[760px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em]" style="color:#888">// soberanía digital</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15]" style="font-size:clamp(26px,3.5vw,42px);color:var(--text-dark)">
+      No es un eslogan.<br/><span style="color:var(--accent-green)">Es la arquitectura.</span>
+    </h2>
+    <div class="fade-target mt-8 space-y-5 text-[16px] leading-[1.75]" style="color:rgba(0,0,0,.55)">
+      <p>Por primera vez, puedes tener un sistema de IA que es tuyo. No una cuenta en la plataforma de otro. No una suscripción que cambia sus condiciones cada tres meses. Un sistema que se ejecuta en tu infraestructura, con tus datos, y que nadie puede apagar por ti. La herramienta más importante de nuestro tiempo no debería depender de las decisiones de una empresa en San Francisco. Y eso es exactamente lo que construimos.</p>
+      <p><strong style="color:var(--text-dark)">Tus skills se ejecutan en tu máquina. No en la nuestra.</strong> Te ayudamos a elegir dónde: un Mac Mini en tu oficina, un VPS en Europa, un servidor dedicado. No vendemos hosting — te enseñamos a elegirlo.</p>
+      <p><strong style="color:var(--text-dark)">Tus claves y contraseñas no salen de tu entorno.</strong> Nosotros accedemos para configurar y mejorar, pero tus datos viajan por tu infraestructura, no por la nuestra.</p>
+      <p><strong style="color:var(--text-dark)">Todo queda documentado.</strong> Cada skill, cada conexión, cada decisión. Si mañana decides que no nos necesitas, te llevas todo — el sistema y el conocimiento de cómo funciona.</p>
+      <p><strong style="color:var(--text-dark)">No tenemos tus datos porque no los queremos.</strong> Nuestro negocio es construir skills y mejorarlos. No acumular información de clientes.</p>
+    </div>
+
+    <div class="fade-target mt-10 rounded-lg border p-6" style="border-color:var(--border-light);background:#fff">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">🔒</span> Infraestructura aislada
+        </div>
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">🔐</span> Todo cifrado
+        </div>
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">💾</span> Backups automáticos
+        </div>
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">🔑</span> Permisos mínimos
+        </div>
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">📡</span> Monitorización 24/7
+        </div>
+        <div class="flex items-center gap-2 text-[13px]" style="color:var(--text-dark)">
+          <span style="color:var(--accent-green)">✓</span> Zero lock-in
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament dark -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+</div>
+
+<!-- ══════════════ SKILLS / NODOS ══════════════ -->
+<section id="skills" class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark)">
+  <div class="max-w-[1100px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// elige tu primer skill</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-12" style="font-size:clamp(26px,3.5vw,42px)">
+      Empieza por uno. Añade más.
+    </h2>
+
+    <!-- Main card -->
+    <div class="fade-target nodo-card rounded-lg border p-8 mb-6" style="border-color:var(--accent-green);background:rgba(52,211,153,.03)">
+      <div class="flex flex-col md:flex-row gap-6 items-start">
+        <span class="text-[32px]">⚡</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <h3 class="text-[22px] font-medium">Tu Nodo Personal</h3>
+            <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border" style="border-color:var(--accent-green);color:var(--accent-green)">más popular</span>
+          </div>
+          <p class="text-[14px] font-medium mb-2" style="color:var(--accent-green)">Tu copiloto de operaciones</p>
+          <p class="text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.55)">Email, calendario, investigación, seguimiento de contactos, contenido, operaciones. El skill central que coordina el resto. Viene pre-cargado con la configuración más probada que hemos construido.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-nodos -->
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">📬</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo Inbox</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill de bandeja de entrada</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Filtra lo importante, responde lo rutinario, escala lo que necesita tu atención con contexto completo.</p>
+      </div>
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">📅</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo Reunión</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill de reuniones</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Entra a tus llamadas, resume en tiempo real, detecta compromisos y los convierte en tareas asignadas.</p>
+      </div>
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">💰</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo Finanzas</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill financiero</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Mapea suscripciones, avisa antes de renovaciones, detecta cobros duplicados o servicios que ya no usas.</p>
+      </div>
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">✍️</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo Contenido</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill de contenido</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Investiga, redacta, publica. En tu blog, en LinkedIn, en tu newsletter. En tu voz.</p>
+      </div>
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">📈</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo Ventas</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill de ventas</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Investiga prospectos, escribe outreach personalizado, actualiza tu CRM y hace seguimiento.</p>
+      </div>
+      <div class="fade-target nodo-card rounded-lg border border-[var(--border-dark)] p-5">
+        <span class="text-[20px] mb-3 block">🧠</span>
+        <h3 class="text-[15px] font-medium mb-1">Nodo a Medida</h3>
+        <p class="text-[12px] font-mono mb-2" style="color:var(--accent-green)">Skill personalizado</p>
+        <p class="text-[13px] leading-[1.55]" style="color:rgba(255,255,255,.5)">Cuéntanos tu workflow. Si tiene partes repetitivas o mecánicas, construimos un skill para cubrirlas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:#1a1a1a"></span><span style="background:rgba(255,255,255,.04)"></span>
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.02)"></span>
+</div>
+
+<!-- ══════════════ PROCESO ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark-2)">
+  <div class="max-w-[760px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// de consulta a tu primer skill en días</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-12" style="font-size:clamp(26px,3.5vw,42px)">
+      Cinco pasos. Una semana.
+    </h2>
+
+    <div class="space-y-6">
+      <div class="fade-target flex gap-5 items-start">
+        <span class="font-mono text-[28px] font-bold shrink-0 w-10 text-center" style="color:var(--accent-green)">1</span>
+        <div>
+          <h3 class="text-[16px] font-medium mb-1">Cuéntanos cómo trabajas</h3>
+          <p class="text-[14px] leading-[1.6]" style="color:rgba(255,255,255,.5)">¿Cómo es tu día? ¿Qué herramientas usas? ¿Dónde pierdes más tiempo? Con eso identificamos qué skill construir primero.</p>
+        </div>
+      </div>
+      <div class="fade-target flex gap-5 items-start">
+        <span class="font-mono text-[28px] font-bold shrink-0 w-10 text-center" style="color:var(--accent-green)">2</span>
+        <div>
+          <h3 class="text-[16px] font-medium mb-1">Elegimos tu primer skill</h3>
+          <p class="text-[14px] leading-[1.6]" style="color:rgba(255,255,255,.5)">No empezamos por todo. Empezamos por lo que más duele — inbox, reuniones, gastos, ventas. Un skill concreto, con un resultado claro en 48h.</p>
+        </div>
+      </div>
+      <div class="fade-target flex gap-5 items-start">
+        <span class="font-mono text-[28px] font-bold shrink-0 w-10 text-center" style="color:var(--accent-green)">3</span>
+        <div>
+          <h3 class="text-[16px] font-medium mb-1">Lo construimos en tu infraestructura</h3>
+          <p class="text-[14px] leading-[1.6]" style="color:rgba(255,255,255,.5)">Instalamos OpenClaw en tu máquina y configuramos el skill: memoria, personalidad, conexiones con tus herramientas. Todo se ejecuta en tu servidor — nunca en el nuestro.</p>
+        </div>
+      </div>
+      <div class="fade-target flex gap-5 items-start">
+        <span class="font-mono text-[28px] font-bold shrink-0 w-10 text-center" style="color:var(--accent-green)">4</span>
+        <div>
+          <h3 class="text-[16px] font-medium mb-1">Empiezas a usarlo</h3>
+          <p class="text-[14px] leading-[1.6]" style="color:rgba(255,255,255,.5)">Tu primer skill está activo. Le hablas, le mandas contexto, te devuelve trabajo hecho. Cuando funciona bien, añadimos el siguiente.</p>
+        </div>
+      </div>
+      <div class="fade-target flex gap-5 items-start">
+        <span class="font-mono text-[28px] font-bold shrink-0 w-10 text-center" style="color:var(--accent-green)">5</span>
+        <div>
+          <h3 class="text-[16px] font-medium mb-1">Lo mejoramos cada mes</h3>
+          <p class="text-[14px] leading-[1.6]" style="color:rgba(255,255,255,.5)">Monitorizamos cómo usas cada skill, empujamos mejoras y añadimos capacidades nuevas. Tu Nodo Personal crece contigo. Tus datos no salen de tu máquina.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+</div>
+
+<!-- ══════════════ PRECIOS ══════════════ -->
+<section id="precios" class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark)">
+  <div class="max-w-[1000px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// precios</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-12" style="font-size:clamp(26px,3.5vw,42px)">
+      Sin permanencia. Sin&nbsp;letra&nbsp;pequeña.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 flex flex-col">
+        <span class="font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nodo Esencial</span>
+        <p class="text-[13px] mb-4" style="color:rgba(255,255,255,.45)">Inbox + día organizado</p>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-[32px] font-bold">€120</span>
+          <span class="text-[14px]" style="color:rgba(255,255,255,.4)">/mes</span>
+        </div>
+        <p class="text-[12px] font-mono mb-5" style="color:rgba(255,255,255,.35)">€300 setup</p>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.55)">
+          <div>✓ Skill de brief diario</div>
+          <div>✓ Skill de email filtrado y priorizado</div>
+          <div>✓ Memoria persistente</div>
+          <div>✓ Mejoras mensuales</div>
+          <div>✓ Asesoría de infraestructura</div>
+        </div>
+        <a href="#consulta" class="mt-6 rounded-full px-6 py-2.5 text-[13px] font-medium text-center border border-[var(--border-dark)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#444] transition-all">Consulta gratis →</a>
+      </div>
+
+      <div class="fade-target rounded-lg border p-6 flex flex-col" style="border-color:var(--accent-green);background:rgba(52,211,153,.03)">
+        <span class="font-mono text-[11px] uppercase tracking-wider mb-2" style="color:var(--accent-green)">Nodo Completo</span>
+        <p class="text-[13px] mb-4" style="color:rgba(255,255,255,.45)">Esencial + reuniones + memoria avanzada</p>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-[32px] font-bold" style="color:var(--accent-green)">€200</span>
+          <span class="text-[14px]" style="color:rgba(255,255,255,.4)">/mes</span>
+        </div>
+        <p class="text-[12px] font-mono mb-5" style="color:rgba(255,255,255,.35)">€600 setup</p>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.55)">
+          <div>✓ Todo lo del Esencial</div>
+          <div>✓ Skill de reuniones incluido</div>
+          <div>✓ WhatsApp + Slack integrado</div>
+          <div>✓ Control de suscripciones</div>
+          <div>✓ Personalidad y criterio a medida</div>
+          <div>✓ nodo_bot de respaldo</div>
+        </div>
+        <a href="#consulta" class="mt-6 btn-shimmer rounded-full px-6 py-2.5 text-[13px] font-medium text-center text-[#141414]">Consulta gratis →</a>
+      </div>
+
+      <div class="fade-target rounded-lg border border-[var(--border-dark)] p-6 flex flex-col">
+        <span class="font-mono text-[11px] text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nodo Pro</span>
+        <p class="text-[13px] mb-4" style="color:rgba(255,255,255,.45)">Completo + skills a medida</p>
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-[32px] font-bold">€300</span>
+          <span class="text-[14px]" style="color:rgba(255,255,255,.4)">/mes</span>
+        </div>
+        <p class="text-[12px] font-mono mb-5" style="color:rgba(255,255,255,.35)">€1.000 setup</p>
+        <div class="space-y-2 text-[13px] flex-1" style="color:rgba(255,255,255,.55)">
+          <div>✓ Todo lo del Completo</div>
+          <div>✓ Skills especializados a medida</div>
+          <div>✓ Skill de ventas + skill de contenido</div>
+          <div>✓ Multi-canal avanzado</div>
+          <div>✓ Prioridad en mejoras mensuales</div>
+        </div>
+        <a href="#consulta" class="mt-6 rounded-full px-6 py-2.5 text-[13px] font-medium text-center border border-[var(--border-dark)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#444] transition-all">Consulta gratis →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:#1a1a1a"></span><span style="background:rgba(255,255,255,.04)"></span>
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="w-full flex justify-center px-5 py-24" style="background:var(--bg-dark-2)">
+  <div class="max-w-[760px] w-full">
+    <div class="fade-target mb-3">
+      <span class="font-mono text-[11px] uppercase tracking-[.1em] text-[var(--text-secondary)]">// preguntas</span>
+    </div>
+    <h2 class="fade-target font-medium leading-[1.15] mb-10" style="font-size:clamp(26px,3.5vw,42px)">
+      Lo que vas a preguntar.
+    </h2>
+
+    <div class="space-y-0">
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          Si no hacéis hosting, ¿quién mantiene el servidor?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Te asesoramos para elegir la opción que menos mantenimiento requiera. Para la mayoría es un VPS europeo con actualizaciones automáticas — no tienes que ser técnico. Si algo se rompe, te lo resolvemos en remoto.</p>
+      </details>
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿En qué se diferencia de instalar OpenClaw yo mismo?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">La misma diferencia que comprar los ingredientes y que te cocine un chef. Cada Nodo viene con skills probados, stack curado, personalidad a medida y mejora continua. Recibes el copiloto funcionando, no los deberes.</p>
+      </details>
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿Qué necesito yo aportar?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Una suscripción a Claude ($20/mes), un lugar donde ejecutarlo (te ayudamos a elegirlo) y las respuestas al intake. Nosotros nos encargamos del resto.</p>
+      </details>
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿Cuánto tarda en estar listo?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">La mayoría están funcionando en menos de una semana. Algunos en 48 horas.</p>
+      </details>
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿Puedo cancelar?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Mes a mes. Sin contrato. Todo es tuyo desde el primer día — no hay nada que "entregar" porque ya está en tu máquina.</p>
+      </details>
+      <details class="fade-target border-t border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿Podéis ver mis datos?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Accedemos a tu sistema para configurar y mejorar skills, prompts y memoria. No leemos tus emails ni tu información de negocio. Piensa en un electricista que entra a tu casa — tiene acceso al cuadro eléctrico, no a tu mesilla de noche.</p>
+      </details>
+      <details class="fade-target border-t border-b border-[var(--border-dark)] group">
+        <summary class="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-[var(--accent-green)] transition-colors">
+          ¿Y si no quiero que aprendáis de mi setup?
+          <span class="text-[var(--text-secondary)] group-open:rotate-45 transition-transform text-[18px]">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] leading-[1.65]" style="color:rgba(255,255,255,.5)">Sin problema — te excluimos del aprendizaje cruzado. Pero es bidireccional: no empujaremos mejoras de otros clientes al tuyo. La mayoría quiere las mejoras, pero tú decides.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ornament -->
+<div class="ornament-divider">
+  <span style="background:rgba(255,255,255,.02)"></span><span style="background:#1a1a1a"></span>
+  <span style="background:rgba(255,255,255,.04)"></span><span style="background:rgba(255,255,255,.02)"></span>
+  <span style="background:#1a1a1a"></span>
+</div>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section id="consulta" class="relative w-full flex justify-center px-5 py-32" style="background:var(--bg-dark)">
+  <div class="pointer-events-none absolute inset-0 opacity-[0.03]"
+       style="background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:28px 28px"></div>
+  <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full"
+       style="background:radial-gradient(ellipse at center,rgba(52,211,153,.06) 0%,transparent 70%);filter:blur(60px)"></div>
+
+  <div class="relative z-10 max-w-[620px] w-full flex flex-col items-center text-center fade-target">
+    <h2 class="font-medium leading-[1.1] tracking-[-0.02em]"
+        style="font-size:clamp(32px,4.5vw,56px)">
+      Empieza por una consulta.<br/><span style="color:var(--accent-green)">Es gratis.</span>
+    </h2>
+    <p class="mt-6 text-[16px] leading-[1.6]" style="color:rgba(255,255,255,.45)">
+      Cuéntanos cómo trabajas. Te decimos qué skill construir primero,<br class="hidden md:block"/> cuánto tardamos y cuánto cuesta. Sin compromiso.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3 mt-9">
+      <a href="https://skool.com" target="_blank" class="btn-shimmer rounded-full px-8 py-3.5 text-[15px] font-medium text-[#141414]">Consulta Gratuita →</a>
+      <a href="#precios" class="rounded-full px-8 py-3.5 text-[15px] font-medium border border-[var(--border-dark)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#444] transition-all">Ver precios</a>
+    </div>
+    <p class="mt-5 font-mono text-[11px] text-[var(--text-secondary)]">Sin tarjeta · Sin compromiso · Respuesta en 24h</p>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="w-full border-t border-[var(--border-dark)]" style="background:var(--bg-dark-2)">
+  <div class="max-w-[1200px] mx-auto px-5 py-14 grid grid-cols-2 md:grid-cols-4 gap-10">
+    <div>
+      <span class="font-mono text-[15px] font-medium">Nodo<span style="color:var(--accent-green)">23</span></span>
+      <span class="pulse-dot w-[6px] h-[6px] rounded-full bg-[var(--accent-green)] inline-block ml-1"></span>
+      <p class="mt-3 text-[13px]" style="color:var(--text-secondary)">Sistemas, no Sermones.</p>
+    </div>
+    <div>
+      <h4 class="font-mono text-[10px] uppercase tracking-[.12em] text-[var(--text-secondary)] mb-4">Nodo Personal</h4>
+      <div class="space-y-2.5 text-[13px]">
+        <a href="#como" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Cómo funciona</a>
+        <a href="#skills" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Skills</a>
+        <a href="#precios" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Precios</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-mono text-[10px] uppercase tracking-[.12em] text-[var(--text-secondary)] mb-4">Comunidad</h4>
+      <div class="space-y-2.5 text-[13px]">
+        <a href="nodo23-v3.html" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nodo23 Home</a>
+        <a href="#" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Blog</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-mono text-[10px] uppercase tracking-[.12em] text-[var(--text-secondary)] mb-4">Legal</h4>
+      <div class="space-y-2.5 text-[13px]">
+        <a href="#" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Privacidad</a>
+        <a href="#" class="block text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Términos</a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1200px] mx-auto px-5 py-4 border-t border-[var(--border-dark)] flex items-center justify-between">
+    <span class="font-mono text-[11px] text-[var(--text-secondary)]">© Nodo23 2026 · Sistemas, no&nbsp;Sermones</span>
+    <span class="font-mono text-[11px] text-[var(--text-secondary)]">Hecho en Canarias</span>
+  </div>
+</footer>
+
+<!-- ══════════════ SCRIPTS ══════════════ -->
+<script>
+// IntersectionObserver for fade-in
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.fade-target').forEach(el=>obs.observe(el));
+
+// Hero terminal typing — nodo personal
+const lines=[
+  {txt:'$ nodo init --user orlando@nodo23.com',c:'c-kw',spd:26},
+  {txt:'  nodo v1.2 · verificando entorno...',c:'c-cmt',spd:7},
+  {txt:'  ✓ Infraestructura: VPS EU (Hetzner · Falkenstein)',c:'c-ok',spd:7},
+  {txt:'  ✓ Datos: cifrados en reposo · TLS activo',c:'c-ok',spd:7},
+  {txt:'  ✓ Propiedad: tú. Siempre.',c:'c-ok',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'$ nodo skills --list',c:'c-kw',spd:26},
+  {txt:'  Cargando skills activos...',c:'c-cmt',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'  [01] skill:inbox .............. ✓ activo',c:'c-ok',spd:7},
+  {txt:'  [02] skill:reunion ............ ✓ activo',c:'c-ok',spd:7},
+  {txt:'  [03] skill:finanzas ........... ✓ activo',c:'c-ok',spd:7},
+  {txt:'  [04] skill:contenido .......... ✓ activo',c:'c-ok',spd:7},
+  {txt:'  [05] skill:ventas ............. ✓ activo',c:'c-ok',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'$ nodo memory --init',c:'c-kw',spd:26},
+  {txt:'  Construyendo grafo de contexto...',c:'c-cmt',spd:7},
+  {txt:'  ✓ 23 contactos frecuentes mapeados',c:'c-ok',spd:7},
+  {txt:'  ✓ 8 proyectos activos detectados',c:'c-ok',spd:7},
+  {txt:'  ✓ Preferencias de comunicación aprendidas',c:'c-ok',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'$ nodo brief --morning',c:'c-kw',spd:26},
+  {txt:'  Generando brief del día...',c:'c-cmt',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'  📬 3 emails que necesitan tu atención',c:'c-str',spd:7},
+  {txt:'  📅 Reunión en 2h — contexto preparado',c:'c-str',spd:7},
+  {txt:'  ⚠  Renovación Figma en 3 días (€168/año)',c:'c-warn',spd:7},
+  {txt:'  📈 Lead en WhatsApp sin responder (48h)',c:'c-fn',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'  Tiempo: 1.2s · Todo en tu máquina.',c:'c-num',spd:7},
+  {txt:'',c:'',spd:0},
+  {txt:'✓ Nodo Personal activo. Buenos días.',c:'c-ok',spd:14},
+];
+let li=0;
+const out=document.getElementById('terminal-output');
+const tb=document.getElementById('terminal-body');
+function typeLine(){
+  if(li>=lines.length)return;
+  const d=lines[li];
+  if(!d.txt){
+    const r=document.createElement('div');r.innerHTML='&nbsp;';out.appendChild(r);
+    tb.scrollTop=tb.scrollHeight;
+    li++;setTimeout(typeLine,280);return;
+  }
+  const row=document.createElement('div');row.className=d.c;out.appendChild(row);
+  let ci=0;
+  const iv=setInterval(()=>{
+    row.textContent=d.txt.substring(0,ci++);
+    tb.scrollTop=tb.scrollHeight;
+    if(ci>d.txt.length){clearInterval(iv);li++;setTimeout(typeLine,d.c==='c-kw'?620:160);}
+  },d.spd);
+}
+setTimeout(typeLine,900);
+</script>
+</body>
+</html>
