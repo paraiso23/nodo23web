@@ -1,0 +1,31 @@
+{
+  "name": "nodo23-remotion",
+  "version": "1.0.0",
+  "description": "Marketing video compositions for Nodo23",
+  "scripts": {
+    "studio": "npx remotion studio",
+    "still:flyer-sq": "npx remotion still EventFlyerSquare --output ../out/flyer-square.png",
+    "still:flyer-story": "npx remotion still EventFlyerStory --output ../out/flyer-story.png",
+    "render:agenda": "npx remotion render AgendaCard --output ../out/agenda.mp4",
+    "render:hero": "npx remotion render HeroReel --output ../out/hero-reel.mp4",
+    "render:skill:bot": "npx remotion render SkillLoop --props '{\"skillIndex\":0}' --output ../out/skill-nodo_bot.mp4",
+    "render:skill:summary": "npx remotion render SkillLoop --props '{\"skillIndex\":1}' --output ../out/skill-nodo_summary.mp4",
+    "render:skill:reply": "npx remotion render SkillLoop --props '{\"skillIndex\":2}' --output ../out/skill-nodo_reply.mp4",
+    "render:skill:seo": "npx remotion render SkillLoop --props '{\"skillIndex\":3}' --output ../out/skill-nodo_seo.mp4",
+    "render:skill:leads": "npx remotion render SkillLoop --props '{\"skillIndex\":4}' --output ../out/skill-nodo_leads.mp4",
+    "render:skill:invoice": "npx remotion render SkillLoop --props '{\"skillIndex\":5}' --output ../out/skill-nodo_invoice.mp4",
+    "render:all": "npm run still:flyer-sq && npm run still:flyer-story && npm run render:agenda && npm run render:hero"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.4.0"
+  }
+}
