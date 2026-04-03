@@ -59,7 +59,7 @@ export const RemotionRoot: React.FC = () => {
       {skills.map((skill, i) => (
         <Composition
           key={skill.id}
-          id={`SkillLoop_${skill.id}`}
+          id={`SkillLoop-${skill.id.replace(/_/g, '-')}`}
           component={SkillLoop}
           durationInFrames={150}
           fps={30}
