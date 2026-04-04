@@ -14,13 +14,16 @@ export default function NodoPersonal() {
   const terminalBodyRef = useRef<HTMLDivElement>(null);
 
   const lines: Line[] = [
-    { txt: '$ nodo init --user orlando@nodo23.com', c: 'text-accent-blue', spd: 26 },
+    { txt: '$ nodo init --user webmaster@nodo23.co', c: 'text-accent-blue', spd: 26 },
+    { txt: '', c: '', spd: 0 },
     { txt: '  nodo v1.2 · verificando entorno...', c: 'text-white/30', spd: 7 },
-    { txt: '  ✓ Infraestructura: VPS EU (Hetzner · Falkenstein)', c: 'text-accent-green', spd: 7 },
+    { txt: '', c: '', spd: 0 },
+    { txt: '  ✓ Infraestructura: VPS EU', c: 'text-accent-green', spd: 7 },
     { txt: '  ✓ Datos: cifrados en reposo · TLS activo', c: 'text-accent-green', spd: 7 },
     { txt: '  ✓ Propiedad: tú. Siempre.', c: 'text-accent-green', spd: 7 },
     { txt: '', c: '', spd: 0 },
     { txt: '$ nodo skills --list', c: 'text-accent-blue', spd: 26 },
+    { txt: '', c: '', spd: 0 },
     { txt: '  Cargando skills activos...', c: 'text-white/30', spd: 7 },
     { txt: '', c: '', spd: 0 },
     { txt: '  [01] skill:inbox .............. ✓ activo', c: 'text-accent-green', spd: 7 },
@@ -29,13 +32,8 @@ export default function NodoPersonal() {
     { txt: '  [04] skill:contenido .......... ✓ activo', c: 'text-accent-green', spd: 7 },
     { txt: '  [05] skill:ventas ............. ✓ activo', c: 'text-accent-green', spd: 7 },
     { txt: '', c: '', spd: 0 },
-    { txt: '$ nodo memory --init', c: 'text-accent-blue', spd: 26 },
-    { txt: '  Construyendo grafo de contexto...', c: 'text-white/30', spd: 7 },
-    { txt: '  ✓ 23 contactos frecuentes mapeados', c: 'text-accent-green', spd: 7 },
-    { txt: '  ✓ 8 proyectos activos detectados', c: 'text-accent-green', spd: 7 },
-    { txt: '  ✓ Preferencias de comunicación aprendidas', c: 'text-accent-green', spd: 7 },
-    { txt: '', c: '', spd: 0 },
     { txt: '$ nodo brief --morning', c: 'text-accent-blue', spd: 26 },
+    { txt: '', c: '', spd: 0 },
     { txt: '  Generando brief del día...', c: 'text-white/30', spd: 7 },
     { txt: '', c: '', spd: 0 },
     { txt: '  📬 3 emails que necesitan tu atención', c: 'text-accent-teal', spd: 7 },
@@ -120,7 +118,7 @@ export default function NodoPersonal() {
           <div className="fade-target mb-7 inline-flex items-center gap-2 border border-[#2c2c2c] rounded-full px-4 py-1.5 max-w-full overflow-hidden">
             <span className="pulse-dot w-[6px] h-[6px] rounded-full bg-accent-green shrink-0"></span>
             <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[.05em] md:tracking-[.1em] text-[#999] whitespace-nowrap overflow-hidden text-ellipsis">
-              <span className="hidden sm:inline">Nodo Personal · </span>Skills de IA · Soberanía Digital
+              Nodo Personal · Automatizaciones de IA · Tu infraestructura
             </span>
           </div>
 
@@ -132,7 +130,7 @@ export default function NodoPersonal() {
           </h1>
 
           <p className="fade-target mt-6 max-w-[580px] leading-[1.65] text-[17px] text-white/50">
-            Te construimos un Nodo Personal — un conjunto de skills de IA que se ejecuta en tu máquina. Empieza por el que más te duela. Lo configuramos en 48h, lo mejoramos cada mes, y tus datos nunca salen de tu infraestructura.
+            Te construimos un sistema de skills de IA que se ejecuta en tu máquina. Empezamos por lo que más tiempo te roba. Lo configuramos en menos de una semana y lo mejoramos cada mes.
           </p>
 
           <div className="fade-target flex flex-wrap justify-center gap-3 mt-9">
@@ -183,10 +181,10 @@ export default function NodoPersonal() {
             Sabes que la IA puede hacer esto.<br/><span className="text-accent-green">¿Por qué no lo está haciendo?</span>
           </h2>
           <div className="fade-target mt-8 space-y-5 text-[16px] leading-[1.75] text-white/55">
-            <p>Porque hay un abismo brutal entre "la IA puede organizar tu email" y tener un skill que organiza tu email, filtra lo importante, te prepara el brief del día y te recuerda que llevas cuatro días sin contestar a ese contacto — sin que tú toques&nbsp;nada.</p>
-            <p>Llegar ahí significa configurar prompts, conectar APIs, montar un sistema de memoria, elegir dónde ejecutarlo, arreglar lo que se rompe e iterar durante semanas hasta que el resultado es realmente bueno. La mayoría empieza, llega al 60% y lo&nbsp;deja.</p>
-            <p className="text-[#f6f6f6] font-medium">Nosotros hacemos el 100%.</p>
-            <p>Nos dices cómo trabajas. Construimos los skills, te guiamos para desplegarlos en la infraestructura más segura para tu caso, y después — la parte que nadie más hace — los seguimos mejorando cada mes.</p>
+            <p>Porque hay un abismo entre "la IA puede organizar tu email" y tener algo que organiza tu email, filtra lo importante, te prepara el brief del día y te recuerda que llevas cuatro días sin contestar a ese contacto — sin que tú toques nada.</p>
+            <p>Llegar ahí significa configurar prompts, conectar APIs, montar un sistema de memoria, decidir dónde ejecutarlo, arreglar lo que se rompe y pulir durante semanas hasta que el resultado es realmente bueno.</p>
+            <p>La mayoría empieza, llega al 60% y lo deja.</p>
+            <p className="text-[#f6f6f6] font-medium">Nosotros hacemos el 100%. Nos cuentas cómo trabajas. Construimos los skills, los desplegamos en tu infraestructura para seguirlo mejorando cada mes.</p>
           </div>
         </div>
       </section>
@@ -201,10 +199,10 @@ export default function NodoPersonal() {
       <section className="w-full flex justify-center px-5 py-24 bg-dark">
         <div className="max-w-[860px] w-full">
           <div className="fade-target mb-3">
-            <span className="font-mono text-[11px] uppercase tracking-[.1em] text-[#999]">// lo que recuperas</span>
+            <span className="font-mono text-[11px] uppercase tracking-[.1em] text-[#999]">// lo que hace tu nodo</span>
           </div>
           <h2 className="fade-target font-medium leading-[1.15] mb-10 text-[clamp(26px,3.5vw,42px)]">
-            Lo que hace tu Nodo<br/><span className="text-white/35">mientras tú haces lo demás.</span>
+            Lo que hace tu Nodo<br/><span className="text-white/35">mientras tú haces lo que importa.</span>
           </h2>
 
           <div className="fade-target rounded-lg overflow-hidden border border-[#2c2c2c]">
@@ -219,9 +217,9 @@ export default function NodoPersonal() {
               <tbody className="text-white/70">
                 {[
                   { task: 'Empezar el día', without: 'Abres el email y ya perdiste el foco', with: 'Te dice qué importa hoy, en orden' },
-                  { task: 'Después de cada reunión', without: 'Tú transcribes, tú asignas, tú recuerdas', with: 'Resumido y los seguimientos anotados' },
-                  { task: 'Bandeja de entrada', without: '45 minutos cada mañana, mínimo', with: 'Filtrado y priorizado antes de que te despiertes' },
-                  { task: 'Seguimiento de proyectos', without: 'Abres cuatro apps, preguntas, buscas', with: 'Le preguntas al Nodo. Te responde en segundos.' },
+                  { task: 'Después de cada reunión', without: 'Tú transcribes, tú asignas, tú recuerdas', with: 'Resumido, con los seguimientos anotados' },
+                  { task: 'Bandeja de entrada', without: '45 minutos cada mañana, mínimo', with: 'Filtrado y priorizado antes de que te levantes' },
+                  { task: 'Seguimiento de proyectos', without: 'Abres cuatro apps, preguntas, buscas', with: 'Le preguntas al Nodo. Responde en segundos.' },
                   { task: 'Control de gastos', without: 'Fin de mes, con sorpresas', with: 'Monitorizado en tiempo real' },
                   { task: 'Final del día', without: 'No sabes bien qué hiciste ni qué queda', with: 'Resumen listo, mañana ya preparada' }
                 ].map((row, i) => (
@@ -235,7 +233,7 @@ export default function NodoPersonal() {
             </table>
           </div>
           <p className="fade-target mt-6 font-mono text-[13px] text-white/40">
-            // Entre 8 y 12 horas a la semana haciendo cosas que no necesitan tu cabeza.
+            // En nuestra experiencia, un sistema que puede revolucionar como trabajas y liberarte de tareas que no disfrutas hacer.
           </p>
         </div>
       </section>
@@ -249,26 +247,24 @@ export default function NodoPersonal() {
       <section id="soberania" className="w-full flex justify-center px-5 py-24 bg-[#F6F6F6]">
         <div className="max-w-[760px] w-full">
           <div className="fade-target mb-3">
-            <span className="font-mono text-[11px] uppercase tracking-[.1em] text-[#888]">// soberanía digital</span>
+            <span className="font-mono text-[11px] uppercase tracking-[.1em] text-[#888]">// tus datos, tu máquina</span>
           </div>
           <h2 className="fade-target font-medium leading-[1.15] text-[clamp(26px,3.5vw,42px)] text-[#1a1a1a]">
-            No es un eslogan.<br/><span className="text-accent-green">Es la arquitectura.</span>
+            Si mañana desaparecemos,<br/><span className="text-accent-green">tu sistema sigue siendo tuyo, encendido.</span>
           </h2>
           <div className="fade-target mt-8 space-y-5 text-[16px] leading-[1.75] text-black/55">
-            <p>Por primera vez, puedes tener un sistema de IA que es tuyo. No una cuenta en la plataforma de otro. No una suscripción que cambia sus condiciones cada tres meses. Un sistema que se ejecuta en tu infraestructura, con tus datos, y que nadie puede apagar por ti. La herramienta más importante de nuestro tiempo no debería depender de las decisiones de una empresa en San Francisco. Y eso es exactamente lo que construimos.</p>
-            <p><strong className="text-[#1a1a1a]">Tus skills se ejecutan en tu máquina. No en la nuestra.</strong> Te ayudamos a elegir dónde: un Mac Mini en tu oficina, un VPS en Europa, un servidor dedicado. No vendemos hosting — te enseñamos a elegirlo.</p>
-            <p><strong className="text-[#1a1a1a]">Tus claves y contraseñas no salen de tu entorno.</strong> Nosotros accedemos para configurar y mejorar, pero tus datos viajan por tu infraestructura, no por la nuestra.</p>
+            <p>Por primera vez, puedes tener un sistema de IA avanzado que es tuyo de verdad. No una cuenta en la plataforma de otro. No una suscripción que cambia sus condiciones cada trimestre. Un sistema que corre en tu infraestructura, con tus datos, y que nadie puede apagar por ti.</p>
+            <p><strong className="text-[#1a1a1a]">Tus skills se ejecutan en tu máquina. No en la nuestra.</strong> Te ayudamos a elegir dónde: un Mac Mini en tu oficina, un VPS en Europa, un servidor dedicado. No vendemos hosting — te asesoramos para que elijas el que mejor te encaja.</p>
+            <p><strong className="text-[#1a1a1a]">Tus claves y contraseñas no salen de tu entorno.</strong> Nosotros accedemos para configurar y mejorar, pero tus datos viajan por tu infraestructura.</p>
             <p><strong className="text-[#1a1a1a]">Todo queda documentado.</strong> Cada skill, cada conexión, cada decisión. Si mañana decides que no nos necesitas, te llevas todo — el sistema y el conocimiento de cómo funciona.</p>
           </div>
 
           <div className="fade-target mt-10 rounded-lg border border-[#e0e0e0] p-6 bg-white">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
-                { icon: '🔒', text: 'Infraestructura aislada' },
-                { icon: '🔐', text: 'Todo cifrado' },
-                { icon: '💾', text: 'Backups automáticos' },
-                { icon: '🔑', text: 'Permisos mínimos' },
-                { icon: '📡', text: 'Monitorización 24/7' },
+                { icon: '🖥️', text: 'Infraestructura controlada' },
+                { icon: '📉', text: 'Menos dependencias' },
+                { icon: '💻', text: 'Ordenador propio o VPS' },
                 { icon: '✓', text: 'Zero lock-in' }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 text-[13px] text-[#1a1a1a]">
@@ -296,24 +292,42 @@ export default function NodoPersonal() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-5">
-            {[
-              { title: 'Nodo Freelance', sub: 'Para profesionales independientes', price: '200', setup: 'incluido', features: ['✓ Setup completo de OpenClaw', '✓ Gestión y mantenimiento incluido', '✓ Hosting xCloud incluido', '✓ 1 skill activo + mejoras mensuales', '✓ Soporte continuo por Telegram', '✓ El cliente no toca nada'], featured: true },
-              { title: 'Nodo Pyme', sub: 'Para equipos de 2-10 personas', price: '400', setup: 'incluido', features: ['✓ Todo lo de Freelance', '✓ 3 skills activos simultáneos', '✓ Integraciones de equipo', '✓ Revisión mensual en directo (30 min)', '✓ Soporte prioritario', '✓ Escalabilidad garantizada'] }
-            ].map((plan, i) => (
-              <div key={i} className={`fade-target rounded-lg border p-8 flex flex-col ${plan.featured ? 'border-accent-green bg-accent-green/3' : 'border-[#2c2c2c]'}`}>
-                <span className={`font-mono text-[11px] uppercase tracking-wider mb-2 ${plan.featured ? 'text-accent-green' : 'text-[#999]'}`}>{plan.title}</span>
-                <p className="text-[13px] mb-4 text-white/45">{plan.sub}</p>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`text-[42px] font-bold ${plan.featured ? 'text-accent-green' : ''}`}>€{plan.price}</span>
-                  <span className="text-[16px] text-white/40">/mes</span>
-                </div>
-                <p className="text-[12px] font-mono mb-6 text-white/35">Setup {plan.setup}</p>
-                <div className="space-y-3 text-[14px] flex-1 text-white/55">
-                  {plan.features.map((f, j) => <div key={j}>{f}</div>)}
-                </div>
-                <a href="#consulta" className={`mt-8 rounded-full px-8 py-3.5 text-[14px] font-medium text-center transition-all ${plan.featured ? 'btn-shimmer text-[#141414]' : 'border border-[#2c2c2c] text-[#999] hover:text-[#f6f6f6] hover:border-[#444]'}`}>Consulta gratuita →</a>
+            <div className="fade-target rounded-lg border border-accent-green p-8 flex flex-col bg-accent-green/3">
+              <span className="font-mono text-[11px] uppercase tracking-wider mb-2 text-accent-green">Nodo Freelance</span>
+              <p className="text-[13px] mb-4 text-white/45">Para profesionales independientes. Instalación y Setup incluido.</p>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className="text-[42px] font-bold text-accent-green">€200</span>
+                <span className="text-[16px] text-white/40">/mes</span>
               </div>
-            ))}
+              <p className="text-[12px] font-mono mb-6 text-white/35">Setup incluido</p>
+              <div className="space-y-3 text-[14px] flex-1 text-white/55">
+                <div>✓ Dos llamadas mensuales 1:1 para mejora continua</div>
+                <div>✓ Setup completo de OpenClaw</div>
+                <div>✓ Todos los skills del Kit activos</div>
+                <div>✓ Plan de adopción de IA</div>
+                <div>✓ Gestión y mantenimiento</div>
+                <div>✓ Soporte continuo por Telegram o WhatsApp</div>
+                <div>✓ No tocas nada del servidor, ¡solo chateas con nosotros y OpenClaw!</div>
+              </div>
+              <a href="#consulta" className="mt-8 btn-shimmer rounded-full px-8 py-3.5 text-[14px] font-medium text-center text-[#141414]">Consulta gratuita →</a>
+            </div>
+
+            <div className="fade-target rounded-lg border border-[#2c2c2c] p-8 flex flex-col">
+              <span className="font-mono text-[11px] uppercase tracking-wider mb-2 text-[#999]">Nodo Pyme</span>
+              <p className="text-[13px] mb-4 text-white/45">Para equipos de 2-10 personas. Setup incluido.</p>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className="text-[42px] font-bold">€400</span>
+                <span className="text-[16px] text-white/40">/mes</span>
+              </div>
+              <p className="text-[12px] font-mono mb-6 text-white/35">Setup incluido</p>
+              <div className="space-y-3 text-[14px] flex-1 text-white/55">
+                <div>✓ Todo lo de Freelance</div>
+                <div>✓ Plan de adopción de IA en organizaciones</div>
+                <div>✓ Skills para gestión de equipos</div>
+                <div>✓ Integración del sistema en el equipo</div>
+              </div>
+              <a href="#consulta" className="mt-8 rounded-full px-8 py-3.5 text-[14px] font-medium text-center border border-[#2c2c2c] text-[#999] hover:text-[#f6f6f6] hover:border-[#444] transition-all">Consulta gratuita →</a>
+            </div>
           </div>
         </div>
       </section>
@@ -329,11 +343,12 @@ export default function NodoPersonal() {
           </h2>
           <div className="space-y-0">
             {[
-              { q: 'Si no hacéis hosting, ¿quién mantiene el servidor?', a: 'Te asesoramos para elegir la opción que menos mantenimiento requiera. Para la mayoría es un VPS europeo con actualizaciones automáticas — no tienes que ser técnico. Si algo se rompe, te lo resolvemos en remoto.' },
-              { q: '¿En qué se diferencia de instalar OpenClaw yo mismo?', a: 'La misma diferencia que comprar los ingredientes y que te cocine un chef. Cada Nodo viene con skills probados, stack curado, personalidad a medida y mejora continua. Recibes el copiloto funcionando, no los deberes.' },
-              { q: '¿Qué necesito yo aportar?', a: 'Una suscripción a Claude ($20/mes), un lugar donde ejecutarlo (te ayudamos a elegirlo) y las respuestas al intake. Nosotros nos encargamos del resto.' },
-              { q: '¿Cuánto tarda en estar listo?', a: 'La mayoría están funcionando en menos de una semana. Algunos en 48 horas.' },
-              { q: '¿Puedo cancelar?', a: 'Mes a mes. Sin contrato. Todo es tuyo desde el primer día — no hay nada que "entregar" porque ya está en tu máquina.' }
+              { q: 'Si no hacéis hosting, ¿quién mantiene el servidor?', a: 'Te asesoramos para elegir la opción que menos mantenimiento requiera. Para la mayoría es un VPS europeo con actualizaciones automáticas — no necesitas ser técnico. Si algo falla, lo resolvemos en remoto.' },
+              { q: '¿En qué se diferencia de instalar OpenClaw yo mismo?', a: 'En lo mismo que se diferencia comprar los ingredientes de que te cocine un chef. Cada Nodo viene con skills probados, configuración a medida y mejora continua. Recibes el sistema funcionando, no los deberes.' },
+              { q: '¿Qué necesito yo aportar?', a: 'Un lugar donde ejecutarlo (Servidor VPS o tu propio mac local, te ayudamos a elegirlo) y las respuestas al cuestionario inicial. Del resto nos encargamos nosotros.' },
+              { q: '¿Cuánto tarda en estar listo?', a: 'Dependiendo de tu implicación inicial. La mayoría están funcionando en menos de una semana. Algunos en 48 horas.' },
+              { q: '¿Puedo cancelar?', a: 'Mes a mes. Sin contrato. Todo está en tu máquina desde el primer día — no hay nada que "entregar" porque nunca salió de tu entorno.' },
+              { q: 'Si cancelo, ¿pierdo algo?', a: 'No. Los skills, la configuración y la documentación son tuyos. Lo único que pierdes es la mejora continua y el soporte. El sistema sigue funcionando tal cual.' }
             ].map((item, i) => (
               <details key={i} className="fade-target border-t border-[#2c2c2c] group">
                 <summary className="py-5 cursor-pointer flex justify-between items-center text-[15px] font-medium hover:text-accent-green transition-colors list-none">
