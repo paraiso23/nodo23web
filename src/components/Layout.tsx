@@ -11,10 +11,10 @@ export default function Layout({ children, isNodoPersonal }: LayoutProps) {
     <div className="bg-dark min-h-screen">
       {/* NAVBAR */}
       <nav className="nav-blur fixed top-0 left-0 right-0 z-50 h-[56px] w-full overflow-hidden">
-        <div className="w-full max-w-[1200px] mx-auto px-4 md:px-5 h-full flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <span className="font-mono text-[15px] font-medium">Nodo<span className="text-accent-green">23</span></span>
-            <span className="pulse-dot w-[7px] h-[7px] rounded-full bg-accent-green"></span>
+        <div className="w-full max-w-[1200px] mx-auto px-3 md:px-5 h-full flex items-center justify-between gap-2">
+          <Link to="/" className="flex items-center gap-1.5 md:gap-2 shrink-0">
+            <span className="font-mono text-[14px] md:text-[15px] font-medium">Nodo<span className="text-accent-green">23</span></span>
+            <span className="pulse-dot w-[6px] h-[6px] md:w-[7px] md:h-[7px] rounded-full bg-accent-green"></span>
           </Link>
           <div className="hidden md:flex items-center gap-7">
             {isNodoPersonal ? (
@@ -37,7 +37,7 @@ export default function Layout({ children, isNodoPersonal }: LayoutProps) {
           <a 
             href={isNodoPersonal ? "#consulta" : "https://www.skool.com/nodo23-automatiza-de-verdad-4941"} 
             target={isNodoPersonal ? undefined : "_blank"}
-            className="btn-shimmer rounded-full px-4 md:px-5 py-2 text-[13px] font-medium text-[#141414] shrink-0 whitespace-nowrap"
+            className="btn-shimmer rounded-full px-3 py-1.5 md:px-5 md:py-2 text-[12px] md:text-[13px] font-medium text-[#141414] shrink-0 whitespace-nowrap"
           >
             {isNodoPersonal ? "Consulta" : "Unirse"}
           </a>
