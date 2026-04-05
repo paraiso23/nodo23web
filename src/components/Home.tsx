@@ -109,13 +109,13 @@ export default function Home() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden pt-[56px]">
+      <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-x-hidden pt-[56px]">
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]"
              style={{ backgroundImage: 'radial-gradient(circle,#fff 1px,transparent 1px)', backgroundSize: '28px 28px' }}></div>
         <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full"
              style={{ background: 'radial-gradient(ellipse at center,rgba(52,211,153,.07) 0%,transparent 70%)', filter: 'blur(40px)' }}></div>
 
-        <div className="relative z-10 flex flex-col items-center text-center px-5 max-w-[820px] mx-auto pt-10">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 md:px-5 w-full pt-10">
           <div className="fade-target mb-7 inline-flex items-center gap-2 border border-[#2c2c2c] rounded-full px-4 py-1.5 max-w-full overflow-hidden">
             <span className="pulse-dot w-[6px] h-[6px] rounded-full bg-accent-green shrink-0"></span>
             <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[.05em] md:tracking-[.1em] text-[#999] whitespace-nowrap overflow-hidden text-ellipsis">
@@ -123,14 +123,14 @@ export default function Home() {
             </span>
           </div>
 
-          <h1 className="fade-target font-medium tracking-[-0.025em] leading-[1.08]">
+          <h1 className="fade-target font-medium tracking-[-0.025em] leading-[1.08] max-w-[820px]">
             <span className="block text-[clamp(15px,1.6vw,22px)] text-white/40 font-normal tracking-wide mb-2.5">
               Tienes 12 apps de IA abiertas.
             </span>
-            <span className="hero-gradient text-[clamp(28px,4.5vw,54px)]">Todas prometen.<br/>Ninguna hace el trabajo.</span>
+            <span className="hero-gradient text-[clamp(24px,4.5vw,54px)]">Todas prometen.<br/>Ninguna hace el trabajo.</span>
           </h1>
 
-          <p className="fade-target mt-6 max-w-[580px] leading-[1.65] text-[17px] text-white/50">
+          <p className="fade-target mt-6 max-w-[580px] leading-[1.65] text-[15px] md:text-[17px] text-white/50 px-2">
             Un skill es una automatización de IA que trabaja por ti: responde emails, resume reuniones, organiza tu CRM. OpenClaw es el motor que las ejecuta — en tu máquina, con tus datos. Nodo23 te enseña a montarlo.
           </p>
 
@@ -138,7 +138,7 @@ export default function Home() {
             <a href="https://www.skool.com/nodo23-automatiza-de-verdad-4941" target="_blank" className="btn-shimmer rounded-full px-7 py-3 text-[14px] font-medium text-[#141414]">Únete al Skool →</a>
             <a href="#metodo" className="rounded-full px-7 py-3 text-[14px] font-medium border border-[#2c2c2c] text-[#999] hover:text-[#f6f6f6] hover:border-[#444] transition-all">Conoce el método</a>
           </div>
-          <p className="fade-target mt-5 font-mono text-[11px] text-[#999]">
+          <p className="fade-target mt-5 font-mono text-[10px] md:text-[11px] text-[#999] px-2">
             Freelancers · Solopreneurs · PYMEs — sin tocar una línea de código
           </p>
         </div>
