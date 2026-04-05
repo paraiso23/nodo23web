@@ -10,7 +10,7 @@ export default function Layout({ children, isNodoPersonal }: LayoutProps) {
   return (
     <div className="bg-dark min-h-screen">
       {/* NAVBAR */}
-      <nav className="nav-blur fixed top-0 left-0 right-0 z-50 h-[56px] w-full">
+      <nav className="nav-blur fixed top-0 left-0 right-0 z-50 h-[56px] w-full overflow-hidden">
         <div className="w-full max-w-[1200px] mx-auto px-4 md:px-5 h-full flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <span className="font-mono text-[15px] font-medium">Nodo<span className="text-accent-green">23</span></span>
@@ -34,7 +34,11 @@ export default function Layout({ children, isNodoPersonal }: LayoutProps) {
               </>
             )}
           </div>
-          <a href={isNodoPersonal ? "#consulta" : "#planes"} className="btn-shimmer rounded-full px-4 md:px-5 py-2 text-[13px] font-medium text-[#141414] shrink-0">
+          <a 
+            href={isNodoPersonal ? "#consulta" : "https://www.skool.com/nodo23-automatiza-de-verdad-4941"} 
+            target={isNodoPersonal ? undefined : "_blank"}
+            className="btn-shimmer rounded-full px-4 md:px-5 py-2 text-[13px] font-medium text-[#141414] shrink-0 whitespace-nowrap"
+          >
             {isNodoPersonal ? "Consulta" : "Unirse"}
           </a>
         </div>
