@@ -108,13 +108,13 @@ export default function NodoPersonal() {
   return (
     <Layout isNodoPersonal>
       {/* HERO */}
-      <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden pt-[56px]">
+      <section className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-x-hidden pt-[56px]">
         <div className="pointer-events-none absolute inset-0 opacity-[0.03]"
              style={{ backgroundImage: 'radial-gradient(circle,#fff 1px,transparent 1px)', backgroundSize: '28px 28px' }}></div>
         <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full"
              style={{ background: 'radial-gradient(ellipse at center,rgba(52,211,153,.07) 0%,transparent 70%)', filter: 'blur(40px)' }}></div>
 
-        <div className="relative z-10 flex flex-col items-center text-center px-5 max-w-[820px] mx-auto pt-10">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 md:px-5 w-full pt-10">
           <div className="fade-target mb-7 inline-flex items-center gap-2 border border-[#2c2c2c] rounded-full px-4 py-1.5 max-w-full overflow-hidden">
             <span className="pulse-dot w-[6px] h-[6px] rounded-full bg-accent-green shrink-0"></span>
             <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[.05em] md:tracking-[.1em] text-[#999] whitespace-nowrap overflow-hidden text-ellipsis">
@@ -122,14 +122,14 @@ export default function NodoPersonal() {
             </span>
           </div>
 
-          <h1 className="fade-target font-medium tracking-[-0.025em] leading-[1.08]">
+          <h1 className="fade-target font-medium tracking-[-0.025em] leading-[1.08] max-w-[820px]">
             <span className="block text-[clamp(15px,1.6vw,22px)] text-white/40 font-normal tracking-wide mb-2.5">
               El 60% lo monta cualquiera.
             </span>
-            <span className="hero-gradient text-[clamp(28px,4.5vw,54px)]">El otro 40%<br/>es lo que funciona.</span>
+            <span className="hero-gradient text-[clamp(24px,4.5vw,54px)]">El otro 40%<br/>es lo que funciona.</span>
           </h1>
 
-          <p className="fade-target mt-6 max-w-[580px] leading-[1.65] text-[17px] text-white/50">
+          <p className="fade-target mt-6 max-w-[580px] leading-[1.65] text-[15px] md:text-[17px] text-white/50 px-2">
             Te construimos un sistema de skills de IA que se ejecuta en tu máquina. Empezamos por lo que más tiempo te roba. Lo configuramos en menos de una semana y lo mejoramos cada mes.
           </p>
 
@@ -137,7 +137,7 @@ export default function NodoPersonal() {
             <a href="#consulta" className="btn-shimmer rounded-full px-7 py-3 text-[14px] font-medium text-[#141414]">Consulta Gratuita →</a>
             <a href="#como" className="rounded-full px-7 py-3 text-[14px] font-medium border border-[#2c2c2c] text-[#999] hover:text-[#f6f6f6] hover:border-[#444] transition-all">Cómo funciona</a>
           </div>
-          <p className="fade-target mt-5 font-mono text-[11px] text-[#999]">
+          <p className="fade-target mt-5 font-mono text-[10px] md:text-[11px] text-[#999] px-2">
             Setup incluido · €200/mes · sin contrato
           </p>
         </div>
