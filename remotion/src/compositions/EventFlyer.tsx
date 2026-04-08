@@ -1,28 +1,27 @@
 /**
  * EventFlyer — Flyer del evento de coworking
+ * Estilo: bicromatico retrofuturista (parchment + charcoal)
  *
- * Composiciones registradas:
- *   - EventFlyerSquare  1080×1080  (IG Post)
- *   - EventFlyerStory   1080×1920  (IG/TG Story)
+ * Composiciones:
+ *   EventFlyerSquare  1080×1080  (IG Post)
+ *   EventFlyerStory   1080×1920  (IG/TG Story)
  *
- * Render como PNG estático:
- *   npx remotion still EventFlyerSquare --output ../out/flyer-square.png
- *   npx remotion still EventFlyerStory  --output ../out/flyer-story.png
- *
- * Render como video animado:
- *   npx remotion render EventFlyerSquare --output ../out/flyer-square.mp4
+ * Render:
+ *   npx remotion still EventFlyerSquare --frame=149 --output ../out/flyer-square.png
+ *   npx remotion still EventFlyerStory  --frame=149 --output ../out/flyer-story.png
  */
 import React from "react";
 import {
   AbsoluteFill,
   interpolate,
-  spring,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { GridBackground } from "../components/GridBackground";
-import { NodoLogo } from "../components/NodoLogo";
-import { theme } from "../lib/theme";
+import { GraphPaper } from "../components/GraphPaper";
+import { PixelDisplay } from "../components/PixelDisplay";
+import { RetroBarChart } from "../components/RetroBarChart";
+import { RetroDataRows } from "../components/RetroDataRows";
+import { retro } from "../lib/theme-retro";
 
 export interface EventFlyerProps {
   format: "square" | "story";
@@ -42,33 +41,11 @@ export const DEFAULT_FLYER_PROPS: EventFlyerProps = {
     { label: "SÁB 11 ABRIL", time: "11:00h" },
   ],
   tagline: "Gratis. Comunidad Nodo23.",
-  url: "nodo23.co 🦞",
+  url: "nodo23.co",
 };
 
-function useFade(startFrame: number, duration = 20) {
-  const frame = useCurrentFrame();
-  return interpolate(frame - startFrame, [0, duration], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-}
-
-function useSlideUp(startFrame: number, fps: number, distance = 28) {
-  const frame = useCurrentFrame();
-  const progress = spring({
-    frame: frame - startFrame,
-    fps,
-    config: { damping: 55, stiffness: 100, mass: 0.8 },
-  });
-  const opacity = interpolate(frame - startFrame, [0, 12], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  return {
-    transform: `translateY(${interpolate(progress, [0, 1], [distance, 0])}px)`,
-    opacity,
-  };
-}
+// Scrolling ticker text
+const TICKER = "NODO23 · COWORKING.EN.DIRECTO · JUE.09.ABR · 19:00h · OPENCLAW · COMUNIDAD.LIBRE · SKILLS.ACTIVOS · ";
 
 export const EventFlyer: React.FC<EventFlyerProps> = ({
   format = "square",
@@ -79,226 +56,363 @@ export const EventFlyer: React.FC<EventFlyerProps> = ({
   url = DEFAULT_FLYER_PROPS.url,
 }) => {
   const { fps, width, height } = useVideoConfig();
+  const frame = useCurrentFrame();
   const isStory = format === "story";
 
-  // Animation timings
-  const logoAnim = useSlideUp(0, fps, 20);
-  const badgeAnim = useSlideUp(10, fps, 16);
-  const titleAnim = useSlideUp(20, fps, 28);
-  const subtitleAnim = useSlideUp(35, fps, 20);
-  const dividerFade = useFade(45);
-  const date0Anim = useSlideUp(50, fps, 16);
-  const date1Anim = useSlideUp(62, fps, 16);
-  const taglineAnim = useSlideUp(75, fps, 12);
-  const urlFade = useFade(85);
+  // ── Timing ──────────────────────────────────────────────────
+  // 0-15:   grid fades in
+  // 0-50:   pixel "23" scans in row by row
+  // 30-70:  bar chart grows
+  // 50-90:  title typewriter
+  // 80-130: dates + tagline
+  // 110-150: data rows appear
 
-  const padding = isStory ? 80 : 64;
-  const titleSize = isStory ? 56 : 48;
-  const subtitleSize = isStory ? 26 : 22;
-  const dateSize = isStory ? 38 : 32;
-  const timeSize = isStory ? 32 : 26;
+  const gridOpacity = interpolate(frame, [0, 15], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const pixelScan = interpolate(frame, [5, 50], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const barGrow = interpolate(frame, [30, 75], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const titleOpacity = interpolate(frame, [50, 75], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const date0Opacity = interpolate(frame, [80, 100], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const date1Opacity = interpolate(frame, [95, 115], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const taglineOpacity = interpolate(frame, [110, 130], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const dataRowReveal = interpolate(frame, [115, 150], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  // Ticker scroll: moves left at ~80px/s (about 2.67px/frame @ 30fps)
+  const tickerOffset = -(frame * 2.4) % (TICKER.length * 9.6);
+
+  // Layout
+  const TICKER_H = isStory ? 44 : 40;
+  const SIDE_COL = isStory ? 200 : 220;
+  const PAD = isStory ? 48 : 56;
+  const PIXEL_DOT = isStory ? 22 : 26;
+  const PIXEL_GAP = isStory ? 7 : 9;
+
+  const contentWidth = width - SIDE_COL;
+  const UPPER_H = isStory ? 520 : 420;
 
   return (
-    <AbsoluteFill style={{ background: theme.bg.dark }}>
-      <GridBackground showGlow glowColor={theme.accent.green} />
+    <AbsoluteFill style={{ background: retro.paper }}>
 
-      {/* Border frame */}
-      <AbsoluteFill
-        style={{
-          border: `1px solid ${theme.border.dark}`,
-          margin: 24,
-          borderRadius: 16,
-          pointerEvents: "none",
-        }}
-      />
+      {/* Graph paper grid */}
+      <div style={{ opacity: gridOpacity, position: "absolute", inset: 0 }}>
+        <GraphPaper cellSize={30} opacity={0.16} />
+      </div>
 
-      {/* Content */}
-      <AbsoluteFill
+      {/* ── TOP TICKER ─────────────────────────────────────────── */}
+      <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: TICKER_H,
+          borderBottom: `1px solid ${retro.ink}`,
+          overflow: "hidden",
           display: "flex",
-          flexDirection: "column",
-          padding,
-          justifyContent: isStory ? "center" : "space-between",
-          gap: isStory ? 0 : undefined,
+          alignItems: "center",
         }}
       >
-        {/* Top: Logo + badge */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: isStory ? 80 : 0,
+            whiteSpace: "nowrap",
+            fontFamily: retro.font,
+            fontSize: isStory ? 13 : 11,
+            color: retro.ink,
+            letterSpacing: "0.06em",
+            transform: `translateX(${tickerOffset}px)`,
           }}
         >
-          <div style={logoAnim}>
-            <NodoLogo startFrame={0} size={isStory ? "md" : "sm"} />
-          </div>
-          <div
-            style={{
-              ...badgeAnim,
-              fontFamily: theme.font.mono,
-              fontSize: 11,
-              color: theme.accent.green,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              border: `1px solid ${theme.accent.green}44`,
-              borderRadius: 20,
-              padding: "4px 12px",
-            }}
-          >
-            openclaw · coworking
-          </div>
+          {TICKER.repeat(8)}
         </div>
+      </div>
 
-        {/* Center content */}
+      {/* ── MAIN AREA (below ticker) ────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute",
+          top: TICKER_H,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+        }}
+      >
+        {/* LEFT CONTENT */}
         <div
           style={{
-            flex: isStory ? undefined : 1,
+            flex: 1,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            borderRight: `1px solid ${retro.ink}`,
           }}
         >
-          {/* Title */}
-          <div style={titleAnim}>
-            <h1
-              style={{
-                fontFamily: theme.font.sans,
-                fontSize: titleSize,
-                fontWeight: 700,
-                color: theme.text.primary,
-                lineHeight: 1.1,
-                letterSpacing: "-0.02em",
-                margin: 0,
-                marginBottom: 20,
-              }}
-            >
-              {title}
-            </h1>
-          </div>
-
-          {/* Subtitle */}
-          <div style={subtitleAnim}>
-            <p
-              style={{
-                fontFamily: theme.font.sans,
-                fontSize: subtitleSize,
-                fontWeight: 300,
-                color: "rgba(255,255,255,0.55)",
-                lineHeight: 1.5,
-                margin: 0,
-                marginBottom: 40,
-                whiteSpace: "pre-line",
-              }}
-            >
-              {subtitle}
-            </p>
-          </div>
-
-          {/* Divider */}
+          {/* UPPER: pixel art */}
           <div
             style={{
-              height: 1,
-              background: theme.border.dark,
-              marginBottom: 36,
-              opacity: dividerFade,
-            }}
-          />
-
-          {/* Dates */}
-          <div
-            style={{
+              height: UPPER_H,
+              padding: PAD,
+              paddingBottom: 24,
               display: "flex",
               flexDirection: "column",
-              gap: isStory ? 28 : 20,
-              marginBottom: 40,
+              justifyContent: "flex-end",
+              borderBottom: `1px solid ${retro.ink}`,
+              overflow: "hidden",
             }}
           >
-            {(dates ?? []).map((d, i) => {
-              const anim = i === 0 ? date0Anim : date1Anim;
-              return (
+            <PixelDisplay
+              text="23"
+              dotSize={PIXEL_DOT}
+              gap={PIXEL_GAP}
+              scanProgress={pixelScan}
+            />
+          </div>
+
+          {/* LOWER: text content */}
+          <div
+            style={{
+              flex: 1,
+              padding: PAD,
+              paddingTop: isStory ? 40 : 32,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            {/* Title */}
+            <div style={{ opacity: titleOpacity }}>
+              <div
+                style={{
+                  fontFamily: retro.font,
+                  fontSize: isStory ? 14 : 11,
+                  color: retro.ink,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  opacity: 0.5,
+                  marginBottom: isStory ? 14 : 12,
+                }}
+              >
+                // evento · coworking
+              </div>
+              <div
+                style={{
+                  fontFamily: retro.font,
+                  fontSize: isStory ? 40 : 36,
+                  fontWeight: 700,
+                  color: retro.ink,
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.01em",
+                  marginBottom: 8,
+                }}
+              >
+                {title}
+              </div>
+              {subtitle && (
+                <div
+                  style={{
+                    fontFamily: retro.font,
+                    fontSize: isStory ? 16 : 14,
+                    color: retro.ink,
+                    opacity: 0.55,
+                    lineHeight: 1.5,
+                    whiteSpace: "pre-line",
+                  }}
+                >
+                  {subtitle}
+                </div>
+              )}
+            </div>
+
+            {/* Dates */}
+            <div style={{ display: "flex", flexDirection: "column", gap: isStory ? 16 : 12 }}>
+              {(dates ?? []).map((d, i) => (
                 <div
                   key={i}
                   style={{
-                    ...anim,
+                    opacity: i === 0 ? date0Opacity : date1Opacity,
                     display: "flex",
                     alignItems: "baseline",
-                    gap: 16,
+                    gap: 10,
+                    borderLeft: `3px solid ${retro.ink}`,
+                    paddingLeft: 14,
                   }}
                 >
                   <span
                     style={{
-                      fontFamily: theme.font.mono,
-                      fontSize: dateSize,
-                      fontWeight: 500,
-                      color: theme.accent.green,
-                      letterSpacing: "-0.01em",
+                      fontFamily: retro.font,
+                      fontSize: isStory ? 28 : 24,
+                      fontWeight: 600,
+                      color: retro.ink,
+                      letterSpacing: "0.02em",
                     }}
                   >
-                    📅 {d.label}
+                    {d.label}
                   </span>
                   <span
                     style={{
-                      fontFamily: theme.font.mono,
-                      fontSize: timeSize,
-                      color: "rgba(255,255,255,0.5)",
+                      fontFamily: retro.font,
+                      fontSize: isStory ? 22 : 18,
+                      color: retro.ink,
+                      opacity: 0.5,
                     }}
                   >
                     · {d.time}
                   </span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              ))}
+            </div>
 
-        {/* Bottom: tagline + url */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: isStory ? 60 : 0,
-          }}
-        >
-          <div style={taglineAnim}>
-            <p
+            {/* Tagline + URL */}
+            <div
               style={{
-                fontFamily: theme.font.sans,
-                fontSize: 18,
-                color: "rgba(255,255,255,0.45)",
-                margin: 0,
+                opacity: taglineOpacity,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+                borderTop: `1px solid ${retro.ink}`,
+                paddingTop: 16,
               }}
             >
-              {tagline}
-            </p>
-          </div>
-          <div
-            style={{
-              opacity: urlFade,
-              fontFamily: theme.font.mono,
-              fontSize: 18,
-              color: theme.text.secondary,
-            }}
-          >
-            {url}
+              <span
+                style={{
+                  fontFamily: retro.font,
+                  fontSize: isStory ? 14 : 12,
+                  color: retro.ink,
+                  opacity: 0.6,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {tagline}
+              </span>
+              <span
+                style={{
+                  fontFamily: retro.font,
+                  fontSize: isStory ? 14 : 12,
+                  color: retro.ink,
+                  letterSpacing: "0.06em",
+                  fontWeight: 600,
+                }}
+              >
+                {url}
+              </span>
+            </div>
+
+            {/* Data rows */}
+            <div style={{ marginTop: 8 }}>
+              <RetroDataRows
+                rowCount={isStory ? 5 : 4}
+                revealProgress={dataRowReveal}
+                fontSize={isStory ? 12 : 11}
+                seed={42}
+              />
+            </div>
           </div>
         </div>
-      </AbsoluteFill>
 
-      {/* Bottom green glow accent */}
-      <AbsoluteFill
-        style={{
-          background: `radial-gradient(ellipse at 50% 110%, ${theme.accent.green}12 0%, transparent 60%)`,
-          pointerEvents: "none",
-        }}
-      />
+        {/* RIGHT COLUMN: bar chart */}
+        <div
+          style={{
+            width: SIDE_COL,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "24px 16px",
+            gap: 20,
+            overflow: "hidden",
+          }}
+        >
+          {/* "el." label top right */}
+          <div
+            style={{
+              fontFamily: retro.font,
+              fontSize: isStory ? 13 : 11,
+              color: retro.ink,
+              opacity: 0.5,
+              letterSpacing: "0.08em",
+              alignSelf: "flex-end",
+            }}
+          >
+            el.
+          </div>
+
+          {/* Bar chart fills the column */}
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "flex-end",
+              width: "100%",
+              overflow: "hidden",
+            }}
+          >
+            <RetroBarChart
+              barCount={isStory ? 20 : 24}
+              barWidth={isStory ? 5 : 5}
+              barGap={isStory ? 3 : 2}
+              maxHeight={isStory ? 700 : 560}
+              growProgress={barGrow}
+            />
+          </div>
+
+          {/* "04_" cursor */}
+          <div
+            style={{
+              fontFamily: retro.font,
+              fontSize: isStory ? 20 : 18,
+              color: retro.ink,
+              letterSpacing: "0.02em",
+              alignSelf: "flex-end",
+              opacity: titleOpacity,
+            }}
+          >
+            04_
+          </div>
+
+          {/* Secondary mini bars */}
+          <div style={{ alignSelf: "flex-end", opacity: barGrow }}>
+            <RetroBarChart
+              barCount={8}
+              barWidth={isStory ? 8 : 7}
+              barGap={2}
+              maxHeight={isStory ? 80 : 70}
+              growProgress={barGrow}
+            />
+          </div>
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
 
-// Re-export with format pre-set for Root.tsx
 export const EventFlyerSquare: React.FC<Omit<EventFlyerProps, "format">> = (
   props
 ) => <EventFlyer {...props} format="square" />;

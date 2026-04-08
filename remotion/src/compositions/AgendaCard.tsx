@@ -1,22 +1,24 @@
 /**
- * AgendaCard — Agenda visual 4 pasos para el streaming (Mar 7)
+ * AgendaCard — Agenda visual 4 pasos para el streaming
+ * Estilo: bicromatico retrofuturista (parchment + charcoal)
  *
  * Formato: 1080×1080 @ 30fps, 8s = 240 frames
  *
  * Render:
  *   npx remotion render AgendaCard --output ../out/agenda.mp4
+ *   npx remotion still AgendaCard --frame=200 --output ../out/agenda-preview.png
  */
 import React from "react";
 import {
   AbsoluteFill,
   interpolate,
-  spring,
   useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
-import { GridBackground } from "../components/GridBackground";
-import { NodoLogo } from "../components/NodoLogo";
-import { theme } from "../lib/theme";
+import { GraphPaper } from "../components/GraphPaper";
+import { PixelDisplay } from "../components/PixelDisplay";
+import { RetroBarChart } from "../components/RetroBarChart";
+import { RetroDataRows } from "../components/RetroDataRows";
+import { retro } from "../lib/theme-retro";
 
 export interface AgendaStep {
   number: string;
@@ -35,28 +37,28 @@ export interface AgendaCardProps {
 export const DEFAULT_AGENDA_PROPS: AgendaCardProps = {
   steps: [
     {
-      number: "①",
+      number: "01",
       title: "Instalar OpenClaw desde cero",
       detail: "Terminal. Sin preparación previa.",
-      duration: "~15 min",
+      duration: "~15min",
     },
     {
-      number: "②",
+      number: "02",
       title: "Darle acceso al correo",
       detail: "Gmail de demo. Conexión en vivo.",
-      duration: "~5 min",
+      duration: "~5min",
     },
     {
-      number: "③",
+      number: "03",
       title: "Ver cómo gestiona un email solo",
       detail: "Sin tocar el teclado.",
-      duration: "~10 min",
+      duration: "~10min",
     },
     {
-      number: "④",
+      number: "04",
       title: "Preguntas abiertas",
       detail: "Tu caso concreto. Sin filtro.",
-      duration: "~15 min",
+      duration: "~15min",
     },
   ],
   date: "JUE 9 ABRIL",
@@ -64,37 +66,7 @@ export const DEFAULT_AGENDA_PROPS: AgendaCardProps = {
   subtitle: "Sin script. Sin edición. Si algo falla, lo vemos en directo.",
 };
 
-function useStepAnim(stepIndex: number, fps: number) {
-  const frame = useCurrentFrame();
-  // Steps appear one by one: step 0 at frame 40, then every 35 frames
-  const startFrame = 40 + stepIndex * 38;
-
-  const progress = spring({
-    frame: frame - startFrame,
-    fps,
-    config: { damping: 58, stiffness: 110, mass: 0.75 },
-  });
-
-  const opacity = interpolate(frame - startFrame, [0, 15], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  return {
-    opacity,
-    transform: `translateX(${interpolate(progress, [0, 1], [-24, 0])}px)`,
-  };
-}
-
-// Tick mark that appears after the step slides in
-function useTickAnim(stepIndex: number, fps: number) {
-  const frame = useCurrentFrame();
-  const startFrame = 40 + stepIndex * 38 + 18; // appears slightly after the step
-  return interpolate(frame - startFrame, [0, 12], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-}
+const TICKER = "NODO23 · AGENDA.DIRECTO · JUE.09.ABR · 19:00h · OPENCLAW · COWORKING.LIVE · ";
 
 export const AgendaCard: React.FC<AgendaCardProps> = ({
   steps = DEFAULT_AGENDA_PROPS.steps,
@@ -102,131 +74,220 @@ export const AgendaCard: React.FC<AgendaCardProps> = ({
   time = DEFAULT_AGENDA_PROPS.time,
   subtitle = DEFAULT_AGENDA_PROPS.subtitle,
 }) => {
-  const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
-  const headerOpacity = interpolate(frame, [0, 20], [0, 1], {
+  // ── Timing (240 frames = 8s @ 30fps) ───────────────────────
+  // 0-20:   grid + ticker
+  // 5-40:   pixel "23" scans in
+  // 25-60:  bar chart grows
+  // 40-70:  header info
+  // Step reveals: 70, 108, 146, 184 (every 38 frames)
+  // 200-240: data rows + status
+
+  const gridOpacity = interpolate(frame, [0, 20], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  const lastStepEnd = 40 + ((steps ?? []).length - 1) * 38 + 30;
-  const ctaOpacity = interpolate(frame - lastStepEnd, [0, 25], [0, 1], {
+  const pixelScan = interpolate(frame, [5, 40], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+
+  const barGrow = interpolate(frame, [25, 65], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const headerOpacity = interpolate(frame, [40, 65], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const stepReveal = (steps ?? []).map((_, i) => {
+    const start = 70 + i * 38;
+    return interpolate(frame, [start, start + 20], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+  });
+
+  const tickOpacity = (steps ?? []).map((_, i) => {
+    const start = 85 + i * 38;
+    return interpolate(frame, [start, start + 15], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+  });
+
+  const dataRowReveal = interpolate(frame, [200, 235], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const tickerOffset = -(frame * 2.4) % (TICKER.length * 9.6);
+
+  const TICKER_H = 40;
+  const SIDE_COL = 200;
+  const PAD = 52;
+  const UPPER_H = 300;
 
   return (
-    <AbsoluteFill style={{ background: theme.bg.dark }}>
-      <GridBackground showGlow glowColor={theme.accent.green} gridOpacity={0.025} />
+    <AbsoluteFill style={{ background: retro.paper }}>
 
-      <AbsoluteFill
+      {/* Graph paper grid */}
+      <div style={{ opacity: gridOpacity, position: "absolute", inset: 0 }}>
+        <GraphPaper cellSize={30} opacity={0.16} />
+      </div>
+
+      {/* ── TOP TICKER ─────────────────────────────────────────── */}
+      <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: TICKER_H,
+          borderBottom: `1px solid ${retro.ink}`,
+          overflow: "hidden",
           display: "flex",
-          flexDirection: "column",
-          padding: 64,
-          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        {/* Header */}
-        <div style={{ opacity: headerOpacity }}>
+        <div
+          style={{
+            whiteSpace: "nowrap",
+            fontFamily: retro.font,
+            fontSize: 11,
+            color: retro.ink,
+            letterSpacing: "0.06em",
+            transform: `translateX(${tickerOffset}px)`,
+          }}
+        >
+          {TICKER.repeat(8)}
+        </div>
+      </div>
+
+      {/* ── MAIN AREA ───────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute",
+          top: TICKER_H,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+        }}
+      >
+        {/* LEFT CONTENT */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            borderRight: `1px solid ${retro.ink}`,
+          }}
+        >
+          {/* UPPER: pixel art + header */}
           <div
             style={{
+              height: UPPER_H,
+              padding: PAD,
+              paddingBottom: 20,
               display: "flex",
-              alignItems: "center",
+              flexDirection: "column",
               justifyContent: "space-between",
-              marginBottom: 8,
+              borderBottom: `1px solid ${retro.ink}`,
+              overflow: "hidden",
             }}
           >
-            <NodoLogo startFrame={0} size="sm" />
-            <span
-              style={{
-                fontFamily: theme.font.mono,
-                fontSize: 11,
-                color: theme.text.secondary,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              // agenda del directo
-            </span>
-          </div>
-          <div
-            style={{ height: 1, background: theme.border.dark, marginTop: 20 }}
-          />
-        </div>
+            <PixelDisplay
+              text="23"
+              dotSize={22}
+              gap={7}
+              scanProgress={pixelScan}
+            />
 
-        {/* Date + subtitle */}
-        <div style={{ opacity: headerOpacity }}>
+            {/* Date + subtitle */}
+            <div style={{ opacity: headerOpacity }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: 10,
+                  marginBottom: 6,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: retro.font,
+                    fontSize: 22,
+                    fontWeight: 700,
+                    color: retro.ink,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {date}
+                </span>
+                <span
+                  style={{
+                    fontFamily: retro.font,
+                    fontSize: 18,
+                    color: retro.ink,
+                    opacity: 0.5,
+                  }}
+                >
+                  · {time}
+                </span>
+              </div>
+              <div
+                style={{
+                  fontFamily: retro.font,
+                  fontSize: 12,
+                  color: retro.ink,
+                  opacity: 0.5,
+                  lineHeight: 1.4,
+                }}
+              >
+                {subtitle}
+              </div>
+            </div>
+          </div>
+
+          {/* LOWER: agenda steps */}
           <div
             style={{
+              flex: 1,
+              padding: PAD,
+              paddingTop: 24,
               display: "flex",
-              alignItems: "baseline",
-              gap: 12,
-              marginBottom: 8,
+              flexDirection: "column",
+              gap: 14,
             }}
           >
-            <span
-              style={{
-                fontFamily: theme.font.mono,
-                fontSize: 30,
-                fontWeight: 500,
-                color: theme.accent.green,
-              }}
-            >
-              📅 {date}
-            </span>
-            <span
-              style={{
-                fontFamily: theme.font.mono,
-                fontSize: 24,
-                color: "rgba(255,255,255,0.4)",
-              }}
-            >
-              · {time}
-            </span>
-          </div>
-          <p
-            style={{
-              fontFamily: theme.font.sans,
-              fontSize: 16,
-              color: "rgba(255,255,255,0.4)",
-              margin: 0,
-              lineHeight: 1.5,
-            }}
-          >
-            {subtitle}
-          </p>
-        </div>
-
-        {/* Steps */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 }}>
-          {(steps ?? []).map((step, i) => {
-            const anim = useStepAnim(i, fps);
-            const tickOpacity = useTickAnim(i, fps);
-
-            return (
+            {(steps ?? []).map((step, i) => (
               <div
                 key={i}
                 style={{
-                  ...anim,
+                  opacity: stepReveal[i],
                   display: "flex",
                   alignItems: "flex-start",
-                  gap: 20,
-                  background: "rgba(255,255,255,0.02)",
-                  border: `1px solid ${theme.border.dark}`,
-                  borderRadius: 10,
-                  padding: "16px 20px",
+                  gap: 16,
+                  padding: "12px 16px",
+                  border: `1px solid ${retro.ink}`,
+                  borderLeftWidth: 3,
                 }}
               >
                 {/* Step number */}
                 <span
                   style={{
-                    fontFamily: theme.font.mono,
-                    fontSize: 28,
-                    color: theme.accent.green,
-                    lineHeight: 1,
+                    fontFamily: retro.font,
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: retro.ink,
                     flexShrink: 0,
+                    lineHeight: 1,
+                    opacity: 0.35,
                     marginTop: 2,
                   }}
                 >
@@ -235,48 +296,49 @@ export const AgendaCard: React.FC<AgendaCardProps> = ({
 
                 {/* Content */}
                 <div style={{ flex: 1 }}>
-                  <p
+                  <div
                     style={{
-                      fontFamily: theme.font.sans,
-                      fontSize: 18,
-                      fontWeight: 500,
-                      color: theme.text.primary,
-                      margin: 0,
-                      lineHeight: 1.3,
+                      fontFamily: retro.font,
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: retro.ink,
+                      lineHeight: 1.25,
                     }}
                   >
                     {step.title}
-                  </p>
+                  </div>
                   {step.detail && (
-                    <p
+                    <div
                       style={{
-                        fontFamily: theme.font.sans,
-                        fontSize: 14,
-                        color: "rgba(255,255,255,0.4)",
-                        margin: "4px 0 0",
+                        fontFamily: retro.font,
+                        fontSize: 12,
+                        color: retro.ink,
+                        opacity: 0.5,
+                        marginTop: 3,
                       }}
                     >
                       {step.detail}
-                    </p>
+                    </div>
                   )}
                 </div>
 
                 {/* Duration + tick */}
                 <div
                   style={{
+                    opacity: tickOpacity[i],
                     display: "flex",
                     alignItems: "center",
                     gap: 8,
                     flexShrink: 0,
-                    opacity: tickOpacity,
                   }}
                 >
                   {step.duration && (
                     <span
                       style={{
-                        fontFamily: theme.font.mono,
-                        fontSize: 12,
-                        color: "rgba(255,255,255,0.3)",
+                        fontFamily: retro.font,
+                        fontSize: 11,
+                        color: retro.ink,
+                        opacity: 0.4,
                       }}
                     >
                       {step.duration}
@@ -284,50 +346,96 @@ export const AgendaCard: React.FC<AgendaCardProps> = ({
                   )}
                   <span
                     style={{
-                      fontFamily: theme.font.mono,
-                      fontSize: 18,
-                      color: theme.accent.green,
+                      fontFamily: retro.font,
+                      fontSize: 16,
+                      color: retro.ink,
+                      fontWeight: 700,
                     }}
                   >
-                    ✓
+                    [✓]
                   </span>
                 </div>
               </div>
-            );
-          })}
+            ))}
+
+            {/* Data rows at bottom */}
+            <div style={{ marginTop: "auto", paddingTop: 8 }}>
+              <RetroDataRows
+                rowCount={3}
+                revealProgress={dataRowReveal}
+                fontSize={11}
+                seed={99}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* CTA */}
+        {/* RIGHT COLUMN: bar chart */}
         <div
           style={{
-            opacity: ctaOpacity,
+            width: SIDE_COL,
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: 20,
-            borderTop: `1px solid ${theme.border.dark}`,
+            padding: "24px 16px",
+            gap: 20,
+            overflow: "hidden",
           }}
         >
-          <span
+          <div
             style={{
-              fontFamily: theme.font.sans,
-              fontSize: 16,
-              color: "rgba(255,255,255,0.4)",
+              fontFamily: retro.font,
+              fontSize: 11,
+              color: retro.ink,
+              opacity: 0.5,
+              alignSelf: "flex-end",
+              letterSpacing: "0.06em",
             }}
           >
-            Gratis para todos los miembros.
-          </span>
-          <span
+            el.
+          </div>
+
+          <div
             style={{
-              fontFamily: theme.font.mono,
-              fontSize: 16,
-              color: theme.accent.green,
+              flex: 1,
+              display: "flex",
+              alignItems: "flex-end",
+              width: "100%",
+              overflow: "hidden",
             }}
           >
-            nodo23.co 🦞
-          </span>
+            <RetroBarChart
+              barCount={22}
+              barWidth={5}
+              barGap={2}
+              maxHeight={560}
+              growProgress={barGrow}
+            />
+          </div>
+
+          <div
+            style={{
+              fontFamily: retro.font,
+              fontSize: 18,
+              color: retro.ink,
+              alignSelf: "flex-end",
+              opacity: headerOpacity,
+            }}
+          >
+            04_
+          </div>
+
+          <div style={{ alignSelf: "flex-end", opacity: barGrow }}>
+            <RetroBarChart
+              barCount={8}
+              barWidth={7}
+              barGap={2}
+              maxHeight={65}
+              growProgress={barGrow}
+            />
+          </div>
         </div>
-      </AbsoluteFill>
+      </div>
     </AbsoluteFill>
   );
 };

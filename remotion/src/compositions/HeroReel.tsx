@@ -1,13 +1,14 @@
 /**
  * HeroReel — Reel principal de marca Nodo23 (1280×720, 15s)
+ * Estilo: bicromatico retrofuturista (parchment + charcoal)
  *
  * Secuencia:
- *   0–60:    Logo + eyebrow
- *   60–120:  Headline typewriter "Sistemas, no Sermones."
- *   120–200: Terminal abre + `openclaw skills --list`
- *   200–360: 6 skills en cascada con SkillBadge
- *   360–420: CTA "nodo23.co — Únete gratis"
- *   420–450: Fade out suave
+ *   0–60:    Grid + ticker + logo "23" pixel scan
+ *   60–120:  Headline typewriter
+ *   120–220: Skills cascade (data rows)
+ *   220–340: Command output + bar chart fills
+ *   340–420: CTA
+ *   420–450: Fade out
  *
  * Render:
  *   npx remotion render HeroReel --output ../out/hero-reel.mp4
@@ -16,17 +17,15 @@ import React from "react";
 import {
   AbsoluteFill,
   interpolate,
-  Sequence,
-  spring,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { GridBackground } from "../components/GridBackground";
-import { NodoLogo } from "../components/NodoLogo";
-import { SkillBadge } from "../components/SkillBadge";
-import { Terminal } from "../components/Terminal";
+import { GraphPaper } from "../components/GraphPaper";
+import { PixelDisplay } from "../components/PixelDisplay";
+import { RetroBarChart } from "../components/RetroBarChart";
+import { RetroDataRows } from "../components/RetroDataRows";
+import { retro } from "../lib/theme-retro";
 import { skills } from "../lib/skills";
-import { theme } from "../lib/theme";
 
 function useTypewriter(text: string, startFrame: number, cps: number) {
   const frame = useCurrentFrame();
@@ -36,306 +35,392 @@ function useTypewriter(text: string, startFrame: number, cps: number) {
   return text.slice(0, Math.min(visible, text.length));
 }
 
+const TICKER = "NODO23 · SISTEMAS.DE.IA · OPENCLAW · SKILLS.ACTIVOS · SOBERANIA.DIGITAL · FREELANCERS · SOLOPRENEURS · PYMES · ";
+
 export const HeroReel: React.FC = () => {
-  const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
-  // Overall fade out at the end
-  const fadeOut = interpolate(frame, [420, 450], [1, 0], {
+  // ── Timing ───────────────────────────────────────────────────
+  const gridOpacity = interpolate(frame, [0, 15], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  // Logo area
-  const logoOpacity = interpolate(frame, [0, 20], [0, 1], {
+  const pixelScan = interpolate(frame, [5, 55], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  // Eyebrow badge
-  const eyebrowProg = spring({
-    frame: frame - 10,
-    fps,
-    config: { damping: 60, stiffness: 120, mass: 0.7 },
-  });
-  const eyebrowOpacity = interpolate(frame - 10, [0, 15], [0, 1], {
+  const barGrow = interpolate(frame, [40, 100], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   // Headline
-  const headline1 = useTypewriter("Tienes 12 apps de IA abiertas.", 60, 30);
-  const headline2 = useTypewriter("Ninguna produce.", 110, 28);
+  const h1 = useTypewriter("SISTEMAS, NO SERMONES.", 60, 28);
+  const h2 = useTypewriter("Skills de IA que trabajan mientras duermes.", 110, 32);
 
-  const h1Opacity = interpolate(frame, [58, 68], [0, 1], {
+  const h1Opacity = interpolate(frame, [58, 72], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const h2Opacity = interpolate(frame, [108, 118], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  // Subhead
-  const subOpacity = interpolate(frame, [140, 160], [0, 1], {
+  const h2Opacity = interpolate(frame, [108, 120], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  // Terminal lines for openclaw skills --list
-  const terminalLines = [
-    {
-      text: "$ openclaw skills --list",
-      startFrame: 205,
-      color: "#5b9cf4",
-      cps: 30,
-    },
-    {
-      text: "",
-      startFrame: 235,
-      color: "rgba(255,255,255,0.2)",
-      cps: 999,
-    },
-    ...skills.map((s, i) => ({
-      text: `  ${s.name.padEnd(18)} ${s.shortDesc}`,
-      startFrame: 238 + i * 18,
-      color: s.color,
-      cps: 60,
-    })),
-    {
-      text: "",
-      startFrame: 238 + skills.length * 18,
-      color: "rgba(255,255,255,0.2)",
-      cps: 999,
-    },
-    {
-      text: `${skills.length} skills · sistema activo`,
-      startFrame: 238 + skills.length * 18 + 5,
-      color: theme.accent.green,
-      cps: 40,
-    },
-  ];
+  // Skills cascade (each skill appears as a data line)
+  const skillLineOpacity = skills.map((_, i) =>
+    interpolate(frame, [130 + i * 18, 148 + i * 18], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    })
+  );
 
-  // Skills grid badges (appear after terminal)
-  const skillsBadgesStart = 360;
-  const skillsOpacity = interpolate(frame, [358, 372], [0, 1], {
+  // Command + output section
+  const cmdOpacity = interpolate(frame, [230, 250], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   // CTA
-  const ctaOpacity = interpolate(frame, [405, 425], [0, 1], {
+  const ctaOpacity = interpolate(frame, [340, 370], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const ctaProg = spring({
-    frame: frame - 405,
-    fps,
-    config: { damping: 55, stiffness: 100, mass: 0.8 },
+
+  // Data rows
+  const dataRowReveal = interpolate(frame, [260, 330], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
   });
 
-  return (
-    <AbsoluteFill style={{ background: theme.bg.dark, opacity: fadeOut }}>
-      <GridBackground showGlow glowColor={theme.accent.green} gridOpacity={0.03} />
+  // Fade out
+  const fadeOut = interpolate(frame, [420, 450], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
-      <AbsoluteFill
+  const tickerOffset = -(frame * 2.8) % (TICKER.length * 9.6);
+
+  const TICKER_H = 40;
+  const SIDE_COL = 220;
+  const PAD_X = 60;
+  const PAD_Y = 48;
+  const UPPER_H = 280;
+
+  return (
+    <AbsoluteFill style={{ background: retro.paper, opacity: fadeOut }}>
+
+      {/* Graph paper grid */}
+      <div style={{ opacity: gridOpacity, position: "absolute", inset: 0 }}>
+        <GraphPaper cellSize={28} opacity={0.15} />
+      </div>
+
+      {/* ── TOP TICKER ─────────────────────────────────────────── */}
+      <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: TICKER_H,
+          borderBottom: `1px solid ${retro.ink}`,
+          overflow: "hidden",
           display: "flex",
-          flexDirection: "column",
-          padding: "48px 72px",
-          gap: 0,
+          alignItems: "center",
         }}
       >
-        {/* ── Row 1: Logo + eyebrow ── */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: 40,
+            whiteSpace: "nowrap",
+            fontFamily: retro.font,
+            fontSize: 11,
+            color: retro.ink,
+            letterSpacing: "0.06em",
+            transform: `translateX(${tickerOffset}px)`,
           }}
         >
-          <div style={{ opacity: logoOpacity }}>
-            <NodoLogo startFrame={0} size="md" />
-          </div>
+          {TICKER.repeat(6)}
+        </div>
+      </div>
 
+      {/* ── MAIN AREA ───────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute",
+          top: TICKER_H,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          display: "flex",
+        }}
+      >
+        {/* LEFT CONTENT */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            borderRight: `1px solid ${retro.ink}`,
+          }}
+        >
+          {/* UPPER: pixel "23" + headline */}
           <div
             style={{
-              opacity: eyebrowOpacity,
-              transform: `translateX(${interpolate(eyebrowProg, [0, 1], [16, 0])}px)`,
+              height: UPPER_H,
+              padding: `${PAD_Y}px ${PAD_X}px`,
+              paddingBottom: 20,
               display: "flex",
-              alignItems: "center",
-              gap: 8,
-              border: `1px solid ${theme.border.dark}`,
-              borderRadius: 20,
-              padding: "4px 14px",
+              flexDirection: "row",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              borderBottom: `1px solid ${retro.ink}`,
+              overflow: "hidden",
             }}
           >
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: theme.accent.green,
-              }}
+            <PixelDisplay
+              text="23"
+              dotSize={22}
+              gap={7}
+              scanProgress={pixelScan}
             />
-            <span
+
+            {/* Headline */}
+            <div
               style={{
-                fontFamily: theme.font.mono,
-                fontSize: 11,
-                color: theme.text.secondary,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                maxWidth: 460,
               }}
             >
-              OpenClaw · Skills de IA · Soberanía Digital
-            </span>
+              <div
+                style={{
+                  opacity: h1Opacity,
+                  fontFamily: retro.font,
+                  fontSize: 32,
+                  fontWeight: 700,
+                  color: retro.ink,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.1,
+                  textAlign: "right",
+                  marginBottom: 10,
+                }}
+              >
+                {h1}
+              </div>
+              <div
+                style={{
+                  opacity: h2Opacity * 0.55,
+                  fontFamily: retro.font,
+                  fontSize: 14,
+                  color: retro.ink,
+                  lineHeight: 1.5,
+                  textAlign: "right",
+                }}
+              >
+                {h2}
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* ── Row 2: Headline ── */}
-        <div style={{ marginBottom: 24 }}>
-          <p
-            style={{
-              fontFamily: theme.font.sans,
-              fontSize: 18,
-              color: "rgba(255,255,255,0.35)",
-              margin: 0,
-              marginBottom: 10,
-              opacity: h1Opacity,
-            }}
-          >
-            {headline1}
-          </p>
-          <h1
-            style={{
-              fontFamily: theme.font.sans,
-              fontSize: 64,
-              fontWeight: 600,
-              margin: 0,
-              lineHeight: 1.05,
-              letterSpacing: "-0.025em",
-              background: "linear-gradient(90deg, #f6f6f6 0%, rgba(246,246,246,0.35) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              opacity: h2Opacity,
-            }}
-          >
-            Todas consumen.
-            <br />
-            <span style={{ color: theme.accent.green, WebkitTextFillColor: theme.accent.green }}>
-              {headline2}
-            </span>
-          </h1>
-        </div>
-
-        {/* ── Row 3: Subheadline ── */}
-        <p
-          style={{
-            fontFamily: theme.font.sans,
-            fontSize: 18,
-            color: "rgba(255,255,255,0.45)",
-            lineHeight: 1.6,
-            margin: 0,
-            marginBottom: 32,
-            maxWidth: 620,
-            opacity: subOpacity,
-          }}
-        >
-          OpenClaw es el motor. Los skills son las piezas.
-          <br />
-          Tu Nodo es el sistema completo.
-        </p>
-
-        {/* ── Row 4: Terminal ── */}
-        <Sequence from={190} durationInFrames={200}>
-          <div style={{ marginBottom: 24 }}>
-            <Terminal
-              title="openclaw · nodo activo"
-              lines={terminalLines}
-              openFrame={0}
-              width={580}
-            />
-          </div>
-        </Sequence>
-
-        {/* ── Row 5: Skills badges grid ── */}
-        <Sequence from={skillsBadgesStart} durationInFrames={90}>
+          {/* LOWER: skills list + command */}
           <div
             style={{
-              opacity: skillsOpacity,
+              flex: 1,
+              padding: `24px ${PAD_X}px`,
               display: "flex",
-              flexWrap: "wrap",
+              flexDirection: "column",
               gap: 12,
             }}
           >
-            {skills.map((skill, i) => (
-              <SkillBadge key={skill.id} skill={skill} startFrame={0} index={i} />
-            ))}
-          </div>
-        </Sequence>
+            {/* Skills cascade */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+              }}
+            >
+              {skills.map((skill, i) => (
+                <div
+                  key={skill.id}
+                  style={{
+                    opacity: skillLineOpacity[i],
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    fontFamily: retro.font,
+                    fontSize: 13,
+                    color: retro.ink,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  <span style={{ opacity: 0.35, width: 28, flexShrink: 0, fontWeight: 700 }}>
+                    {String(i + 1).padStart(2, "0")}.
+                  </span>
+                  <span style={{ fontWeight: 600, width: 140, flexShrink: 0 }}>
+                    {skill.name}
+                  </span>
+                  <span
+                    style={{
+                      opacity: 0.5,
+                      flex: 1,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {skill.tagline}
+                  </span>
+                  <span style={{ opacity: 0.3, flexShrink: 0, fontSize: 11 }}>
+                    [activo]
+                  </span>
+                </div>
+              ))}
+            </div>
 
-        {/* ── Row 6: CTA ── */}
-        <Sequence from={405} durationInFrames={45}>
+            {/* Command line */}
+            <div
+              style={{
+                opacity: cmdOpacity,
+                fontFamily: retro.font,
+                fontSize: 12,
+                color: retro.ink,
+                borderLeft: `2px solid ${retro.ink}`,
+                paddingLeft: 14,
+                marginTop: 8,
+              }}
+            >
+              $ openclaw skills --list --status=active
+            </div>
+
+            {/* Data rows */}
+            <div style={{ marginTop: "auto" }}>
+              <RetroDataRows
+                rowCount={4}
+                revealProgress={dataRowReveal}
+                fontSize={11}
+                seed={77}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div
+          style={{
+            width: SIDE_COL,
+            display: "flex",
+            flexDirection: "column",
+            padding: "20px 16px",
+            gap: 16,
+            overflow: "hidden",
+          }}
+        >
           <div
             style={{
-              position: "absolute",
-              bottom: 48,
-              left: 72,
-              right: 72,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              opacity: ctaOpacity,
-              transform: `translateY(${interpolate(ctaProg, [0, 1], [20, 0])}px)`,
+              fontFamily: retro.font,
+              fontSize: 11,
+              color: retro.ink,
+              opacity: 0.45,
+              alignSelf: "flex-end",
+              letterSpacing: "0.06em",
             }}
           >
-            <div>
-              <p
-                style={{
-                  fontFamily: theme.font.sans,
-                  fontSize: 28,
-                  fontWeight: 500,
-                  color: theme.text.primary,
-                  margin: 0,
-                  marginBottom: 6,
-                }}
-              >
-                Sistemas, no Sermones.
-              </p>
-              <p
-                style={{
-                  fontFamily: theme.font.sans,
-                  fontSize: 16,
-                  color: "rgba(255,255,255,0.4)",
-                  margin: 0,
-                }}
-              >
-                Freelancers · Solopreneurs · PYMEs — sin convertirte en técnico
-              </p>
+            el.
+          </div>
+
+          {/* Bar chart */}
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "flex-end",
+              overflow: "hidden",
+            }}
+          >
+            <RetroBarChart
+              barCount={26}
+              barWidth={4}
+              barGap={2}
+              maxHeight={460}
+              growProgress={barGrow}
+            />
+          </div>
+
+          {/* CTA box */}
+          <div
+            style={{
+              opacity: ctaOpacity,
+              border: `2px solid ${retro.ink}`,
+              padding: "16px 14px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+            }}
+          >
+            <div
+              style={{
+                fontFamily: retro.font,
+                fontSize: 11,
+                color: retro.ink,
+                opacity: 0.45,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              // empieza aquí
             </div>
             <div
               style={{
-                background: theme.text.primary,
-                borderRadius: 28,
-                padding: "12px 28px",
+                fontFamily: retro.font,
+                fontSize: 20,
+                fontWeight: 700,
+                color: retro.ink,
+                lineHeight: 1.1,
               }}
             >
-              <span
-                style={{
-                  fontFamily: theme.font.sans,
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: theme.bg.dark,
-                }}
-              >
-                nodo23.co — Únete gratis →
-              </span>
+              nodo23.co
+            </div>
+            <div
+              style={{
+                fontFamily: retro.font,
+                fontSize: 11,
+                color: retro.ink,
+                opacity: 0.5,
+              }}
+            >
+              €300 setup · €120/mes
             </div>
           </div>
-        </Sequence>
-      </AbsoluteFill>
+
+          {/* 04_ cursor */}
+          <div
+            style={{
+              fontFamily: retro.font,
+              fontSize: 16,
+              color: retro.ink,
+              alignSelf: "flex-end",
+              opacity: h1Opacity,
+            }}
+          >
+            04_
+          </div>
+
+          {/* Mini bars */}
+          <div style={{ alignSelf: "flex-end", opacity: barGrow }}>
+            <RetroBarChart
+              barCount={10}
+              barWidth={6}
+              barGap={2}
+              maxHeight={55}
+              growProgress={barGrow}
+            />
+          </div>
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
