@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mudanzas Moreno · Demo privada</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#5af0b3',
+            'primary-container': '#34d399',
+            surface: '#131313',
+            'surface-container-lowest': '#0e0e0e',
+            'surface-container-low': '#1c1b1b',
+            'surface-container': '#201f1f',
+            'surface-container-high': '#2a2a2a',
+            'surface-container-highest': '#353534',
+            'on-surface': '#e5e2e1',
+            'on-surface-variant': '#bbcac0',
+            outline: '#85948b',
+            'outline-variant': '#3c4a42',
+            error: '#ffb4ab'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          },
+          boxShadow: {
+            ambient: '0 20px 40px rgba(0,0,0,0.28)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #131313; color: #e5e2e1; }
+    .glass-panel { background: rgba(32,31,31,.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+    .bg-gradient-primary { background: linear-gradient(135deg, #5af0b3 0%, #34d399 100%); }
+    .top-glow { box-shadow: inset 0 1px 0 rgba(90,240,179,.12); }
+    .grid-noise {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen overflow-x-hidden">
+  <div id="lockscreen" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#131313]/96">
+    <div class="w-full max-w-md rounded-3xl glass-panel shadow-ambient p-8 border border-outline-variant/20">
+      <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">Demo privada</p>
+      <h1 class="text-3xl font-extrabold tracking-tight mb-3">Mudanzas Moreno</h1>
+      <p class="text-sm leading-relaxed text-on-surface-variant mb-6">Propuesta demo con varios casos de uso para captar, filtrar y mover mejor el presupuesto entrante. Contraseña: <span class="font-mono text-primary">2323</span></p>
+      <form id="unlockForm" class="space-y-4">
+        <input id="passwordInput" type="password" inputmode="numeric" placeholder="Introduce la contraseña" class="w-full rounded-2xl bg-surface-container-low border-0 text-on-surface placeholder:text-on-surface-variant/60 focus:ring-2 focus:ring-primary/40" />
+        <button type="submit" class="w-full rounded-2xl bg-gradient-primary text-[#052116] font-semibold py-3">Entrar a la demo</button>
+        <p id="errorText" class="hidden text-sm text-error">La contraseña no coincide.</p>
+      </form>
+    </div>
+  </div>
+
+  <main id="app" class="hidden min-h-screen relative">
+    <div class="absolute inset-0 pointer-events-none grid-noise opacity-35"></div>
+    <div class="absolute top-0 right-0 w-[420px] h-[420px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[40%] left-[10%] w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <header class="sticky top-0 z-30 bg-[#131313]/75 backdrop-blur-xl border-b border-outline-variant/10">
+      <div class="max-w-7xl mx-auto px-5 md:px-10 h-16 flex items-center justify-between gap-4">
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Propuesta demo</p>
+          <h1 class="text-lg font-bold tracking-tight">Mudanzas Moreno</h1>
+        </div>
+        <div class="hidden md:flex items-center gap-3 text-xs text-on-surface-variant font-mono uppercase tracking-[0.2em]">
+          <span>captación</span>
+          <span>calificación</span>
+          <span>seguimiento</span>
+          <span>operativa</span>
+        </div>
+        <a href="mailto:bot@nodo23.co?subject=Demo%20Mudanzas%20Moreno" class="rounded-full bg-surface-container-high px-4 py-2 text-sm text-primary whitespace-nowrap">Verlo en 15 min</a>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-12 relative z-10">
+      <div class="grid xl:grid-cols-12 gap-6 items-start">
+        <section class="xl:col-span-8 space-y-6">
+          <div class="rounded-[30px] bg-surface-container-low p-7 md:p-10 shadow-ambient top-glow overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+            <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">Sistema comercial guiado</p>
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight max-w-4xl">No es solo un chatbot. Es una entrada comercial más ordenada para captar y cerrar mejor.</h2>
+            <p class="mt-5 max-w-3xl text-on-surface-variant leading-relaxed text-base md:text-lg">La demo enseña un sistema simple para web y móvil: responde rápido, recoge lo importante, distingue urgencias, prepara el presupuesto y deja al equipo el siguiente paso claro.</p>
+
+            <div class="mt-8 grid md:grid-cols-3 gap-4">
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Respuesta inicial</p>
+                <p class="mt-2 text-3xl font-bold">&lt; 1 min</p>
+                <p class="mt-2 text-sm text-on-surface-variant">Sin perder el lead fuera de horario.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Datos útiles</p>
+                <p class="mt-2 text-3xl font-bold">origen, destino, volumen</p>
+                <p class="mt-2 text-sm text-on-surface-variant">Lo justo para avanzar sin marear.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Siguiente paso</p>
+                <p class="mt-2 text-3xl font-bold">llamada o WhatsApp</p>
+                <p class="mt-2 text-sm text-on-surface-variant">Con el lead ya más limpio.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[30px] bg-surface-container-low p-7 md:p-8 shadow-ambient">
+            <div class="flex items-start justify-between gap-4 flex-wrap mb-6">
+              <div>
+                <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Casos de uso</p>
+                <h3 class="text-2xl md:text-3xl font-bold tracking-tight mt-2">Qué haría esta demo en el día a día</h3>
+              </div>
+              <span class="rounded-full bg-primary/10 px-3 py-1 font-mono text-[11px] text-primary uppercase tracking-[0.2em]">4 bloques conectados</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold text-lg">1. Presupuesto de mudanza local</p>
+                <p class="text-sm text-on-surface-variant mt-2">Si alguien pide una mudanza en Gran Canaria, por ejemplo Las Palmas → Telde, la demo recoge origen, destino, volumen, planta y si hay ascensor para dejar el presupuesto mejor preparado.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold text-lg">2. Mudanza entre islas, nacional o internacional</p>
+                <p class="text-sm text-on-surface-variant mt-2">Cuando la solicitud es más compleja, el flujo cambia y pide solo los datos clave de ruta, fechas y tipo de carga para que el equipo comercial no arranque desde cero.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold text-lg">3. Trasteros y guardamuebles</p>
+                <p class="text-sm text-on-surface-variant mt-2">Si el cliente no necesita mudanza completa, la demo lo desvía a una opción de almacenaje con metros aproximados, tiempo previsto y acceso, que es otro servicio real de Moreno.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold text-lg">4. Seguimiento y resumen para llamada</p>
+                <p class="text-sm text-on-surface-variant mt-2">Con la consulta ya contextualizada, el sistema deja resumen interno y activa WhatsApp o recordatorio simple si el cliente pidió presupuesto y desapareció.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-6">
+            <div class="rounded-[30px] bg-surface-container-low p-7 md:p-8 shadow-ambient">
+              <div class="flex items-center justify-between gap-4 flex-wrap mb-6">
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Vista operativa</p>
+                  <h3 class="text-2xl font-bold tracking-tight mt-2">Cómo se vería por dentro</h3>
+                </div>
+                <span class="font-mono text-[11px] text-on-surface-variant uppercase tracking-[0.2em]">modo demo</span>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-4 mb-5">
+                <div class="rounded-2xl bg-surface-container-high p-4">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Locales GC</p>
+                  <p class="mt-2 text-3xl font-bold">9</p>
+                </div>
+                <div class="rounded-2xl bg-surface-container-high p-4">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Entre islas / larga distancia</p>
+                  <p class="mt-2 text-3xl font-bold">5</p>
+                </div>
+                <div class="rounded-2xl bg-surface-container-high p-4">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant">Trasteros / guardamuebles</p>
+                  <p class="mt-2 text-3xl font-bold">4</p>
+                </div>
+              </div>
+
+              <div class="rounded-[24px] bg-surface-container-highest p-5 shadow-ambient">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <p class="font-semibold">Embudo del día</p>
+                    <p class="text-xs text-on-surface-variant">servicio detectado, contexto y siguiente acción</p>
+                  </div>
+                  <span class="rounded-full px-3 py-1 bg-primary/10 font-mono text-[11px] text-primary uppercase tracking-[0.2em]">activo</span>
+                </div>
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between rounded-2xl bg-surface-container-low p-4 gap-3">
+                    <div>
+                      <p class="font-semibold">Mudanza local de oficina · Las Palmas → Telde</p>
+                      <p class="text-xs text-on-surface-variant mt-1">fecha, planta, ascensor y volumen ya recogidos</p>
+                    </div>
+                    <span class="font-mono text-sm text-primary whitespace-nowrap">llamar hoy</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-2xl bg-surface-container-low p-4 gap-3">
+                    <div>
+                      <p class="font-semibold">Mudanza entre islas · Gran Canaria → Tenerife</p>
+                      <p class="text-xs text-on-surface-variant mt-1">ruta detectada, pendiente cerrar fecha y tipo de carga</p>
+                    </div>
+                    <span class="font-mono text-sm text-on-surface-variant whitespace-nowrap">pedir detalle</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-2xl bg-surface-container-low p-4 gap-3">
+                    <div>
+                      <p class="font-semibold">Guardamuebles por obra en casa</p>
+                      <p class="text-xs text-on-surface-variant mt-1">cliente pide espacio temporal y no ha respondido en 24h</p>
+                    </div>
+                    <span class="font-mono text-sm text-on-surface-variant whitespace-nowrap">recordatorio</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-[30px] glass-panel border border-outline-variant/15 overflow-hidden shadow-ambient">
+              <div class="px-5 py-4 bg-surface-container-highest flex items-center justify-between">
+                <div>
+                  <p class="font-semibold">Asistente comercial</p>
+                  <p class="text-xs text-primary">online</p>
+                </div>
+                <span class="font-mono text-[11px] text-on-surface-variant uppercase tracking-[0.2em]">web + móvil</span>
+              </div>
+              <div class="p-5 space-y-4 bg-surface-container min-h-[420px]">
+                <div class="max-w-[88%] rounded-2xl rounded-tl-sm bg-surface-container-high p-4 text-sm leading-relaxed">
+                  Hola, soy el asistente de Mudanzas Moreno. ¿Lo que necesitas es una mudanza local, entre islas, nacional/internacional o un guardamuebles?
+                </div>
+                <div class="max-w-[88%] ml-auto rounded-2xl rounded-tr-sm bg-primary/10 border border-primary/20 p-4 text-sm text-primary leading-relaxed">
+                  Mudanza local de oficina. Sería de Las Palmas a Telde, para la semana que viene, con varias mesas y equipos.
+                </div>
+                <div class="max-w-[88%] rounded-2xl rounded-tl-sm bg-surface-container-high p-4 text-sm leading-relaxed">
+                  Perfecto. Te pido origen, destino, planta, si hay ascensor y una idea del volumen. Con eso el equipo ya puede orientarte mucho mejor.
+                </div>
+                <div class="rounded-2xl bg-surface-container-highest p-4">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-on-surface-variant mb-2">lo que activa por detrás</p>
+                  <div class="space-y-2 text-sm text-on-surface-variant">
+                    <p>• clasifica el servicio correcto</p>
+                    <p>• crea lead interno con contexto</p>
+                    <p>• prioriza si es urgente o complejo</p>
+                    <p>• prepara llamada o seguimiento</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-surface-container-highest">
+                <div class="rounded-2xl bg-surface-container-low px-4 py-3 text-sm text-on-surface-variant">Escribe aquí la consulta del cliente...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[30px] bg-surface-container-low p-7 md:p-8 shadow-ambient">
+            <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-4">Resultados esperables</p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold">Responder antes</p>
+                <p class="text-sm text-on-surface-variant mt-2">Menos leads muertos por esperar a que alguien coja el correo o el móvil.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold">Presupuestar con más orden</p>
+                <p class="text-sm text-on-surface-variant mt-2">El equipo recibe mejor el contexto y pregunta menos veces lo mismo.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-5">
+                <p class="font-semibold">Seguir sin perseguir</p>
+                <p class="text-sm text-on-surface-variant mt-2">Recordatorios simples solo cuando toca, sin parecer spam.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="xl:col-span-4 space-y-6 xl:sticky xl:top-24">
+          <div class="rounded-[30px] bg-surface-container-low p-7 shadow-ambient">
+            <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-4">Ficha rápida</p>
+            <dl class="space-y-4 text-sm">
+              <div>
+                <dt class="text-on-surface-variant">Negocio</dt>
+                <dd class="mt-1 font-semibold">Mudanzas Moreno</dd>
+              </div>
+              <div>
+                <dt class="text-on-surface-variant">Web actual</dt>
+                <dd class="mt-1 break-all">mudanzasytrasterosmoreno.com</dd>
+              </div>
+              <div>
+                <dt class="text-on-surface-variant">Teléfono</dt>
+                <dd class="mt-1 font-semibold">900 104 575</dd>
+              </div>
+              <div>
+                <dt class="text-on-surface-variant">Dolor detectado</dt>
+                <dd class="mt-1">Presupuestos urgentes que pueden enfriarse si la respuesta llega tarde.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="rounded-[30px] bg-surface-container-low p-7 shadow-ambient">
+            <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-4">Piezas del sistema</p>
+            <div class="space-y-3">
+              <div class="rounded-2xl bg-surface-container-high p-4">
+                <p class="font-semibold">Entrada web por servicio</p>
+                <p class="text-sm text-on-surface-variant mt-1">No mezcla todo igual. Distingue local, entre islas, larga distancia y guardamuebles.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-4">
+                <p class="font-semibold">Calificador corto</p>
+                <p class="text-sm text-on-surface-variant mt-1">Pregunta justo lo necesario según el tipo de mudanza o almacenaje.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-4">
+                <p class="font-semibold">Resumen interno</p>
+                <p class="text-sm text-on-surface-variant mt-1">Ficha breve para preparar presupuesto o devolver llamada con contexto.</p>
+              </div>
+              <div class="rounded-2xl bg-surface-container-high p-4">
+                <p class="font-semibold">Seguimiento ligero</p>
+                <p class="text-sm text-on-surface-variant mt-1">Email o WhatsApp si el cliente pidió info y se quedó frío.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[30px] p-7 bg-gradient-primary text-[#052116] shadow-ambient">
+            <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-[#0d3d2d] mb-3">CTA</p>
+            <h3 class="text-2xl font-extrabold tracking-tight">Si te cuadra, te lo enseño en 15 minutos.</h3>
+            <p class="mt-3 text-sm leading-relaxed text-[#114c39]">Sin humo técnico. Solo ver el flujo, la experiencia y cómo encajaría en vuestro caso.</p>
+            <a href="mailto:bot@nodo23.co?subject=Quiero%20ver%20la%20demo%20de%20Mudanzas%20Moreno" class="inline-block mt-5 rounded-full bg-[#0d2219] text-white px-5 py-3 text-sm font-semibold">Reservar demo rápida</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="relative z-10 border-t border-outline-variant/10 bg-surface-container-low/70 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-5 md:px-10 py-8 grid md:grid-cols-[1.2fr_.8fr_.8fr] gap-6 items-start">
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">Demo privada Nodo23</p>
+          <p class="text-sm text-on-surface-variant leading-relaxed max-w-xl">Esta demo no intenta vender humo. Enseña una forma sencilla de captar mejor el presupuesto entrante, ordenar el siguiente paso y quitar carga repetitiva al equipo.</p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold mb-3">Qué enseña</p>
+          <ul class="space-y-2 text-sm text-on-surface-variant">
+            <li>Presupuesto local</li>
+            <li>Entre islas / nacional / internacional</li>
+            <li>Trasteros y guardamuebles</li>
+            <li>Seguimiento y resumen interno</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold mb-3">Contacto</p>
+          <ul class="space-y-2 text-sm text-on-surface-variant">
+            <li>bot@nodo23.co</li>
+            <li>Demo protegida con password simple</li>
+            <li>Acceso actual: 2323</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById('unlockForm');
+    const input = document.getElementById('passwordInput');
+    const errorText = document.getElementById('errorText');
+    const lockscreen = document.getElementById('lockscreen');
+    const app = document.getElementById('app');
+    const PASS = '2323';
+    const KEY = 'nodo23-demo-pass-mudanzas-moreno';
+
+    function unlock() {
+      lockscreen.classList.add('hidden');
+      app.classList.remove('hidden');
+      sessionStorage.setItem(KEY, 'ok');
+    }
+
+    if (sessionStorage.getItem(KEY) === 'ok') unlock();
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value === PASS) {
+        errorText.classList.add('hidden');
+        unlock();
+      } else {
+        errorText.classList.remove('hidden');
+        input.select();
+      }
+    });
+  </script>
+</body>
+</html>
