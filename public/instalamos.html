@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nodo23 · Instaladores de inteligencia artificial</title>
+  <meta name="description" content="Te instalamos inteligencia artificial en tu negocio: contesta a tus clientes, te lleva las redes, te hace la web. Venimos, lo instalamos y funciona." />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#5af0b3', surface: '#111111', panel: '#1a1a1a',
+            panel2: '#242424', text: '#f5f5f5', muted: '#b6b6b6', line: '#303030',
+            danger: '#ffb4ab', warn: '#ffcf7a'
+          },
+          boxShadow: { ambient: '0 24px 60px rgba(0,0,0,.35)' },
+          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: Inter, sans-serif; background:#111; color:#f5f5f5; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .grad { background: linear-gradient(135deg,#5af0b3 0%, #34d399 100%); }
+    .grad-text { background: linear-gradient(135deg,#f5f5f5 0%, #5af0b3 120%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .glass { background: rgba(26,26,26,.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .dotgrid { background-image: radial-gradient(circle,#fff 1px,transparent 1px); background-size: 28px 28px; }
+    .fade { opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .fade.in { opacity:1; transform:none; }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .marquee { display:flex; gap:2.5rem; white-space:nowrap; animation: scroll 28s linear infinite; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+    details > summary { list-style:none; } details > summary::-webkit-details-marker { display:none; }
+    details[open] .chev { transform: rotate(45deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-surface text-text overflow-x-hidden">
+
+  <!-- ===== NAV ===== -->
+  <nav class="fixed top-0 inset-x-0 z-40 glass border-b border-line">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-primary pulse"></span>
+        <span class="font-extrabold tracking-tight">Nodo23</span>
+        <span class="mono text-[10px] uppercase tracking-[0.2em] text-muted hidden sm:inline">· instaladores de IA</span>
+      </div>
+      <a data-wa class="grad text-[#062217] text-sm font-bold rounded-full px-4 py-2">Probar gratis →</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="relative pt-32 pb-16 md:pt-40 md:pb-24 px-4 md:px-8 overflow-hidden">
+    <div class="absolute inset-0 dotgrid opacity-[0.04] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[560px] rounded-full pointer-events-none"
+         style="background:radial-gradient(ellipse at center,rgba(90,240,179,.10) 0%,transparent 70%);filter:blur(40px)"></div>
+
+    <div class="relative max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center">
+      <div>
+        <div class="fade inline-flex items-center gap-2 border border-line rounded-full px-4 py-1.5 mb-7">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary pulse"></span>
+          <span class="mono text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-muted">Instaladores de IA · a pie de calle</span>
+        </div>
+
+        <h1 class="fade text-[clamp(30px,5.4vw,58px)] font-900 font-extrabold leading-[1.05] tracking-[-0.02em]">
+          La inteligencia artificial<br>ya trabaja.<br>
+          <span class="grad-text">¿Por qué todavía no<br>trabaja para ti?</span>
+        </h1>
+
+        <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-muted max-w-[540px]">
+          Igual que llamas al electricista para la luz o al técnico para el aire, nos llamas a nosotros
+          para meter IA en tu negocio: contesta a tus clientes, te lleva las redes, te hace la web.
+          Venimos, lo instalamos y funciona. <span class="text-text font-semibold">Tú a lo tuyo.</span>
+        </p>
+
+        <div class="fade flex flex-wrap gap-3 mt-8">
+          <a data-wa class="grad text-[#062217] font-bold rounded-full px-7 py-3.5 text-[15px]">Pruébalo con tu negocio →</a>
+          <a href="#catalogo" class="rounded-full px-7 py-3.5 text-[15px] font-semibold border border-line text-muted hover:text-text hover:border-muted transition">Ver qué instalamos</a>
+        </div>
+        <p class="fade mono text-[11px] text-muted mt-5">Sin permanencia · Lo pruebas con tu propio negocio antes de pagar un euro.</p>
+      </div>
+
+      <!-- Chat mock -->
+      <div class="fade">
+        <div class="rounded-[26px] bg-panel border border-line shadow-ambient overflow-hidden max-w-[400px] mx-auto">
+          <div class="flex items-center gap-3 px-5 py-3.5 border-b border-line bg-black/30">
+            <div class="w-9 h-9 rounded-full grad flex items-center justify-center text-[#062217] font-extrabold">CE</div>
+            <div class="leading-tight">
+              <p class="font-bold text-sm">Clínica Estética Lúmen</p>
+              <p class="text-[11px] text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary pulse"></span> en línea · responde al instante</p>
+            </div>
+            <span class="ml-auto mono text-[10px] text-muted">23:47</span>
+          </div>
+          <div class="p-4 space-y-3 text-[13px]" style="background:#0d0d0d">
+            <div class="flex justify-end">
+              <div class="bg-panel2 rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[80%]">Hola, ¿hacéis limpieza dental? ¿Cuánto sale?</div>
+            </div>
+            <div class="flex">
+              <div class="bg-primary/12 border border-primary/25 rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[85%]">
+                ¡Hola! 😊 Sí, hacemos limpieza dental por <b>49 €</b>, con revisión incluida. ¿Te miro un hueco para esta semana?
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bg-panel2 rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[80%]">Sí, mejor por la tarde</div>
+            </div>
+            <div class="flex">
+              <div class="bg-primary/12 border border-primary/25 rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[85%]">
+                Tengo el <b>jueves a las 17:30</b> o el <b>viernes a las 18:00</b>. ¿Cuál te viene mejor? Te lo dejo reservado al momento ✅
+              </div>
+            </div>
+          </div>
+          <div class="px-4 py-2.5 border-t border-line bg-black/30 text-center">
+            <span class="mono text-[10px] text-muted">Cliente atendido a las 23:47. Mientras tú dormías.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== TICKER ===== -->
+  <div class="border-y border-line bg-panel py-3 overflow-hidden">
+    <div class="marquee mono text-[12px] text-muted">
+      <span class="flex gap-10">
+        <span>contesta 24/7 <span class="text-primary">✦</span></span>
+        <span>coge citas solo <span class="text-primary">✦</span></span>
+        <span>habla como tú <span class="text-primary">✦</span></span>
+        <span>sin permanencia <span class="text-primary">✦</span></span>
+        <span>es tuyo para siempre <span class="text-primary">✦</span></span>
+        <span>lo pruebas gratis <span class="text-primary">✦</span></span>
+        <span>en tu propio WhatsApp <span class="text-primary">✦</span></span>
+      </span>
+      <span class="flex gap-10" aria-hidden="true">
+        <span>contesta 24/7 <span class="text-primary">✦</span></span>
+        <span>coge citas solo <span class="text-primary">✦</span></span>
+        <span>habla como tú <span class="text-primary">✦</span></span>
+        <span>sin permanencia <span class="text-primary">✦</span></span>
+        <span>es tuyo para siempre <span class="text-primary">✦</span></span>
+        <span>lo pruebas gratis <span class="text-primary">✦</span></span>
+        <span>en tu propio WhatsApp <span class="text-primary">✦</span></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ===== EL GOLPE ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-28">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold leading-tight tracking-tight">
+        Mientras lees esto, alguien está escribiendo a tu negocio.<br>
+        <span class="text-muted">Y no le contesta nadie.</span>
+      </h2>
+      <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-muted">
+        Tienes el móvil hasta arriba. El WhatsApp con catorce sin leer. Llamadas que entran justo cuando
+        estás atendiendo y no puedes cogerlas. Cada una de esas es alguien que quería darte dinero.
+      </p>
+      <p class="fade mt-4 text-[16px] md:text-[18px] leading-relaxed text-muted">
+        ¿Sabes a dónde van? Al de al lado. Porque él sí contestó.
+      </p>
+      <p class="fade mt-9 text-[20px] md:text-[26px] font-bold leading-snug">
+        No pierdes clientes porque seas peor.<br><span class="text-primary">Los pierdes porque no llegas a todo.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ SOMOS ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-24 bg-panel border-y border-line">
+    <div class="max-w-4xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// la idea</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">No somos otra app. Somos instaladores.</h2>
+      <div class="fade mt-6 space-y-5 text-[16px] md:text-[18px] leading-relaxed text-muted max-w-2xl">
+        <p>No te vendemos un curso. No te soltamos "una herramienta de IA" para que la pelees tú solo en casa un domingo por la noche. Eso ya lo has probado y sabes cómo acaba.</p>
+        <p>Nosotros venimos, miramos tu negocio y te dejamos la inteligencia artificial montada y funcionando. Como el que te instala el aire: lo enchufa, lo prueba, y no se va hasta que da frío.</p>
+        <p class="text-text font-semibold text-[18px] md:text-[20px]">Tú no tienes que entender cómo funciona. Solo notar que funciona.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTO ESTRELLA ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-28">
+    <div class="max-w-5xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-primary mb-3">// la instalación nº 1</p>
+      <h2 class="fade text-[clamp(28px,4.4vw,46px)] font-extrabold tracking-tight">El empleado que nunca duerme.</h2>
+      <p class="fade mt-5 text-[16px] md:text-[18px] leading-relaxed text-muted max-w-2xl">
+        Contesta a tus clientes al instante, de día y de noche, por WhatsApp y en tu web. Coge citas.
+        Responde precios, horarios y las mismas diez preguntas de siempre. Te pasa solo lo que de verdad
+        merece tu atención.
+      </p>
+      <p class="fade mt-4 text-[16px] md:text-[18px] leading-relaxed text-muted max-w-2xl">
+        Lo entrenamos con <b class="text-text">tu</b> negocio: tus servicios, tus precios, tu forma de hablar.
+        Tus clientes no notan que es un robot. Solo notan que, por fin, alguien contesta rápido.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-4 mt-10">
+        <div class="fade rounded-2xl bg-panel border border-line p-6">
+          <div class="text-2xl mb-3">⚡</div>
+          <p class="font-bold mb-1">Contesta en segundos</p>
+          <p class="text-sm text-muted leading-relaxed">Las 24 horas. También a las 3 de la mañana.</p>
+        </div>
+        <div class="fade rounded-2xl bg-panel border border-line p-6">
+          <div class="text-2xl mb-3">📅</div>
+          <p class="font-bold mb-1">Coge la cita solo</p>
+          <p class="text-sm text-muted leading-relaxed">Y te la deja apuntada en la agenda.</p>
+        </div>
+        <div class="fade rounded-2xl bg-panel border border-line p-6">
+          <div class="text-2xl mb-3">🎯</div>
+          <p class="font-bold mb-1">Habla como tú</p>
+          <p class="text-sm text-muted leading-relaxed">Nadie nota que es una máquina.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATÁLOGO ===== -->
+  <section id="catalogo" class="px-4 md:px-8 py-20 md:py-28 bg-panel border-y border-line">
+    <div class="max-w-5xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// lo que instalamos</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight mb-3">Empieza por uno.<br>Acaba con el negocio funcionando solo.</h2>
+
+      <div class="grid md:grid-cols-2 gap-5 mt-10">
+        <div class="fade rounded-2xl bg-surface border border-primary/40 p-7 relative">
+          <span class="absolute top-5 right-5 mono text-[10px] uppercase tracking-wider text-[#062217] bg-primary rounded-full px-2.5 py-1 font-bold">el estrella</span>
+          <p class="mono text-[11px] text-primary mb-2">01</p>
+          <h3 class="text-xl font-bold mb-2">El empleado que nunca duerme</h3>
+          <p class="text-sm text-muted leading-relaxed mb-3">Contesta a tus clientes al instante y coge citas, día y noche.</p>
+          <p class="text-sm text-primary">Lo que sientes: no se te escapa ni un cliente por no llegar a tiempo.</p>
+        </div>
+        <div class="fade rounded-2xl bg-surface border border-line p-7">
+          <p class="mono text-[11px] text-muted mb-2">02</p>
+          <h3 class="text-xl font-bold mb-2">Tu community manager automático</h3>
+          <p class="text-sm text-muted leading-relaxed mb-3">Publica en tus redes y responde comentarios, en tu estilo, sin que toques nada.</p>
+          <p class="text-sm text-primary">Lo que sientes: tus redes vivas sin robarte una hora al día.</p>
+        </div>
+        <div class="fade rounded-2xl bg-surface border border-line p-7">
+          <p class="mono text-[11px] text-muted mb-2">03</p>
+          <h3 class="text-xl font-bold mb-2">Tu web lista en una semana</h3>
+          <p class="text-sm text-muted leading-relaxed mb-3">Una página profesional que atrae y que no tienes que pelear con nadie.</p>
+          <p class="text-sm text-primary">Lo que sientes: por fin tienes web, y buena.</p>
+        </div>
+        <div class="fade rounded-2xl bg-surface border border-line p-7">
+          <p class="mono text-[11px] text-muted mb-2">04</p>
+          <h3 class="text-xl font-bold mb-2">El ayudante de oficina</h3>
+          <p class="text-sm text-muted leading-relaxed mb-3">Te ordena el correo, prepara los presupuestos y persigue a los clientes que no contestan.</p>
+          <p class="text-sm text-primary">Lo que sientes: llegas a todo sin contratar a nadie.</p>
+        </div>
+      </div>
+      <p class="fade mono text-[12px] text-muted mt-6">// lo normal es empezar por el nº 1. Cuando ves que funciona, el resto cae solo.</p>
+    </div>
+  </section>
+
+  <!-- ===== CÓMO FUNCIONA ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-28">
+    <div class="max-w-4xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// cómo va esto</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">Antes de pagar nada, lo ves funcionando con tu propio negocio.</h2>
+
+      <div class="fade mt-8 rounded-2xl grad p-[1px]">
+        <div class="rounded-2xl bg-surface p-7">
+          <p class="text-[16px] md:text-[18px] leading-relaxed text-text">
+            Te montamos una demo con el nombre de tu negocio, tus servicios y tu tono. Escaneas un QR,
+            escribes por WhatsApp… y ya estás hablando con <b>tu propio empleado de IA</b>.
+            Si te gusta, lo dejamos fijo. Si no, no has perdido nada.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-10">
+        <div class="fade">
+          <p class="mono text-primary text-sm mb-2">01</p>
+          <h3 class="font-bold text-lg mb-2">Revisión gratis</h3>
+          <p class="text-sm text-muted leading-relaxed">Miramos tu negocio y te decimos dónde estás perdiendo clientes o tiempo. Sin compromiso.</p>
+        </div>
+        <div class="fade">
+          <p class="mono text-primary text-sm mb-2">02</p>
+          <h3 class="font-bold text-lg mb-2">Presupuesto en una hoja</h3>
+          <p class="text-sm text-muted leading-relaxed">Una instalación concreta, un precio claro, un resultado prometido. Sin letra pequeña.</p>
+        </div>
+        <div class="fade">
+          <p class="mono text-primary text-sm mb-2">03</p>
+          <h3 class="font-bold text-lg mb-2">Instalado y a funcionar</h3>
+          <p class="text-sm text-muted leading-relaxed">Lo montamos, lo dejamos rodando y nos quedamos detrás para que no se rompa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ES TUYO ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-24 bg-panel border-y border-line">
+    <div class="max-w-4xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// la letra pequeña que sí te gusta</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">Lo que te instalamos, es tuyo. Punto.</h2>
+      <div class="fade mt-6 space-y-5 text-[16px] md:text-[18px] leading-relaxed text-muted max-w-2xl">
+        <p>No alquilas nada. No es una cuenta prestada en una app que mañana sube el precio o cierra y te deja tirado. Lo que montamos se queda en tu negocio, con tus datos, funcionando.</p>
+        <p>¿Que un día decides que no nos necesitas? Te quedas con todo igual. Como el aire acondicionado: te lo instalamos nosotros, pero es tuyo para siempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRECIO ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-28">
+    <div class="max-w-4xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// cuánto cuesta</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight">Como cualquier instalación: se monta una vez y luego se mantiene.</h2>
+      <p class="fade mt-5 text-[16px] text-muted leading-relaxed max-w-2xl">Sin sorpresas. Sin permanencia: te quedas porque funciona, no porque te hayamos atado.</p>
+
+      <div class="grid md:grid-cols-2 gap-5 mt-10">
+        <div class="fade rounded-2xl bg-panel border border-primary/40 p-8">
+          <p class="mono text-[11px] uppercase tracking-wider text-primary mb-2">La instalación · pago único</p>
+          <div class="flex items-baseline gap-2 mb-4">
+            <span class="text-muted text-lg">desde</span>
+            <span class="text-5xl font-extrabold text-primary">350&nbsp;€</span>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">Montamos tu empleado de IA, entrenado con tu negocio y conectado a tu WhatsApp. Lo dejamos funcionando.</p>
+        </div>
+        <div class="fade rounded-2xl bg-panel border border-line p-8">
+          <p class="mono text-[11px] uppercase tracking-wider text-muted mb-2">El mantenimiento · al mes</p>
+          <div class="flex items-baseline gap-2 mb-4">
+            <span class="text-muted text-lg">desde</span>
+            <span class="text-5xl font-extrabold">60&nbsp;€</span><span class="text-muted">/mes</span>
+          </div>
+          <p class="text-sm text-muted leading-relaxed">Lo mantenemos afinado, actualizado y vigilado. Si algo falla, lo arreglamos nosotros.</p>
+        </div>
+      </div>
+      <p class="fade mono text-[11px] text-muted mt-6">Sin permanencia · Lo pruebas gratis antes · El sistema es tuyo desde el primer día.</p>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="px-4 md:px-8 py-20 md:py-24 bg-panel border-y border-line">
+    <div class="max-w-3xl mx-auto">
+      <p class="fade mono text-[11px] uppercase tracking-[0.2em] text-muted mb-3">// preguntas</p>
+      <h2 class="fade text-[clamp(26px,4vw,42px)] font-extrabold tracking-tight mb-8">Lo que vas a preguntar.</h2>
+      <div id="faq">
+        <!-- items inyectados -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="relative px-4 md:px-8 py-28 md:py-36 overflow-hidden">
+    <div class="absolute inset-0 dotgrid opacity-[0.04] pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[460px] rounded-full pointer-events-none"
+         style="background:radial-gradient(ellipse at center,rgba(90,240,179,.09) 0%,transparent 70%);filter:blur(40px)"></div>
+    <div class="relative max-w-2xl mx-auto text-center">
+      <h2 class="fade text-[clamp(28px,5vw,52px)] font-extrabold tracking-tight leading-tight">
+        Tu competencia ya está contestando.<br><span class="text-primary">Tú decides cuándo empezar.</span>
+      </h2>
+      <p class="fade mt-6 text-[16px] md:text-[18px] text-muted">Te montamos la demo con tu negocio gratis. La pruebas, y hablamos.</p>
+      <div class="fade mt-9">
+        <a data-wa class="grad text-[#062217] font-bold rounded-full px-9 py-4 text-[16px] inline-block">Pruébalo con tu negocio →</a>
+      </div>
+      <p class="fade mono text-[11px] text-muted mt-5">Gratis · Sin compromiso · En tu propio WhatsApp.</p>
+    </div>
+  </section>
+
+  <footer class="border-t border-line py-8 px-4 text-center">
+    <p class="mono text-[11px] text-muted">Nodo23 · Instaladores de inteligencia artificial · Te instalamos la IA. Tú a lo tuyo.</p>
+  </footer>
+
+  <script>
+    /* ====== CONFIG · CAMBIA ESTAS DOS LÍNEAS ====== */
+    const WA_NUMBER = "34600000000";                                  // ← tu WhatsApp (formato internacional, sin + ni espacios)
+    const WA_MSG    = "Hola, quiero probar la demo de IA para mi negocio";
+    /* ============================================== */
+
+    const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MSG)}`;
+    document.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink; a.target = "_blank"; a.rel = "noopener"; });
+
+    // FAQ
+    const FAQ = [
+      ['¿Necesito saber de informática?', 'Nada. Si sabes usar WhatsApp, sabes de sobra. De lo técnico nos encargamos nosotros.'],
+      ['¿No contestará como un robot raro?', 'No. Lo entrenamos con tu negocio y tu forma de hablar. La gente nota que contestas rápido, no que es una máquina.'],
+      ['¿Y si veo que no me sirve?', 'Por eso lo pruebas gratis con tu propio negocio antes de pagar. Si no te convence, no hay nada que firmar.'],
+      ['¿Tengo que cambiar mi número de WhatsApp?', 'No. Trabaja con el que ya tienes. Tus clientes te escriben donde siempre.'],
+      ['¿Cuánto tarda en estar funcionando?', 'La demo, en un par de días. Instalado y rodando, normalmente en menos de una semana.'],
+      ['¿Me ata algún contrato?', 'Mes a mes. Sin permanencia ni letra pequeña. Te quedas si funciona.'],
+      ['¿Es mío de verdad o dependo de vosotros?', 'Es tuyo. Se queda en tu negocio aunque dejes de contar con nosotros.']
+    ];
+    const faqBox = document.getElementById('faq');
+    FAQ.forEach(([q, a]) => {
+      const d = document.createElement('details');
+      d.className = 'fade border-t border-line group';
+      d.innerHTML = `
+        <summary class="py-5 cursor-pointer flex justify-between items-center gap-4 font-semibold text-[15px] md:text-[16px] hover:text-primary transition">
+          ${q}
+          <span class="chev text-muted text-xl leading-none transition-transform shrink-0">+</span>
+        </summary>
+        <p class="pb-5 text-[14px] md:text-[15px] leading-relaxed text-muted">${a}</p>`;
+      faqBox.appendChild(d);
+    });
+
+    // Fade-in on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
