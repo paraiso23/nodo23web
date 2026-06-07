@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nodo23 · Instaladores de inteligencia artificial</title>
-  <meta name="description" content="Te instalamos inteligencia artificial en tu negocio: contesta a tus clientes, te lleva las redes, te hace la web. Venimos, lo instalamos y funciona." />
+  <title>Nodo23 · Instaladores de inteligencia artificial para empresas</title>
+  <meta name="description" content="Nodo23 instala inteligencia artificial para empresas: chatbots de atención al cliente, páginas web con IA, gestión de redes sociales y automatizaciones para ahorrar tiempo, captar clientes y mejorar procesos." />
   <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -27,7 +27,7 @@
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: Inter, sans-serif; background:#fff; color:#3b3a34; -webkit-font-smoothing:antialiased; }
-    h1,h2,h3,.serif { font-family: 'Fraunces', Georgia, serif; }
+    h1,h2,h3,h4,.serif { font-family: 'Fraunces', Georgia, serif; }
     .eyebrow { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#7c7a72; font-weight:600; }
     .fade { opacity:0; transform: translateY(14px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
     .fade.in { opacity:1; transform:none; }
@@ -36,6 +36,8 @@
     details > summary::-webkit-details-marker { display:none; }
     details[open] .plus { transform: rotate(45deg); }
     .underline-accent { background-image: linear-gradient(#15775a,#15775a); background-size: 100% 1.5px; background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 2px; }
+    .lead li { position: relative; padding-left: 1.4rem; }
+    .lead li::before { content: "—"; position:absolute; left:0; color:#15775a; }
   </style>
 </head>
 <body class="bg-paper text-body">
@@ -48,307 +50,873 @@
         <span class="hidden sm:inline text-[11px] text-muted tracking-wide">Instaladores de IA</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="#catalogo" class="hidden md:inline text-sm text-body hover:text-ink transition">Qué instalamos</a>
+        <a href="#servicios" class="hidden md:inline text-sm text-body hover:text-ink transition">Qué instalamos</a>
+        <a href="#como" class="hidden md:inline text-sm text-body hover:text-ink transition">Cómo funciona</a>
         <a href="#precio" class="hidden md:inline text-sm text-body hover:text-ink transition">Precio</a>
-        <a data-wa class="text-sm font-600 text-paper bg-ink hover:bg-accent transition rounded-full px-5 py-2.5">Probar gratis</a>
+        <a href="#contacto" class="text-sm font-600 text-paper bg-ink hover:bg-accent transition rounded-full px-5 py-2.5">Revisión gratis</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- ===== 1 · HERO ===== -->
   <header class="px-5 md:px-8">
-    <div class="max-w-6xl mx-auto pt-16 md:pt-24 pb-16 md:pb-24 grid lg:grid-cols-[1.06fr_.94fr] gap-14 lg:gap-12 items-center">
-      <div>
-        <div class="fade eyebrow mb-6 flex items-center gap-2.5">
-          <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
-          Instaladores de inteligencia artificial
-        </div>
-        <h1 class="fade serif text-ink font-500 tracking-[-0.02em] leading-[1.04] text-[clamp(34px,5.6vw,62px)]">
-          La inteligencia artificial ya trabaja.
-          <span class="block mt-2 italic font-400 text-accent">¿Por qué todavía no trabaja para ti?</span>
-        </h1>
-        <p class="fade mt-7 text-[16px] md:text-[18px] leading-relaxed text-body max-w-[520px]">
-          Igual que llamas al electricista para la luz, nos llamas a nosotros para meter IA en tu negocio:
-          contesta a tus clientes, te lleva las redes, te hace la web. Venimos, lo instalamos y funciona.
-          <span class="text-ink font-600">Tú a lo tuyo.</span>
-        </p>
-        <div class="fade flex flex-wrap items-center gap-3 mt-9">
-          <a data-wa class="text-paper bg-accent hover:bg-ink transition rounded-full px-7 py-3.5 text-[15px] font-600">Pruébalo con tu negocio</a>
-          <a href="#catalogo" class="rounded-full px-7 py-3.5 text-[15px] font-600 text-ink border border-line hover:border-ink transition">Ver qué instalamos</a>
-        </div>
-        <p class="fade text-[13px] text-muted mt-5">Sin permanencia · Lo pruebas con tu propio negocio antes de pagar un euro.</p>
+    <div class="max-w-4xl mx-auto pt-20 md:pt-28 pb-14 md:pb-20 text-center">
+      <div class="fade eyebrow mb-6 flex items-center justify-center gap-2.5">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
+        Instaladores de inteligencia artificial
+      </div>
+      <h1 class="fade serif text-ink font-500 tracking-[-0.02em] leading-[1.05] text-[clamp(32px,5.4vw,60px)]">
+        Mete inteligencia artificial en tu negocio
+        <span class="block italic font-400 text-accent mt-2">sin tener que entender inteligencia artificial.</span>
+      </h1>
+      <p class="fade mt-7 text-[16px] md:text-[19px] leading-relaxed text-body max-w-2xl mx-auto">
+        Instalamos sistemas de IA para que tu negocio conteste mejor, venda más rápido, tenga una web decente,
+        mantenga sus redes vivas y automatice las tareas que te comen el día.
+      </p>
+
+      <div class="fade mt-8 max-w-xl mx-auto text-[15px] md:text-[16px] text-body space-y-1">
+        <p>No te vendemos un curso.</p>
+        <p>No te soltamos una herramienta para que la pelees tú solo.</p>
+        <p>No te damos una charla de futuro con palabras raras.</p>
       </div>
 
-      <!-- Chat mock (claro) -->
-      <div class="fade">
-        <div class="rounded-3xl bg-paper border border-line shadow-card overflow-hidden max-w-[400px] mx-auto">
-          <div class="flex items-center gap-3 px-5 py-4 border-b border-line">
-            <div class="w-9 h-9 rounded-full bg-accentSoft text-accent grid place-items-center serif font-600">L</div>
-            <div class="leading-tight">
-              <p class="text-ink font-600 text-sm">Clínica Estética Lúmen</p>
-              <p class="text-[11px] text-accent flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span> responde al instante</p>
-            </div>
-            <span class="ml-auto text-[11px] text-muted">23:47</span>
-          </div>
-          <div class="p-4 space-y-2.5 text-[13.5px] bg-cream/60">
-            <div class="flex justify-end">
-              <div class="bg-paper border border-line rounded-2xl rounded-br-sm px-3.5 py-2.5 max-w-[82%] text-ink">Hola, ¿hacéis limpieza dental? ¿Cuánto sale?</div>
-            </div>
-            <div class="flex">
-              <div class="bg-accentSoft rounded-2xl rounded-bl-sm px-3.5 py-2.5 max-w-[86%] text-ink">¡Hola! 😊 Sí, hacemos limpieza dental por <b>49 €</b>, con revisión incluida. ¿Te miro un hueco para esta semana?</div>
-            </div>
-            <div class="flex justify-end">
-              <div class="bg-paper border border-line rounded-2xl rounded-br-sm px-3.5 py-2.5 max-w-[82%] text-ink">Sí, mejor por la tarde</div>
-            </div>
-            <div class="flex">
-              <div class="bg-accentSoft rounded-2xl rounded-bl-sm px-3.5 py-2.5 max-w-[86%] text-ink">Tengo el <b>jueves a las 17:30</b> o el <b>viernes a las 18:00</b>. ¿Cuál te reservo? ✅</div>
-            </div>
-          </div>
-          <div class="px-5 py-3 border-t border-line text-center">
-            <span class="text-[11px] text-muted">Cliente atendido a las 23:47. Mientras tú dormías.</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      <p class="fade mt-7 text-[16px] md:text-[18px] leading-relaxed text-ink max-w-2xl mx-auto">
+        Miramos tu negocio, vemos qué necesitas y te dejamos la IA montada, probada y funcionando.
+      </p>
+      <p class="fade serif text-ink text-[22px] md:text-[26px] font-500 mt-6">Te instalamos la IA. <span class="text-accent">Tú a lo tuyo.</span></p>
 
-    <!-- Trust strip -->
-    <div class="max-w-6xl mx-auto rule"></div>
-    <div class="max-w-6xl mx-auto py-6 flex flex-wrap justify-center md:justify-between gap-x-8 gap-y-3 text-[13px] text-muted">
-      <span class="flex items-center gap-2"><span class="text-accent">—</span> Contesta 24/7</span>
-      <span class="flex items-center gap-2"><span class="text-accent">—</span> Coge citas solo</span>
-      <span class="flex items-center gap-2"><span class="text-accent">—</span> Habla como tú</span>
-      <span class="flex items-center gap-2"><span class="text-accent">—</span> Sin permanencia</span>
-      <span class="flex items-center gap-2"><span class="text-accent">—</span> Es tuyo para siempre</span>
+      <div class="fade flex flex-wrap justify-center items-center gap-3 mt-9">
+        <a href="#contacto" class="text-paper bg-accent hover:bg-ink transition rounded-full px-7 py-3.5 text-[15px] font-600">Pedir revisión gratis</a>
+        <a href="#servicios" class="rounded-full px-7 py-3.5 text-[15px] font-600 text-ink border border-line hover:border-ink transition">Ver qué instalamos</a>
+      </div>
+      <p class="fade text-[13px] text-muted mt-5">Sin permanencia · Demo antes de pagar · Soluciones montadas para tu negocio</p>
     </div>
   </header>
 
-  <!-- ===== EL GOLPE ===== -->
-  <section class="px-5 md:px-8 py-24 md:py-32 bg-cream border-y border-line">
-    <div class="max-w-3xl mx-auto text-center">
-      <p class="fade eyebrow mb-6">El problema</p>
-      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.12] text-[clamp(26px,4.2vw,44px)]">
-        Mientras lees esto, alguien está escribiendo a tu negocio.
-        <span class="block text-muted italic font-400 mt-1">Y no le contesta nadie.</span>
+  <!-- ===== 2 · EL PROBLEMA ===== -->
+  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+    <div class="max-w-3xl mx-auto">
+      <p class="fade eyebrow mb-5">El problema</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.12] text-[clamp(26px,4.2vw,42px)]">
+        Tu negocio no necesita más horas. <span class="text-muted italic font-400">Necesita quitarse trabajo repetido.</span>
       </h2>
-      <p class="fade mt-8 text-[16px] md:text-[18px] leading-relaxed text-body max-w-xl mx-auto">
-        El WhatsApp con catorce sin leer. Llamadas que entran cuando estás atendiendo y no puedes coger.
-        Cada una es alguien que quería darte dinero. ¿Sabes a dónde va? Al de al lado. Porque él sí contestó.
+      <div class="fade mt-7 space-y-5 text-[16px] md:text-[18px] leading-relaxed text-body">
+        <p>Cada día hay clientes escribiendo, citas que confirmar, presupuestos que mandar, correos que ordenar, publicaciones que preparar, mensajes que responder y tareas que alguien tiene que perseguir.</p>
+        <p>Y muchas veces ese alguien eres tú.</p>
+        <p>El problema no es que tu negocio funcione mal. El problema es que demasiadas cosas dependen de que tú estés pendiente todo el rato.</p>
+      </div>
+
+      <div class="fade mt-8 flex flex-wrap gap-2.5 text-[14px]">
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">WhatsApp</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">Instagram</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">La web</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">El correo</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">Las citas</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">Los presupuestos</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">Los seguimientos</span>
+        <span class="bg-paper border border-line rounded-full px-4 py-1.5">Las redes</span>
+      </div>
+      <p class="fade mt-6 text-[16px] md:text-[18px] text-ink leading-relaxed">
+        Todo abierto. Todo urgente. Todo a medias. <span class="italic text-muted">Qué maravilla de civilización hemos construido.</span>
       </p>
-      <p class="fade serif text-ink font-500 text-[clamp(20px,3vw,30px)] leading-snug mt-10">
-        No pierdes clientes porque seas peor.<br>
-        <span class="underline-accent">Los pierdes porque no llegas a todo.</span>
-      </p>
+
+      <div class="fade mt-8 space-y-4 text-[16px] md:text-[18px] leading-relaxed text-body max-w-2xl">
+        <p>Nosotros instalamos sistemas de IA para que parte de ese trabajo se haga solo. No para cambiar tu negocio entero de golpe. No para meter tecnología porque sí. No para que dependas de una máquina rara que nadie entiende.</p>
+        <p class="serif text-ink text-[20px] md:text-[22px] font-500">Para que las tareas repetidas dejen de robarte tiempo.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ===== QUÉ SOMOS ===== -->
+  <!-- claim -->
+  <section class="px-5 md:px-8 py-16 md:py-20 bg-ink text-paper">
+    <p class="fade max-w-3xl mx-auto text-center serif font-400 italic text-[clamp(22px,3.4vw,34px)] leading-snug">
+      La IA no es el futuro. Es el becario invisible que ya debería estar contestando tus WhatsApps.
+    </p>
+  </section>
+
+  <!-- ===== 3 · QUÉ HACEMOS ===== -->
   <section class="px-5 md:px-8 py-24 md:py-28">
     <div class="max-w-6xl mx-auto grid md:grid-cols-[.8fr_1.2fr] gap-10 md:gap-16">
       <div class="fade">
-        <p class="eyebrow mb-4">La idea</p>
+        <p class="eyebrow mb-4">Qué hacemos</p>
         <h2 class="serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,3.6vw,40px)]">No somos otra app. Somos instaladores.</h2>
       </div>
       <div class="fade space-y-5 text-[16px] md:text-[18px] leading-relaxed text-body max-w-xl">
-        <p>No te vendemos un curso. No te soltamos "una herramienta de IA" para que la pelees tú solo un domingo por la noche. Eso ya lo has probado y sabes cómo acaba.</p>
-        <p>Venimos, miramos tu negocio y te dejamos la inteligencia artificial montada y funcionando. Como el que te instala el aire: lo enchufa, lo prueba y no se va hasta que da frío.</p>
-        <p class="serif text-ink font-500 text-[20px] md:text-[22px] leading-snug">Tú no tienes que entender cómo funciona. Solo notar que funciona.</p>
+        <p>Igual que llamas a alguien para montar el aire acondicionado, arreglar la luz o instalar una alarma, nos llamas a nosotros para instalar inteligencia artificial en tu negocio.</p>
+        <p>La diferencia es que en vez de cables y tornillos, trabajamos con atención al cliente, webs, redes sociales, automatizaciones, datos, mensajes, citas y procesos. Pero la idea es la misma:</p>
+        <p class="serif text-ink text-[20px] md:text-[22px] font-500 leading-snug">Llegamos, revisamos, montamos, probamos y lo dejamos funcionando.</p>
+        <ul class="lead space-y-2 text-[15px] md:text-[16px] text-muted pt-1">
+          <li>Tú no tienes que aprender IA.</li>
+          <li>Tú no tienes que configurar herramientas.</li>
+          <li>Tú no tienes que entender cómo se conecta todo.</li>
+        </ul>
+        <p class="text-ink font-600">Solo tienes que notar que hay menos cosas cayéndose por los lados.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRODUCTO ESTRELLA ===== -->
-  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+  <!-- ===== 4 · QUÉ INSTALAMOS ===== -->
+  <section id="servicios" class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
     <div class="max-w-6xl mx-auto">
-      <p class="fade eyebrow mb-4">La instalación nº 1</p>
-      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.08] text-[clamp(28px,4.4vw,48px)] max-w-2xl">El empleado que nunca duerme.</h2>
-      <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body max-w-2xl">
-        Contesta a tus clientes al instante, de día y de noche, por WhatsApp y en tu web. Coge citas.
-        Responde precios, horarios y las mismas diez preguntas de siempre. Lo entrenamos con
-        <b class="text-ink">tu</b> negocio: tus servicios, tus precios, tu forma de hablar. Tus clientes no
-        notan que es un robot. Solo notan que, por fin, alguien contesta rápido.
-      </p>
-      <div class="grid sm:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden mt-12">
-        <div class="fade bg-paper p-7">
-          <p class="serif text-accent text-2xl font-500 mb-3">01</p>
-          <p class="text-ink font-600 mb-1.5">Contesta en segundos</p>
-          <p class="text-sm text-muted leading-relaxed">Las 24 horas. También a las 3 de la mañana.</p>
-        </div>
-        <div class="fade bg-paper p-7">
-          <p class="serif text-accent text-2xl font-500 mb-3">02</p>
-          <p class="text-ink font-600 mb-1.5">Coge la cita solo</p>
-          <p class="text-sm text-muted leading-relaxed">Y te la deja apuntada en la agenda.</p>
-        </div>
-        <div class="fade bg-paper p-7">
-          <p class="serif text-accent text-2xl font-500 mb-3">03</p>
-          <p class="text-ink font-600 mb-1.5">Habla como tú</p>
-          <p class="text-sm text-muted leading-relaxed">Nadie nota que es una máquina.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CATÁLOGO ===== -->
-  <section id="catalogo" class="px-5 md:px-8 py-24 md:py-28">
-    <div class="max-w-6xl mx-auto">
-      <p class="fade eyebrow mb-4">Lo que instalamos</p>
-      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)] max-w-2xl">Empieza por uno. Acaba con el negocio funcionando solo.</h2>
-
-      <div class="grid md:grid-cols-2 gap-5 mt-12">
-        <div class="fade rounded-2xl border border-accent/40 bg-accentSoft/40 p-8 relative">
-          <span class="absolute top-6 right-6 eyebrow text-accent">El estrella</span>
-          <p class="serif text-accent text-xl font-500 mb-3">01</p>
-          <h3 class="serif text-ink text-2xl font-500 mb-2.5">El empleado que nunca duerme</h3>
-          <p class="text-[15px] text-body leading-relaxed mb-3">Contesta a tus clientes al instante y coge citas, día y noche.</p>
-          <p class="text-[14px] text-accent">Lo que sientes: no se te escapa ni un cliente por no llegar a tiempo.</p>
-        </div>
-        <div class="fade rounded-2xl border border-line bg-paper p-8">
-          <p class="serif text-muted text-xl font-500 mb-3">02</p>
-          <h3 class="serif text-ink text-2xl font-500 mb-2.5">Tu community manager automático</h3>
-          <p class="text-[15px] text-body leading-relaxed mb-3">Publica en tus redes y responde comentarios, en tu estilo, sin que toques nada.</p>
-          <p class="text-[14px] text-accent">Lo que sientes: tus redes vivas sin robarte una hora al día.</p>
-        </div>
-        <div class="fade rounded-2xl border border-line bg-paper p-8">
-          <p class="serif text-muted text-xl font-500 mb-3">03</p>
-          <h3 class="serif text-ink text-2xl font-500 mb-2.5">Tu web lista en una semana</h3>
-          <p class="text-[15px] text-body leading-relaxed mb-3">Una página profesional que atrae y que no tienes que pelear con nadie.</p>
-          <p class="text-[14px] text-accent">Lo que sientes: por fin tienes web, y buena.</p>
-        </div>
-        <div class="fade rounded-2xl border border-line bg-paper p-8">
-          <p class="serif text-muted text-xl font-500 mb-3">04</p>
-          <h3 class="serif text-ink text-2xl font-500 mb-2.5">El ayudante de oficina</h3>
-          <p class="text-[15px] text-body leading-relaxed mb-3">Te ordena el correo, prepara presupuestos y persigue a los clientes que no contestan.</p>
-          <p class="text-[14px] text-accent">Lo que sientes: llegas a todo sin contratar a nadie.</p>
-        </div>
-      </div>
-      <p class="fade text-[14px] text-muted mt-7">Lo normal es empezar por el nº 1. Cuando ves que funciona, el resto cae solo.</p>
-    </div>
-  </section>
-
-  <!-- ===== CÓMO FUNCIONA ===== -->
-  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
-    <div class="max-w-6xl mx-auto">
-      <p class="fade eyebrow mb-4">Cómo va esto</p>
-      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)] max-w-3xl">Antes de pagar nada, lo ves funcionando con tu propio negocio.</h2>
-
-      <div class="fade mt-8 rounded-2xl border-l-2 border-accent bg-paper shadow-card p-7 md:p-8 max-w-3xl">
-        <p class="text-[16px] md:text-[18px] leading-relaxed text-ink">
-          Te montamos una demo con el nombre de tu negocio, tus servicios y tu tono. Escaneas un QR,
-          escribes por WhatsApp… y ya estás hablando con <b>tu propio empleado de IA</b>. Si te gusta, lo
-          dejamos fijo. Si no, no has perdido nada.
+      <div class="max-w-2xl">
+        <p class="fade eyebrow mb-4">Qué instalamos</p>
+        <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)]">Cuatro formas claras de meter IA en tu negocio.</h2>
+        <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body">
+          No todo el mundo necesita lo mismo. Por eso no empezamos vendiéndote un paquete cerrado con nombre futurista y
+          precio misterioso, esa costumbre tan humana de complicar lo simple.
+        </p>
+        <p class="fade mt-4 text-[16px] md:text-[18px] leading-relaxed text-ink">
+          Primero miramos qué necesita tu negocio. Después instalamos lo que tiene sentido.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-10 md:gap-12 mt-14">
-        <div class="fade">
-          <p class="serif text-accent text-3xl font-500 mb-3">01</p>
-          <h3 class="serif text-ink text-xl font-500 mb-2">Revisión gratis</h3>
-          <p class="text-[15px] text-body leading-relaxed">Miramos tu negocio y te decimos dónde estás perdiendo clientes o tiempo. Sin compromiso.</p>
-        </div>
-        <div class="fade">
-          <p class="serif text-accent text-3xl font-500 mb-3">02</p>
-          <h3 class="serif text-ink text-xl font-500 mb-2">Presupuesto en una hoja</h3>
-          <p class="text-[15px] text-body leading-relaxed">Una instalación concreta, un precio claro, un resultado prometido. Sin letra pequeña.</p>
-        </div>
-        <div class="fade">
-          <p class="serif text-accent text-3xl font-500 mb-3">03</p>
-          <h3 class="serif text-ink text-xl font-500 mb-2">Instalado y a funcionar</h3>
-          <p class="text-[15px] text-body leading-relaxed">Lo montamos, lo dejamos rodando y nos quedamos detrás para que no se rompa.</p>
-        </div>
+      <div class="mt-14 space-y-5">
+
+        <!-- Servicio 1 -->
+        <article class="fade rounded-3xl bg-paper border border-accent/40 p-8 md:p-10">
+          <div class="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
+            <div>
+              <div class="flex items-baseline gap-3 mb-2">
+                <span class="serif text-accent text-2xl font-500">01</span>
+                <span class="eyebrow text-accent">El estrella</span>
+              </div>
+              <h3 class="serif text-ink text-[26px] md:text-[30px] font-500 leading-tight">Chatbot de atención al cliente</h3>
+              <p class="serif italic text-accent text-lg mt-1.5">Una IA que responde por tu negocio cuando tú no puedes.</p>
+              <div class="mt-5 space-y-4 text-[15px] md:text-[16px] leading-relaxed text-body">
+                <p>Instalamos un chatbot conectado a tu web, WhatsApp o canales de contacto para que tus clientes reciban respuesta rápida sin que tengas que estar pendiente todo el día.</p>
+                <p>Puede responder preguntas frecuentes, explicar tus servicios, dar precios orientativos, informar de horarios, recoger datos, filtrar consultas y ayudarte a gestionar citas o solicitudes.</p>
+                <p class="text-ink">No es un robot genérico diciendo frases vacías. Lo entrenamos con la información de tu negocio: tus servicios, tu tono, tus condiciones, tus horarios y la forma en la que quieres atender.</p>
+              </div>
+              <a data-cta="atencion" href="#contacto" class="inline-block mt-7 text-paper bg-accent hover:bg-ink transition rounded-full px-6 py-3 text-[14px] font-600">Quiero instalar atención con IA</a>
+            </div>
+            <div class="md:border-l md:border-line md:pl-12 grid sm:grid-cols-1 gap-7">
+              <div>
+                <p class="eyebrow mb-3">Qué puede hacer</p>
+                <ul class="lead space-y-2 text-[14.5px] text-body">
+                  <li>Responder dudas frecuentes.</li>
+                  <li>Atender mensajes fuera de horario.</li>
+                  <li>Recoger nombre, teléfono, email y necesidad del cliente.</li>
+                  <li>Explicar servicios y precios.</li>
+                  <li>Filtrar consultas poco claras.</li>
+                  <li>Pasarte solo las oportunidades importantes.</li>
+                  <li>Ayudar con citas o reservas.</li>
+                  <li>Mantener una atención rápida y constante.</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-accentSoft/50 p-5">
+                <p class="eyebrow text-accent mb-3">Lo que ganas</p>
+                <ul class="lead space-y-1.5 text-[14.5px] text-ink">
+                  <li>Menos mensajes repetidos.</li>
+                  <li>Menos clientes esperando.</li>
+                  <li>Más oportunidades atendidas a tiempo.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Servicio 2 -->
+        <article class="fade rounded-3xl bg-paper border border-line p-8 md:p-10">
+          <div class="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
+            <div>
+              <span class="serif text-muted text-2xl font-500">02</span>
+              <h3 class="serif text-ink text-[26px] md:text-[30px] font-500 leading-tight mt-2">Páginas web con IA</h3>
+              <p class="serif italic text-accent text-lg mt-1.5">Una web clara, rápida y pensada para convertir visitas en contactos.</p>
+              <div class="mt-5 space-y-4 text-[15px] md:text-[16px] leading-relaxed text-body">
+                <p>Creamos páginas web para negocios que necesitan explicar bien lo que hacen, generar confianza y facilitar que el cliente dé el siguiente paso.</p>
+                <p>No hacemos webs para decorar internet, que bastante basura flota ya por ahí. Hacemos webs prácticas: con estructura clara, textos bien pensados, diseño limpio y llamadas a la acción que ayudan a convertir visitas en mensajes, reservas, llamadas o ventas.</p>
+                <p>La IA nos ayuda a acelerar el proceso, ordenar la información, crear contenido base, mejorar textos, estructurar secciones y adaptar la web a lo que el cliente necesita.</p>
+                <p class="text-ink">Pero el objetivo no es decir "hecha con IA". El objetivo es que tu web funcione.</p>
+              </div>
+              <a data-cta="web" href="#contacto" class="inline-block mt-7 text-ink border border-ink hover:bg-ink hover:text-paper transition rounded-full px-6 py-3 text-[14px] font-600">Quiero una web con IA</a>
+            </div>
+            <div class="md:border-l md:border-line md:pl-12 grid gap-7">
+              <div>
+                <p class="eyebrow mb-3">Qué puede incluir</p>
+                <ul class="lead space-y-2 text-[14.5px] text-body">
+                  <li>Web corporativa.</li>
+                  <li>Landing page para captar clientes.</li>
+                  <li>Página de servicios.</li>
+                  <li>Formularios de contacto.</li>
+                  <li>Integración con WhatsApp.</li>
+                  <li>Textos comerciales.</li>
+                  <li>Estructura SEO básica.</li>
+                  <li>Conexión con chatbot o automatizaciones.</li>
+                  <li>Diseño adaptado a móvil.</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-cream p-5">
+                <p class="eyebrow text-accent mb-3">Lo que ganas</p>
+                <ul class="lead space-y-1.5 text-[14.5px] text-ink">
+                  <li>Una web profesional sin eternizar el proceso.</li>
+                  <li>Una explicación clara de tu negocio.</li>
+                  <li>Un canal preparado para recibir clientes.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Servicio 3 -->
+        <article class="fade rounded-3xl bg-paper border border-line p-8 md:p-10">
+          <div class="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
+            <div>
+              <span class="serif text-muted text-2xl font-500">03</span>
+              <h3 class="serif text-ink text-[26px] md:text-[30px] font-500 leading-tight mt-2">Gestión de redes sociales con IA</h3>
+              <p class="serif italic text-accent text-lg mt-1.5">Redes activas sin vivir pegado al móvil.</p>
+              <div class="mt-5 space-y-4 text-[15px] md:text-[16px] leading-relaxed text-body">
+                <p>Instalamos un sistema de apoyo con IA para planificar, crear y ordenar contenido para redes sociales.</p>
+                <p>La idea no es publicar por publicar. La idea es que tus redes tengan una línea clara, contenido constante y respuestas más ágiles sin que cada post se convierta en una pequeña crisis creativa.</p>
+                <p>Podemos ayudarte a crear calendarios de contenido, copies, ideas de publicaciones, respuestas frecuentes, versiones para stories, textos para reels, campañas sencillas y materiales adaptados al tono de tu negocio.</p>
+                <p class="text-ink">La IA no sustituye tu criterio. Te quita la parte pesada: empezar desde cero cada vez.</p>
+              </div>
+              <a data-cta="redes" href="#contacto" class="inline-block mt-7 text-ink border border-ink hover:bg-ink hover:text-paper transition rounded-full px-6 py-3 text-[14px] font-600">Quiero redes con IA</a>
+            </div>
+            <div class="md:border-l md:border-line md:pl-12 grid gap-7">
+              <div>
+                <p class="eyebrow mb-3">Qué puede hacer</p>
+                <ul class="lead space-y-2 text-[14.5px] text-body">
+                  <li>Crear ideas de contenido.</li>
+                  <li>Preparar calendarios mensuales.</li>
+                  <li>Redactar copies para publicaciones.</li>
+                  <li>Adaptar textos a Instagram, LinkedIn, Facebook o TikTok.</li>
+                  <li>Generar respuestas frecuentes.</li>
+                  <li>Ordenar campañas.</li>
+                  <li>Crear borradores para reels y stories.</li>
+                  <li>Mantener coherencia en el tono de marca.</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-cream p-5">
+                <p class="eyebrow text-accent mb-3">Lo que ganas</p>
+                <ul class="lead space-y-1.5 text-[14.5px] text-ink">
+                  <li>Más constancia.</li>
+                  <li>Menos bloqueo.</li>
+                  <li>Menos tiempo perdido pensando "qué subimos hoy", esa pregunta que ha destruido más mañanas que el café malo.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Servicio 4 -->
+        <article class="fade rounded-3xl bg-paper border border-line p-8 md:p-10">
+          <div class="grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12">
+            <div>
+              <span class="serif text-muted text-2xl font-500">04</span>
+              <h3 class="serif text-ink text-[26px] md:text-[30px] font-500 leading-tight mt-2">Automatizaciones para empresas</h3>
+              <p class="serif italic text-accent text-lg mt-1.5">Sistemas que hacen tareas repetidas por ti.</p>
+              <div class="mt-5 space-y-4 text-[15px] md:text-[16px] leading-relaxed text-body">
+                <p>Instalamos automatizaciones para que ciertos procesos de tu empresa no dependan de hacerlo todo a mano.</p>
+                <p>Una automatización puede recoger datos, ordenar información, enviar avisos, crear documentos, registrar clientes, hacer seguimientos, resumir actividad o conectar herramientas que ahora mismo van cada una por su lado.</p>
+                <p>No se trata de automatizar por postureo. Se trata de encontrar tareas que se repiten siempre igual y hacer que dejen de ocupar tiempo humano.</p>
+                <p class="text-ink">Porque si una tarea se repite todos los días, probablemente no debería perseguirte hasta en sueños.</p>
+              </div>
+              <a data-cta="automatizaciones" href="#contacto" class="inline-block mt-7 text-ink border border-ink hover:bg-ink hover:text-paper transition rounded-full px-6 py-3 text-[14px] font-600">Quiero automatizar mi negocio</a>
+            </div>
+            <div class="md:border-l md:border-line md:pl-12 grid gap-7">
+              <div>
+                <p class="eyebrow mb-3">Qué puede hacer</p>
+                <ul class="lead space-y-2 text-[14.5px] text-body">
+                  <li>Conectar formularios con bases de datos.</li>
+                  <li>Registrar clientes nuevos.</li>
+                  <li>Enviar emails automáticos.</li>
+                  <li>Crear presupuestos base.</li>
+                  <li>Avisarte de tareas pendientes.</li>
+                  <li>Hacer seguimiento de oportunidades.</li>
+                  <li>Ordenar conversaciones.</li>
+                  <li>Resumir actividad semanal.</li>
+                  <li>Conectar Gmail, Sheets, Drive, Calendar, WhatsApp, Notion, Airtable o CRM.</li>
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-cream p-5">
+                <p class="eyebrow text-accent mb-3">Lo que ganas</p>
+                <ul class="lead space-y-1.5 text-[14.5px] text-ink">
+                  <li>Menos trabajo manual.</li>
+                  <li>Menos errores.</li>
+                  <li>Más control sobre lo que está pasando.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== ES TUYO ===== -->
+  <!-- ===== 5 · LAS 6 AUTOMATIZACIONES ===== -->
   <section class="px-5 md:px-8 py-24 md:py-28">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-[.8fr_1.2fr] gap-10 md:gap-16">
-      <div class="fade">
-        <p class="eyebrow mb-4">La letra pequeña que sí te gusta</p>
-        <h2 class="serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,3.6fw,40px)] text-[clamp(26px,3.6vw,40px)]">Lo que te instalamos, es tuyo. Punto.</h2>
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl">
+        <p class="fade eyebrow mb-4">Las 6 más útiles</p>
+        <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)]">Las tareas que casi cualquier negocio puede empezar a automatizar.</h2>
+        <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body">
+          Las automatizaciones más seguras para empresas pequeñas, autónomos, clínicas, academias, estudios,
+          inmobiliarias, talleres, servicios profesionales, comercios y negocios que gestionan clientes cada día.
+        </p>
       </div>
-      <div class="fade space-y-5 text-[16px] md:text-[18px] leading-relaxed text-body max-w-xl">
-        <p>No alquilas nada. No es una cuenta prestada en una app que mañana sube el precio o cierra y te deja tirado. Lo que montamos se queda en tu negocio, con tus datos, funcionando.</p>
-        <p>¿Que un día decides que no nos necesitas? Te quedas con todo igual. Como el aire acondicionado: te lo instalamos nosotros, pero es tuyo para siempre.</p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-3xl overflow-hidden mt-12">
+        <!-- auto cards -->
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">1</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Captura automática de clientes</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">Cuando alguien escribe por la web, WhatsApp, Instagram o formulario, el sistema recoge sus datos y los guarda de forma ordenada.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>No perder contactos.</li>
+            <li>Tener todos los leads en un sitio.</li>
+            <li>Saber quién ha preguntado, cuándo y por qué.</li>
+            <li>Evitar que los clientes se queden enterrados en conversaciones.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> dejas de depender de revisar mil mensajes para saber quién quería contratarte.</p>
+        </div>
+
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">2</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Respuestas frecuentes automáticas</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">La IA responde las preguntas de todos los días: horarios, ubicación, precios, servicios, disponibilidad, condiciones, formas de pago o próximos pasos.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>Ahorrar tiempo en atención.</li>
+            <li>Responder fuera de horario.</li>
+            <li>Dar información clara.</li>
+            <li>Reducir interrupciones.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> tu negocio responde rápido sin que tú repitas lo mismo treinta veces.</p>
+        </div>
+
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">3</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Citas y reservas automáticas</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">El sistema ayuda al cliente a pedir cita, elegir horario, confirmar la reserva y recibir recordatorios.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>Clínicas, peluquerías, centros de estética.</li>
+            <li>Academias y consultorías.</li>
+            <li>Servicios con agenda.</li>
+            <li>Restaurantes o actividades con reserva.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> menos llamadas y menos "¿te viene bien el martes?" repetido hasta perder la fe.</p>
+        </div>
+
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">4</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Presupuestos automáticos</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">El cliente responde unas preguntas y el sistema genera una estimación, recoge la información necesaria o prepara un presupuesto base para revisar.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>Servicios profesionales, reformas, diseño.</li>
+            <li>Marketing, eventos, talleres, consultorías.</li>
+            <li>Cualquier negocio que pida datos antes de dar precio.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> presupuestos más rápidos y menos oportunidades olvidadas.</p>
+        </div>
+
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">5</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Seguimiento de clientes interesados</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">Cuando alguien pregunta pero no responde, el sistema envía un recordatorio, comparte información adicional o te avisa para que hagas seguimiento.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>Recuperar clientes que se enfrían.</li>
+            <li>Recordar presupuestos enviados.</li>
+            <li>Hacer seguimiento sin parecer pesado.</li>
+            <li>Mantener vivas oportunidades reales.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> no pierdes ventas solo porque nadie volvió a escribir.</p>
+        </div>
+
+        <div class="fade bg-paper p-7 flex flex-col">
+          <span class="serif text-accent text-xl font-500">6</span>
+          <h3 class="serif text-ink text-xl font-500 mt-2 mb-3">Resumen semanal del negocio</h3>
+          <p class="text-[14.5px] text-body leading-relaxed mb-4">Cada semana recibes un resumen con los mensajes recibidos, clientes nuevos, citas, presupuestos, tareas pendientes y oportunidades abiertas.</p>
+          <p class="eyebrow mb-2">Sirve para</p>
+          <ul class="lead space-y-1.5 text-[14px] text-muted mb-4">
+            <li>Tener control sin revisar todo manualmente.</li>
+            <li>Ver qué preguntas se repiten.</li>
+            <li>Detectar clientes calientes.</li>
+            <li>Saber dónde se está perdiendo tiempo.</li>
+          </ul>
+          <p class="mt-auto text-[14px] text-ink border-t border-line pt-4"><span class="text-accent font-600">Resultado:</span> tu negocio deja de ser una nube de conversaciones y empieza a parecer algo mínimamente gobernable. Una rareza preciosa.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRECIO ===== -->
-  <section id="precio" class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
-    <div class="max-w-5xl mx-auto">
-      <p class="fade eyebrow mb-4">Cuánto cuesta</p>
-      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)] max-w-2xl">Como cualquier instalación: se monta una vez y luego se mantiene.</h2>
-      <p class="fade mt-5 text-[16px] text-body leading-relaxed max-w-xl">Sin sorpresas. Sin permanencia: te quedas porque funciona, no porque te hayamos atado.</p>
+  <!-- ===== 6 · CÓMO FUNCIONA ===== -->
+  <section id="como" class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl">
+        <p class="fade eyebrow mb-4">Cómo funciona</p>
+        <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)]">Antes de pagar, lo ves aplicado a tu negocio.</h2>
+        <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body">
+          No queremos que compres una idea abstracta. Queremos que veas cómo podría funcionar en tu caso. Por eso
+          empezamos con una revisión y, cuando tiene sentido, con una demo sencilla usando información real de tu negocio.
+        </p>
+      </div>
 
       <div class="grid md:grid-cols-2 gap-5 mt-12">
-        <div class="fade rounded-2xl bg-paper border border-accent/40 p-9">
-          <p class="eyebrow text-accent mb-3">La instalación · pago único</p>
-          <div class="flex items-baseline gap-2 mb-4">
-            <span class="text-muted text-base">desde</span>
-            <span class="serif text-ink text-5xl font-500">350&nbsp;€</span>
-          </div>
-          <p class="text-[15px] text-body leading-relaxed">Montamos tu empleado de IA, entrenado con tu negocio y conectado a tu WhatsApp. Lo dejamos funcionando.</p>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="serif text-accent text-3xl font-500 mb-3">01</p>
+          <h3 class="serif text-ink text-xl font-500 mb-3">Revisión gratis</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-4">Miramos tu negocio, tus canales y tus tareas repetidas. Vemos dónde estás perdiendo tiempo, clientes o energía. Después te decimos qué tendría sentido instalar primero.</p>
+          <p class="text-[14px] text-muted italic">Sin compromiso. Sin llamada eterna. Sin presentación de cuarenta diapositivas con gráficos que nadie pidió.</p>
         </div>
-        <div class="fade rounded-2xl bg-paper border border-line p-9">
-          <p class="eyebrow mb-3">El mantenimiento · al mes</p>
-          <div class="flex items-baseline gap-2 mb-4">
-            <span class="text-muted text-base">desde</span>
-            <span class="serif text-ink text-5xl font-500">60&nbsp;€</span><span class="text-muted">/mes</span>
-          </div>
-          <p class="text-[15px] text-body leading-relaxed">Lo mantenemos afinado, actualizado y vigilado. Si algo falla, lo arreglamos nosotros.</p>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="serif text-accent text-3xl font-500 mb-3">02</p>
+          <h3 class="serif text-ink text-xl font-500 mb-3">Propuesta clara</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-4">Te damos una propuesta concreta: qué vamos a instalar, qué problema resuelve, qué incluye, cuánto cuesta, qué necesitas aportar y qué resultado puedes esperar.</p>
+          <p class="text-[14px] text-muted italic">Nada de menús infinitos. Nada de letra pequeña escondida en una cueva.</p>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="serif text-accent text-3xl font-500 mb-3">03</p>
+          <h3 class="serif text-ink text-xl font-500 mb-3">Instalación</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-4">Montamos el sistema, lo conectamos a tus herramientas y lo adaptamos a tu negocio. Probamos que funcione. Ajustamos respuestas, textos, flujos y automatizaciones.</p>
+          <p class="text-[14px] text-muted italic">Te enseñamos lo justo para usarlo sin depender de nosotros para respirar.</p>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="serif text-accent text-3xl font-500 mb-3">04</p>
+          <h3 class="serif text-ink text-xl font-500 mb-3">Mantenimiento</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-4">Una vez instalado, podemos mantenerlo, revisarlo y mejorarlo. Porque los negocios cambian: los precios, los horarios, las preguntas de los clientes.</p>
+          <p class="text-[14px] text-muted italic">Y, por algún motivo, las herramientas digitales también deciden romperse justo cuando más falta hacen.</p>
         </div>
       </div>
-      <p class="fade text-[13px] text-muted mt-6">Sin permanencia · Lo pruebas gratis antes · El sistema es tuyo desde el primer día.</p>
     </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
+  <!-- ===== 7 + 8 · PARA QUIÉN ES / NO ES ===== -->
   <section class="px-5 md:px-8 py-24 md:py-28">
+    <div class="max-w-6xl mx-auto">
+      <p class="fade eyebrow mb-4">Para quién es</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,42px)] max-w-3xl">Para negocios que necesitan responder mejor y trabajar con menos caos.</h2>
+      <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body max-w-2xl">
+        Nodo23 está pensado para empresas pequeñas y medianas, autónomos y equipos que necesitan hacer más sin
+        contratar a más gente para cada tarea. Trabajamos especialmente bien con:
+      </p>
+      <div class="fade mt-7 flex flex-wrap gap-2.5 text-[14px]">
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Clínicas</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Centros de estética</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Academias</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Inmobiliarias</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Restaurantes</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Talleres</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Tiendas</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Estudios creativos</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Profesionales independientes</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Empresas de servicios</span>
+        <span class="bg-cream border border-line rounded-full px-4 py-1.5">Equipos administrativos pequeños</span>
+      </div>
+      <div class="fade mt-9 grid sm:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl text-[15px] md:text-[16px] text-ink">
+        <p class="flex gap-2.5"><span class="text-accent">→</span> Si tus clientes te escriben y tardas en contestar, aquí hay algo que instalar.</p>
+        <p class="flex gap-2.5"><span class="text-accent">→</span> Si haces presupuestos a mano todo el tiempo, aquí hay algo que instalar.</p>
+        <p class="flex gap-2.5"><span class="text-accent">→</span> Si tus redes dependen de "cuando haya un rato", aquí hay algo que instalar.</p>
+        <p class="flex gap-2.5"><span class="text-accent">→</span> Si tu web no explica bien lo que haces, aquí hay algo que instalar.</p>
+      </div>
+
+      <!-- No es -->
+      <div class="fade mt-16 rounded-3xl bg-ink text-paper p-8 md:p-12">
+        <p class="eyebrow mb-4" style="color:#9c9a90">Para quién no es</p>
+        <h3 class="serif font-500 leading-tight text-[clamp(22px,3.4vw,34px)]">No somos para todo el mundo. <span class="italic" style="color:#7fd9b8">Qué alivio.</span></h3>
+        <p class="mt-5 text-[15px] md:text-[16px] leading-relaxed text-white/70 max-w-2xl">
+          Nodo23 no es para ti si buscas una herramienta mágica que haga todo sin información, sin criterio y sin tocar nada.
+          La IA necesita contexto. Necesita datos. Necesita una mínima revisión. Necesita que alguien le diga cómo funciona tu negocio.
+          Nosotros instalamos el sistema, pero no inventamos tu empresa desde cero.
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 mt-9">
+          <div>
+            <p class="eyebrow mb-3" style="color:#9c9a90">No encajamos si</p>
+            <ul class="space-y-2 text-[14.5px] text-white/80">
+              <li>· Quieres resultados sin aportar información.</li>
+              <li>· Buscas algo gratis y perfecto.</li>
+              <li>· No quieres revisar nada nunca.</li>
+              <li>· Prefieres seguir haciéndolo todo a mano.</li>
+              <li>· Quieres "meter IA" solo porque suena moderno.</li>
+              <li>· Esperas que una automatización arregle un negocio que ni tú entiendes.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="eyebrow mb-3" style="color:#7fd9b8">Encajamos si</p>
+            <ul class="space-y-2 text-[14.5px] text-paper">
+              <li>· Quieres ahorrar tiempo.</li>
+              <li>· Quieres responder mejor.</li>
+              <li>· Quieres ordenar procesos.</li>
+              <li>· Quieres captar más oportunidades.</li>
+              <li>· Quieres probar algo práctico.</li>
+              <li>· Quieres IA aplicada a tareas reales.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 9 + 10 · DIFERENCIA + MÉTODO ===== -->
+  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16">
+      <div class="fade">
+        <p class="eyebrow mb-4">Lo que nos diferencia</p>
+        <h2 class="serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(24px,3.4vw,38px)]">No te damos una herramienta. Te dejamos un sistema funcionando.</h2>
+        <div class="mt-6 space-y-4 text-[15px] md:text-[17px] leading-relaxed text-body">
+          <p>Muchas soluciones de IA te venden acceso a una plataforma. Luego entras, ves veinte botones, tres tutoriales, una plantilla en inglés y una promesa de productividad que se desintegra el martes.</p>
+          <p>Nosotros trabajamos de otra manera:</p>
+          <ul class="lead space-y-2 text-[15px] text-ink">
+            <li>Miramos qué necesita tu negocio.</li>
+            <li>Elegimos las herramientas adecuadas.</li>
+            <li>Creamos los textos, flujos y conexiones.</li>
+            <li>Lo probamos contigo.</li>
+            <li>Y lo dejamos instalado.</li>
+          </ul>
+          <p class="serif text-ink text-[18px] md:text-[20px] font-500 leading-snug pt-1">Una herramienta la tienes que aprender. Una instalación la tienes que usar.</p>
+        </div>
+      </div>
+      <div class="fade">
+        <p class="eyebrow mb-4">El método Nodo23</p>
+        <h2 class="serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(24px,3.4vw,38px)]">IA útil, montada con cabeza.</h2>
+        <div class="mt-6 space-y-4 text-[15px] md:text-[17px] leading-relaxed text-body">
+          <p>No creemos en automatizarlo todo. Creemos en automatizar lo que tiene sentido. Hay cosas que debe hacer una persona, cosas que puede preparar una IA, cosas que se pueden automatizar enteras y cosas que es mejor no tocar, porque no todo necesita convertirse en un flujo con nombre raro. Nuestro trabajo es distinguir eso.</p>
+        </div>
+        <div class="mt-6 space-y-3">
+          <div class="rounded-2xl bg-paper border border-line p-5">
+            <p class="serif text-ink font-500 text-lg">1. Que ahorre tiempo</p>
+            <p class="text-[14.5px] text-muted mt-1">Si no te quita trabajo real, no sirve.</p>
+          </div>
+          <div class="rounded-2xl bg-paper border border-line p-5">
+            <p class="serif text-ink font-500 text-lg">2. Que mejore la respuesta al cliente</p>
+            <p class="text-[14.5px] text-muted mt-1">Si el cliente recibe mejor atención, más rápido y con información clara, sirve.</p>
+          </div>
+          <div class="rounded-2xl bg-paper border border-line p-5">
+            <p class="serif text-ink font-500 text-lg">3. Que sea sostenible</p>
+            <p class="text-[14.5px] text-muted mt-1">Si el sistema depende de arreglarlo cada dos días, no es una solución. Es otra mascota digital. Y ya tenemos suficientes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- claim -->
+  <section class="px-5 md:px-8 py-16 md:py-20">
+    <p class="fade max-w-3xl mx-auto text-center serif font-400 italic text-ink text-[clamp(22px,3.4vw,34px)] leading-snug">
+      Tu negocio no necesita sonar más tecnológico. Necesita funcionar mejor.
+    </p>
+  </section>
+
+  <!-- ===== 11 · PRECIO ===== -->
+  <section id="precio" class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+    <div class="max-w-5xl mx-auto">
+      <p class="fade eyebrow mb-4">Precio</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)] max-w-2xl">Como cualquier instalación: se monta una vez y luego se mantiene.</h2>
+      <p class="fade mt-6 text-[16px] md:text-[18px] leading-relaxed text-body max-w-2xl">
+        Cada negocio es distinto. Por eso el precio depende de lo que haya que instalar, conectar y mantener.
+        Pero trabajamos con una lógica sencilla:
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-12">
+        <div class="fade rounded-2xl bg-paper border border-accent/40 p-8">
+          <p class="eyebrow text-accent mb-3">Instalación</p>
+          <p class="serif text-ink text-2xl font-500 mb-3">Pago inicial</p>
+          <p class="text-[14.5px] text-body leading-relaxed">Para montar el sistema. Incluye revisión, configuración, textos, conexiones, pruebas y entrega. Puede ser un chatbot, una web, un sistema de redes, una automatización o una combinación.</p>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="eyebrow mb-3">Mantenimiento</p>
+          <p class="serif text-ink text-2xl font-500 mb-3">Cuota mensual</p>
+          <p class="text-[14.5px] text-body leading-relaxed">Para mantenerlo afinado. Incluye revisión, pequeños ajustes, actualización de contenidos, control de errores y soporte básico. <b class="text-ink">Sin permanencia.</b></p>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-8">
+          <p class="eyebrow mb-3">Demo o revisión previa</p>
+          <p class="serif text-ink text-2xl font-500 mb-3">Antes de pagar</p>
+          <p class="text-[14.5px] text-body leading-relaxed">Antes de montar nada, revisamos tu caso. Cuando tiene sentido, te enseñamos una demo sencilla aplicada a tu propio negocio para que veas la idea funcionando antes de decidir.</p>
+        </div>
+      </div>
+      <p class="fade mt-7 text-[15px] md:text-[16px] text-ink leading-relaxed max-w-2xl">
+        Te quedas porque funciona, no porque te hayamos atado con un contrato escrito por alguien que claramente odiaba la vida.
+      </p>
+      <div class="fade mt-8">
+        <a href="#contacto" class="inline-block text-paper bg-accent hover:bg-ink transition rounded-full px-7 py-3.5 text-[15px] font-600">Pedir revisión gratis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 12 · SERVICIOS RESUMIDO ===== -->
+  <section class="px-5 md:px-8 py-24 md:py-28">
+    <div class="max-w-6xl mx-auto">
+      <p class="fade eyebrow mb-4">En resumen</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,42px)]">Qué puedes pedirnos.</h2>
+      <div class="grid md:grid-cols-2 gap-5 mt-12">
+        <div class="fade rounded-2xl border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-2">Atención al cliente con IA</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-3">Para responder mensajes, resolver dudas, captar datos y atender mejor sin estar disponible todo el día.</p>
+          <p class="text-[14px] text-accent">Ideal si: recibes muchos WhatsApps, llamadas o mensajes repetidos.</p>
+        </div>
+        <div class="fade rounded-2xl border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-2">Web con IA</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-3">Para tener una página clara, profesional y preparada para captar contactos o reservas.</p>
+          <p class="text-[14px] text-accent">Ideal si: tu web está antigua, no tienes web o no explica bien lo que haces.</p>
+        </div>
+        <div class="fade rounded-2xl border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-2">Redes sociales con IA</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-3">Para planificar contenido, redactar copies, ordenar campañas y mantener presencia constante.</p>
+          <p class="text-[14px] text-accent">Ideal si: tus redes dependen de ratos libres que nunca existen.</p>
+        </div>
+        <div class="fade rounded-2xl border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-2">Automatizaciones</h3>
+          <p class="text-[15px] text-body leading-relaxed mb-3">Para conectar herramientas, ordenar tareas, hacer seguimientos, registrar datos y reducir trabajo manual.</p>
+          <p class="text-[14px] text-accent">Ideal si: haces demasiadas tareas repetidas cada semana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 13 · CASOS DE USO ===== -->
+  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
+    <div class="max-w-6xl mx-auto">
+      <p class="fade eyebrow mb-4">Casos de uso</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,42px)]">Ejemplos de lo que podemos instalar.</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para una clínica</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Chatbot que responde dudas frecuentes.</li>
+            <li>Sistema de cita previa.</li>
+            <li>Recordatorios automáticos.</li>
+            <li>Web con servicios claros.</li>
+            <li>Resumen semanal de solicitudes.</li>
+            <li>Respuestas para redes sociales.</li>
+          </ul>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para una academia</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Captura de alumnos interesados.</li>
+            <li>Información automática sobre cursos.</li>
+            <li>Formularios conectados a base de datos.</li>
+            <li>Seguimiento de personas que pidieron info.</li>
+            <li>Web o landing para matrículas.</li>
+            <li>Calendario de contenido para redes.</li>
+          </ul>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para una inmobiliaria</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Chatbot para filtrar compradores o inquilinos.</li>
+            <li>Formularios para captar propiedades.</li>
+            <li>Automatización de visitas.</li>
+            <li>Seguimiento de interesados.</li>
+            <li>Publicaciones para redes.</li>
+            <li>Registro de oportunidades.</li>
+          </ul>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para un centro de estética</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Reservas automáticas.</li>
+            <li>Respuestas sobre tratamientos.</li>
+            <li>Recordatorios de cita.</li>
+            <li>Campañas para redes.</li>
+            <li>Web con servicios y precios desde.</li>
+            <li>Seguimiento de clientes recurrentes.</li>
+          </ul>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para un estudio creativo</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Web clara de servicios.</li>
+            <li>Formulario de briefing.</li>
+            <li>Presupuestos base.</li>
+            <li>Seguimiento de leads.</li>
+            <li>Automatización de correos.</li>
+            <li>Sistema de contenido para redes.</li>
+          </ul>
+        </div>
+        <div class="fade rounded-2xl bg-paper border border-line p-7">
+          <h3 class="serif text-ink text-xl font-500 mb-4">Para una empresa de servicios</h3>
+          <ul class="lead space-y-1.5 text-[14.5px] text-body">
+            <li>Atención inicial por WhatsApp.</li>
+            <li>Recogida de datos.</li>
+            <li>Presupuestos automáticos.</li>
+            <li>Gestión de solicitudes.</li>
+            <li>Avisos internos.</li>
+            <li>Resumen semanal de actividad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 14 · CTA INTERMEDIO ===== -->
+  <section class="px-5 md:px-8 py-20 md:py-24">
+    <div class="fade max-w-3xl mx-auto text-center">
+      <h2 class="serif text-ink font-500 tracking-[-0.01em] leading-[1.12] text-[clamp(24px,3.8vw,38px)]">
+        Cuéntanos qué negocio tienes y te diremos qué IA tiene sentido instalar.
+      </h2>
+      <p class="mt-5 text-[15px] md:text-[17px] text-muted">Sin marearte. Sin venderte diez cosas. Sin llamarlo transformación digital, porque bastante transformación tienes ya cuando se actualiza el ordenador.</p>
+      <div class="mt-8">
+        <a href="#contacto" class="inline-block text-paper bg-accent hover:bg-ink transition rounded-full px-8 py-3.5 text-[15px] font-600">Pedir revisión gratis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 15 · FAQ ===== -->
+  <section class="px-5 md:px-8 py-24 md:py-28 bg-cream border-y border-line">
     <div class="max-w-3xl mx-auto">
-      <p class="fade eyebrow mb-4">Preguntas</p>
+      <p class="fade eyebrow mb-4">Preguntas frecuentes</p>
       <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)] mb-10">Lo que vas a preguntar.</h2>
       <div id="faq" class="border-t border-line"></div>
     </div>
   </section>
 
-  <!-- ===== CTA FINAL ===== -->
+  <!-- ===== 16 · BLOQUE FINAL ===== -->
   <section class="px-5 md:px-8 py-28 md:py-36 bg-ink text-paper">
-    <div class="max-w-2xl mx-auto text-center">
+    <div class="max-w-3xl mx-auto text-center">
       <h2 class="fade serif font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(28px,5vw,52px)]">
-        Tu competencia ya está contestando.
-        <span class="block italic font-400 mt-2" style="color:#7fd9b8">Tú decides cuándo empezar.</span>
+        La IA ya puede trabajar para tu negocio.
       </h2>
-      <p class="fade mt-7 text-[16px] md:text-[18px] text-white/70">Te montamos la demo con tu negocio gratis. La pruebas, y hablamos.</p>
-      <div class="fade mt-10">
-        <a data-wa class="inline-block bg-paper text-ink hover:bg-accent hover:text-paper transition rounded-full px-9 py-4 text-[16px] font-600">Pruébalo con tu negocio</a>
+      <div class="fade mt-8 grid sm:grid-cols-2 gap-x-10 gap-y-2.5 text-[15px] md:text-[16px] text-white/75 text-left max-w-xl mx-auto">
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede responder mensajes.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede ordenar clientes.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede ayudarte con citas.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede preparar presupuestos.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede crear contenido.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede mejorar tu web.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede resumir cada semana.</p>
+        <p class="flex gap-2.5"><span style="color:#7fd9b8">·</span> Puede quitarte tareas manuales.</p>
       </div>
-      <p class="fade text-[13px] text-white/50 mt-6">Gratis · Sin compromiso · En tu propio WhatsApp.</p>
+      <p class="fade mt-8 text-[17px] md:text-[19px] text-paper">Pero alguien tiene que instalarla bien. <span class="italic" style="color:#7fd9b8">Ahí entramos nosotros.</span></p>
+      <p class="fade serif text-[22px] md:text-[26px] font-500 mt-8">Te instalamos la IA. Tú a lo tuyo.</p>
+      <div class="fade flex flex-wrap justify-center gap-3 mt-9">
+        <a href="#contacto" class="bg-paper text-ink hover:bg-accent hover:text-paper transition rounded-full px-8 py-3.5 text-[15px] font-600">Pedir revisión gratis</a>
+        <a href="#servicios" class="border border-white/30 text-paper hover:border-paper transition rounded-full px-8 py-3.5 text-[15px] font-600">Ver servicios</a>
+      </div>
     </div>
   </section>
 
-  <footer class="px-5 md:px-8 py-10 border-t border-line">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-muted">
-      <p class="serif text-ink text-base font-500">Nodo23</p>
-      <p>Instaladores de inteligencia artificial · Te instalamos la IA. Tú a lo tuyo.</p>
+  <!-- ===== 17 · FORMULARIO ===== -->
+  <section id="contacto" class="px-5 md:px-8 py-24 md:py-28">
+    <div class="max-w-2xl mx-auto">
+      <p class="fade eyebrow mb-4">Contacto</p>
+      <h2 class="fade serif text-ink font-500 tracking-[-0.01em] leading-[1.1] text-[clamp(26px,4vw,44px)]">Pide una revisión gratis.</h2>
+      <p class="fade mt-5 text-[16px] md:text-[18px] leading-relaxed text-body">
+        Cuéntanos qué negocio tienes y qué parte te está quitando más tiempo. Te diremos qué tendría sentido instalar primero.
+      </p>
+
+      <form id="form" class="fade mt-9 space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <label class="block">
+            <span class="text-[13px] font-600 text-ink">Nombre</span>
+            <input name="Nombre" type="text" required class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent" />
+          </label>
+          <label class="block">
+            <span class="text-[13px] font-600 text-ink">Empresa</span>
+            <input name="Empresa" type="text" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent" />
+          </label>
+          <label class="block">
+            <span class="text-[13px] font-600 text-ink">Teléfono</span>
+            <input name="Teléfono" type="tel" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent" />
+          </label>
+          <label class="block">
+            <span class="text-[13px] font-600 text-ink">Email</span>
+            <input name="Email" type="email" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-[13px] font-600 text-ink">Web o Instagram</span>
+          <input name="Web/Instagram" type="text" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent" />
+        </label>
+        <label class="block">
+          <span class="text-[13px] font-600 text-ink">¿Qué necesitas mejorar?</span>
+          <select id="necesidad" name="Necesidad" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent">
+            <option>Atención al cliente</option>
+            <option>Web</option>
+            <option>Redes sociales</option>
+            <option>Automatizaciones</option>
+            <option>No lo sé todavía</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-[13px] font-600 text-ink">Cuéntanos brevemente qué te gustaría resolver</span>
+          <textarea name="Mensaje" rows="4" class="mt-1.5 w-full rounded-xl border-line bg-paper text-ink focus:border-accent focus:ring-accent"></textarea>
+        </label>
+        <button type="submit" class="w-full sm:w-auto text-paper bg-accent hover:bg-ink transition rounded-full px-8 py-3.5 text-[15px] font-600">Enviar revisión</button>
+        <p class="text-[13px] text-muted">Responderemos con una propuesta clara. Sin spam. Sin persecución comercial. Sin numeritos raros.</p>
+      </form>
     </div>
+  </section>
+
+  <!-- ===== 22 · FOOTER ===== -->
+  <footer class="px-5 md:px-8 py-16 border-t border-line bg-cream">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-[1.4fr_1fr] gap-10">
+      <div>
+        <p class="serif text-ink text-2xl font-500">Nodo23</p>
+        <p class="text-[14px] text-muted mt-1">Instaladores de inteligencia artificial para negocios.</p>
+        <p class="text-[15px] text-body leading-relaxed mt-4 max-w-md">
+          Montamos chatbots, webs, sistemas de redes sociales y automatizaciones para que tu empresa responda mejor,
+          trabaje con menos caos y aproveche la IA sin tener que entenderla.
+        </p>
+        <p class="serif text-ink text-lg font-500 mt-5">Te instalamos la IA. Tú a lo tuyo.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-6 text-[14px]">
+        <div>
+          <p class="eyebrow mb-3">Navegación</p>
+          <ul class="space-y-2 text-body">
+            <li><a href="#servicios" class="hover:text-ink transition">Qué hacemos</a></li>
+            <li><a href="#servicios" class="hover:text-ink transition">Servicios</a></li>
+            <li><a href="#servicios" class="hover:text-ink transition">Automatizaciones</a></li>
+            <li><a href="#como" class="hover:text-ink transition">Cómo funciona</a></li>
+            <li><a href="#contacto" class="hover:text-ink transition">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow mb-3">Legal</p>
+          <ul class="space-y-2 text-body">
+            <li><a href="#" class="hover:text-ink transition">Política de privacidad</a></li>
+            <li><a href="#" class="hover:text-ink transition">Aviso legal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="max-w-6xl mx-auto text-[12px] text-muted mt-10 pt-6 border-t border-line">© <span id="year"></span> Nodo23 · Instaladores de inteligencia artificial.</p>
   </footer>
 
   <script>
     /* ====== CONFIG · CAMBIA ESTAS DOS LÍNEAS ====== */
-    const WA_NUMBER = "34600000000";                                  // ← tu WhatsApp (formato internacional, sin + ni espacios)
-    const WA_MSG    = "Hola, quiero probar la demo de IA para mi negocio";
+    const WA_NUMBER = "34600000000";   // ← tu WhatsApp (formato internacional, sin + ni espacios)
     /* ============================================== */
 
-    const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MSG)}`;
-    document.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink; a.target = "_blank"; a.rel = "noopener"; });
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    // CTAs de servicio → preseleccionar necesidad en el formulario
+    const mapCta = { atencion:'Atención al cliente', web:'Web', redes:'Redes sociales', automatizaciones:'Automatizaciones' };
+    document.querySelectorAll('[data-cta]').forEach(a => {
+      a.addEventListener('click', () => {
+        const v = mapCta[a.dataset.cta];
+        const sel = document.getElementById('necesidad');
+        if (v && sel) sel.value = v;
+      });
+    });
+
+    // Envío del formulario → abre WhatsApp con todo rellenado
+    document.getElementById('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      let msg = "Hola Nodo23, quiero pedir una revisión gratis:\n\n";
+      for (const [k, v] of fd.entries()) { if (String(v).trim()) msg += `${k}: ${v}\n`; }
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+
+    // FAQ
     const FAQ = [
-      ['¿Necesito saber de informática?', 'Nada. Si sabes usar WhatsApp, sabes de sobra. De lo técnico nos encargamos nosotros.'],
-      ['¿No contestará como un robot raro?', 'No. Lo entrenamos con tu negocio y tu forma de hablar. La gente nota que contestas rápido, no que es una máquina.'],
-      ['¿Y si veo que no me sirve?', 'Por eso lo pruebas gratis con tu propio negocio antes de pagar. Si no te convence, no hay nada que firmar.'],
-      ['¿Tengo que cambiar mi número de WhatsApp?', 'No. Trabaja con el que ya tienes. Tus clientes te escriben donde siempre.'],
-      ['¿Cuánto tarda en estar funcionando?', 'La demo, en un par de días. Instalado y rodando, normalmente en menos de una semana.'],
-      ['¿Me ata algún contrato?', 'Mes a mes. Sin permanencia ni letra pequeña. Te quedas si funciona.'],
-      ['¿Es mío de verdad o dependo de vosotros?', 'Es tuyo. Se queda en tu negocio aunque dejes de contar con nosotros.']
+      ['¿Necesito saber usar inteligencia artificial?', 'No. Para eso estamos nosotros. Tú nos explicas cómo funciona tu negocio y nosotros montamos el sistema. Después te enseñamos lo necesario para usarlo de forma sencilla.'],
+      ['¿El chatbot puede hablar como mi negocio?', 'Sí. Lo entrenamos con tu información, tus servicios, tus precios, tus horarios y el tono que quieras usar. No tiene que sonar como un robot de centralita atrapado en 2003.'],
+      ['¿Se puede conectar a WhatsApp?', 'Sí, dependiendo del caso y de la configuración necesaria. También puede conectarse a web, formularios, email, calendarios, hojas de cálculo, bases de datos o herramientas de gestión.'],
+      ['¿La IA puede gestionar citas?', 'Sí. Puede recoger datos, proponer horarios, confirmar citas y enviar recordatorios, según cómo esté montado tu sistema.'],
+      ['¿Hacéis webs completas?', 'Sí. Podemos crear una web o landing para explicar tu negocio, presentar tus servicios, captar contactos y conectarla con WhatsApp, formularios, chatbot o automatizaciones.'],
+      ['¿Lleváis redes sociales completas?', 'Podemos ayudarte con planificación, ideas, copies, campañas, respuestas frecuentes y sistemas de contenido con IA. Según el caso, montamos un flujo para que tus redes sean más constantes sin empezar de cero cada semana.'],
+      ['¿Qué automatizaciones recomendáis empezar instalando?', 'Las más útiles suelen ser: captura de clientes, respuestas frecuentes, citas y reservas, presupuestos automáticos, seguimiento de interesados y resumen semanal del negocio. Son simples, prácticas y se entienden rápido. Qué rareza, algo tecnológico que no necesita un máster.'],
+      ['¿Cuánto cuesta?', 'Depende de lo que haya que instalar. No cuesta lo mismo un chatbot sencillo que una web, un sistema de automatización completo o una integración con varias herramientas. Por eso empezamos con una revisión y te damos una propuesta clara.'],
+      ['¿Hay permanencia?', 'No. La instalación se paga una vez y el mantenimiento mensual es opcional según el tipo de sistema. La idea es que te quedes porque te ayuda, no porque estés atrapado.'],
+      ['¿Qué pasa si ya uso Gmail, Calendar, Sheets, Drive, Notion o un CRM?', 'Mejor. Podemos estudiar cómo conectarlas para que trabajen juntas y no tengas la información repartida como si fuera una búsqueda del tesoro administrativa.'],
+      ['¿Esto sustituye a una persona?', 'No necesariamente. Normalmente sustituye tareas repetidas, no criterio humano. La IA puede responder, ordenar, preparar, filtrar y avisar. Pero hay decisiones, relaciones y situaciones delicadas que siguen necesitando personas. La gracia está en que las personas no pierdan el día haciendo trabajo de máquina.']
     ];
     const faqBox = document.getElementById('faq');
     FAQ.forEach(([q, a]) => {
@@ -363,9 +931,10 @@
       faqBox.appendChild(d);
     });
 
+    // Fade-in on scroll
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.fade').forEach(el => io.observe(el));
   </script>
 </body>
