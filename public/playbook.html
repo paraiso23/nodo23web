@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playbook de Ventas · Nodo23</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { ink:'#16150f', body:'#3b3a34', muted:'#7c7a72', paper:'#ffffff', cream:'#f7f6f2', line:'#e7e4dc', accent:'#15775a', accentSoft:'#eaf3ee', danger:'#b4452f' },
+        fontFamily: { serif:['Fraunces','Georgia','serif'], sans:['Inter','sans-serif'] }
+      } }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; background:#fff; color:#3b3a34; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4,.serif { font-family:'Fraunces',Georgia,serif; }
+    .eyebrow { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#7c7a72; font-weight:600; }
+    .prose p { line-height:1.7; }
+    .toc a.active { color:#15775a; font-weight:600; }
+    .lead li { position:relative; padding-left:1.3rem; }
+    .lead li::before { content:"—"; position:absolute; left:0; color:#15775a; }
+    @media print {
+      .no-print { display:none !important; }
+      .print-block { break-inside: avoid; }
+      main { margin:0 !important; max-width:none !important; }
+      a { color:inherit; text-decoration:none; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-body">
+
+  <!-- TOP BAR -->
+  <header class="no-print sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-line">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-baseline gap-2.5">
+        <span class="serif text-ink text-xl font-600 tracking-tight">Nodo23</span>
+        <span class="text-[11px] text-muted tracking-wide">Playbook de ventas</span>
+      </div>
+      <button onclick="window.print()" class="text-sm font-600 text-paper bg-ink hover:bg-accent transition rounded-full px-5 py-2.5">Imprimir / PDF</button>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-5 md:px-8 grid lg:grid-cols-[230px_1fr] gap-10 lg:gap-14">
+
+    <!-- TOC -->
+    <aside class="no-print hidden lg:block">
+      <nav class="toc sticky top-24 text-[13.5px] leading-relaxed space-y-1.5 py-12 border-r border-line pr-6">
+        <p class="eyebrow mb-3">Índice</p>
+        <a href="#p1" class="block text-body hover:text-accent transition">1 · Qué vendemos</a>
+        <a href="#p2" class="block text-body hover:text-accent transition">2 · Qué es la IA</a>
+        <a href="#p3" class="block text-body hover:text-accent transition">3 · Los 4 servicios</a>
+        <a href="#p4" class="block text-body hover:text-accent transition">4 · Las 6 automatizaciones</a>
+        <a href="#p5" class="block text-body hover:text-accent transition">5 · A quién (y a quién no)</a>
+        <a href="#p6" class="block text-body hover:text-accent transition">6 · El proceso de venta</a>
+        <a href="#p7" class="block text-body hover:text-accent transition">7 · Hablar de precio</a>
+        <a href="#p8" class="block text-body hover:text-accent transition">8 · Guion de venta</a>
+        <a href="#p9" class="block text-body hover:text-accent transition">9 · Objeciones</a>
+        <a href="#p10" class="block text-body hover:text-accent transition">10 · Glosario</a>
+        <a href="#p11" class="block text-body hover:text-accent transition">11 · Reglas de oro</a>
+        <a href="#claims" class="block text-body hover:text-accent transition">Chuleta de claims</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="py-12 md:py-16 max-w-2xl">
+
+      <!-- PORTADA -->
+      <div class="print-block mb-14">
+        <p class="eyebrow mb-3">Manual interno · Departamento de ventas</p>
+        <h1 class="serif text-ink font-500 tracking-[-0.02em] leading-[1.05] text-[clamp(32px,5vw,52px)]">Playbook de ventas</h1>
+        <p class="serif italic text-accent text-2xl mt-2">Entiende el producto. Aprende a venderlo.</p>
+        <p class="mt-5 text-[15px] text-muted leading-relaxed">
+          Léelo una vez de principio a fin para entender Nodo23. Después úsalo como manual de consulta para los
+          guiones, los precios y las objeciones. Nivel técnico: medio. Sin humo.
+        </p>
+        <div class="mt-6 rounded-2xl bg-accentSoft/60 border border-accent/30 p-5">
+          <p class="text-ink text-[15px] leading-relaxed">
+            <b>La idea en una frase:</b> Nodo23 instala inteligencia artificial en negocios, como quien instala el aire
+            acondicionado: venimos, lo montamos, lo probamos y lo dejamos funcionando.
+          </p>
+          <p class="serif text-ink text-xl font-500 mt-3">"Te instalamos la IA. Tú a lo tuyo."</p>
+        </div>
+      </div>
+
+      <!-- PARTE 1 -->
+      <section id="p1" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 1</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Entiende qué vendemos</h2>
+
+        <h3 class="serif text-ink text-xl font-500 mt-6 mb-2">El cliente no compra software</h3>
+        <p>Compra que le resolvamos un problema y se lo dejemos <b>funcionando sin tener que aprender nada</b>. No vendemos una app ni un curso.</p>
+
+        <h3 class="serif text-ink text-xl font-500 mt-6 mb-2">Por qué esto se vende</h3>
+        <p>La mayoría de empresas de IA venden <b>acceso a una herramienta</b>: te dan una plataforma con veinte botones y te apañas tú. El cliente la abre, no entiende nada y la abandona en una semana. Nosotros vendemos lo contrario: un sistema instalado y funcionando.</p>
+        <div class="border-l-2 border-accent bg-cream rounded-r-xl p-5 my-5">
+          <p class="serif text-ink text-lg font-500">"Una herramienta la tienes que aprender. Una instalación solo la usas."</p>
+          <p class="text-[14px] text-muted mt-1">Si solo te quedas con una frase de todo el playbook, que sea esta.</p>
+        </div>
+      </section>
+
+      <!-- PARTE 2 -->
+      <section id="p2" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 2</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Qué es "la IA" que instalamos</h2>
+        <p>No necesitas explicar cómo funciona por dentro, pero sí entenderlo para no bloquearte. Tres conceptos:</p>
+
+        <div class="space-y-3 my-5">
+          <div class="rounded-xl border border-line p-5">
+            <p class="text-ink font-600">Chatbot / asistente</p>
+            <p class="text-[15px] mt-1">Un programa que <b>conversa</b>: lee lo que escribe un cliente y responde con sentido, como una persona. Nada de "pulse 1 para…". Lo entrenamos con la info del negocio para que responda como si fuera de la casa.</p>
+          </div>
+          <div class="rounded-xl border border-line p-5">
+            <p class="text-ink font-600">Automatización</p>
+            <p class="text-[15px] mt-1">Una <b>tarea que se hace sola</b> cuando pasa algo. Ej.: alguien rellena el formulario → se guarda → te llega un aviso. Nadie lo hace a mano.</p>
+          </div>
+          <div class="rounded-xl border border-line p-5">
+            <p class="text-ink font-600">Integración / conexión</p>
+            <p class="text-[15px] mt-1">Hacer que <b>dos herramientas hablen entre sí</b> (WhatsApp con la agenda, la web con una hoja de Google). "Integrar" = conectar.</p>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-accentSoft/60 border border-accent/30 p-5">
+          <p class="text-ink text-[15px]"><b>Regla de oro técnica:</b> si te preguntan un detalle muy técnico que no sabes, no improvises. Di: <i>"Buena pregunta, eso lo confirma el equipo técnico en la revisión para no decirte una cifra al aire."</i> Genera más confianza que inventar.</p>
+        </div>
+      </section>
+
+      <!-- PARTE 3 -->
+      <section id="p3" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 3</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">El catálogo: los 4 servicios</h2>
+
+        <div class="space-y-4">
+          <div class="rounded-2xl border border-accent/40 bg-cream p-6">
+            <span class="eyebrow text-accent">Producto estrella</span>
+            <h3 class="serif text-ink text-xl font-500 mt-1 mb-2">1 · Chatbot de atención al cliente</h3>
+            <p class="text-[15px]"><b>Qué es:</b> IA conectada a su web y WhatsApp que responde al instante, día y noche. Resuelve dudas, da precios, recoge datos y ayuda con las citas.</p>
+            <p class="text-[15px] mt-1"><b>Encaja si:</b> recibe muchos mensajes repetidos, tarda en contestar o pierde clientes fuera de horario.</p>
+            <p class="text-[15px] mt-2 text-accent italic">"Es como tener a alguien contestando tu WhatsApp 24 horas, que además habla como tú."</p>
+          </div>
+          <div class="rounded-2xl border border-line p-6">
+            <h3 class="serif text-ink text-xl font-500 mb-2">2 · Páginas web con IA</h3>
+            <p class="text-[15px]"><b>Qué es:</b> web clara y profesional pensada para convertir visitas en clientes. Formularios, conexión a WhatsApp y SEO básico.</p>
+            <p class="text-[15px] mt-1"><b>Encaja si:</b> no tiene web, la tiene anticuada o no explica bien lo que hace.</p>
+            <p class="text-[15px] mt-2 text-accent italic">"Una web que en vez de estar de adorno, te trae contactos."</p>
+          </div>
+          <div class="rounded-2xl border border-line p-6">
+            <h3 class="serif text-ink text-xl font-500 mb-2">3 · Gestión de redes con IA</h3>
+            <p class="text-[15px]"><b>Qué es:</b> sistema que ayuda a planificar y crear contenido (calendarios, textos, ideas) en el tono de su marca.</p>
+            <p class="text-[15px] mt-1"><b>Encaja si:</b> sus redes están muertas o dependen de "cuando tenga un rato".</p>
+            <p class="text-[15px] mt-2 text-accent italic">"Redes activas sin estrujarte el cerebro cada mañana."</p>
+          </div>
+          <div class="rounded-2xl border border-line p-6">
+            <h3 class="serif text-ink text-xl font-500 mb-2">4 · Automatizaciones</h3>
+            <p class="text-[15px]"><b>Qué es:</b> sistemas que hacen tareas repetidas solas y conectan sus herramientas.</p>
+            <p class="text-[15px] mt-1"><b>Encaja si:</b> hace mucho trabajo manual y repetitivo cada semana.</p>
+            <p class="text-[15px] mt-2 text-accent italic">"Eso que haces a mano cada día y te roba tiempo, lo dejamos en automático."</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-danger/40 bg-danger/5 p-5 mt-5">
+          <p class="text-[15px] text-ink"><b class="text-danger">⚠ No vendas los cuatro de golpe.</b> Empieza por uno (casi siempre el chatbot) y amplía cuando el cliente ve que funciona. Vender todo a la vez asusta y encarece.</p>
+        </div>
+      </section>
+
+      <!-- PARTE 4 -->
+      <section id="p4" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 4</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Las 6 automatizaciones "de entrada"</h2>
+        <p>Las más fáciles de vender porque cualquier negocio las entiende. Útiles cuando el cliente no sabe por dónde empezar.</p>
+        <div class="overflow-hidden rounded-2xl border border-line mt-5">
+          <table class="w-full text-[14.5px] border-collapse">
+            <thead><tr class="bg-cream text-ink text-left">
+              <th class="p-3 font-600 border-b border-line">Automatización</th>
+              <th class="p-3 font-600 border-b border-line">Cómo se la vendes</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="p-3 border-b border-line text-ink font-500">Captura de clientes</td><td class="p-3 border-b border-line">"No se te pierde ni un contacto, aunque entren por cinco sitios."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink font-500">Respuestas frecuentes</td><td class="p-3 border-b border-line">"Deja de responder treinta veces lo mismo."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink font-500">Citas y reservas</td><td class="p-3 border-b border-line">"El cliente reserva solo y le llega el recordatorio."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink font-500">Presupuestos</td><td class="p-3 border-b border-line">"Presupuestos base en minutos, no en días."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink font-500">Seguimiento</td><td class="p-3 border-b border-line">"Recupera al que preguntó y no volvió a escribir."</td></tr>
+              <tr><td class="p-3 text-ink font-500">Resumen semanal</td><td class="p-3">"Cada lunes sabes qué pasó en tu negocio de un vistazo."</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PARTE 5 -->
+      <section id="p5" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 5</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">A quién le vendemos (y a quién no)</h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-accent/40 bg-accentSoft/40 p-5">
+            <p class="eyebrow text-accent mb-2">✅ Cliente ideal</p>
+            <p class="text-[14.5px]">Pymes, autónomos y equipos pequeños que reciben muchos mensajes o dependen de citas/presupuestos: clínicas, estética, academias, inmobiliarias, restaurantes, talleres, tiendas, estudios, servicios profesionales.</p>
+          </div>
+          <div class="rounded-2xl border border-line p-5">
+            <p class="eyebrow mb-2" style="color:#b4452f">❌ No le vendemos a</p>
+            <p class="text-[14.5px]">Quien quiere magia sin aportar nada, busca gratis y perfecto, o quiere "meter IA" porque suena moderno sin un problema real.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl bg-cream p-5 mt-4">
+          <p class="text-ink font-600 text-[15px] mb-2">Señales de buen cliente (escúchalas):</p>
+          <ul class="lead space-y-1.5 text-[14.5px]">
+            <li>"No doy abasto con los WhatsApp / las llamadas." → <span class="text-accent">Chatbot</span></li>
+            <li>"Hago los presupuestos a mano." → <span class="text-accent">Automatización</span></li>
+            <li>"Mis redes las llevo cuando puedo." → <span class="text-accent">Redes</span></li>
+            <li>"Tengo web pero no me entra nada." → <span class="text-accent">Web</span></li>
+          </ul>
+        </div>
+        <p class="text-[14px] text-muted mt-3">La IA necesita información del negocio. Montamos el sistema, no inventamos su empresa. Si detectas a un mal cliente, no fuerces la venta.</p>
+      </section>
+
+      <!-- PARTE 6 -->
+      <section id="p6" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 6</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">El proceso de venta paso a paso</h2>
+        <p>Este es nuestro embudo. Cada llamada tiene que mover al cliente al siguiente paso.</p>
+        <ol class="space-y-3 mt-5">
+          <li class="rounded-xl border border-accent/40 bg-accentSoft/30 p-4"><b class="text-ink">1 · Revisión gratis</b> <span class="text-[14px] text-muted">— tu objetivo nº 1.</span><br><span class="text-[14.5px]">No cierres la venta en el primer mensaje. Tu meta es conseguir la revisión gratuita: es gratis, no compromete y es donde se vende de verdad.</span></li>
+          <li class="rounded-xl border border-line p-4"><b class="text-ink">2 · Propuesta clara</b><br><span class="text-[14.5px]">Qué instalamos, qué resuelve, qué incluye, cuánto cuesta y qué resultado esperar. (Normalmente con el equipo técnico.)</span></li>
+          <li class="rounded-xl border border-line p-4"><b class="text-ink">3 · Demo</b> <span class="text-[14px] text-muted">— cuando tiene sentido.</span><br><span class="text-[14.5px]">Le enseñamos la idea funcionando con su propio negocio. Nuestra arma de cierre: ver es creer.</span></li>
+          <li class="rounded-xl border border-line p-4"><b class="text-ink">4 y 5 · Instalación y mantenimiento</b><br><span class="text-[14.5px]">"Lo montamos, lo dejamos funcionando y nos quedamos detrás para que no se rompa."</span></li>
+        </ol>
+      </section>
+
+      <!-- PARTE 7 -->
+      <section id="p7" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 7</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">El dinero: cómo hablar de precio</h2>
+        <p>Dos cobros, más una puerta de entrada gratis:</p>
+        <ul class="lead space-y-2 my-4 text-[15px]">
+          <li><b class="text-ink">Instalación</b> — pago único (revisión, configuración, textos, conexiones, pruebas, entrega).</li>
+          <li><b class="text-ink">Mantenimiento</b> — cuota mensual opcional. Ajustes, actualizaciones y soporte. Sin permanencia.</li>
+          <li><b class="text-ink">Revisión/demo previa</b> — gratis. Tu gancho de entrada.</li>
+        </ul>
+        <div class="border-l-2 border-accent bg-cream rounded-r-xl p-5 my-4">
+          <p class="text-[14px] text-muted mb-1">Cuando te pregunten "¿cuánto cuesta?" (siempre lo harán):</p>
+          <p class="text-[15px] text-ink italic">"Depende de lo que haya que instalar — no cuesta lo mismo un chatbot sencillo que una web completa. Por eso hacemos primero una revisión gratis: miramos tu caso y te damos un precio cerrado, sin sorpresas. ¿Te lo monto?"</p>
+        </div>
+        <p class="text-[14px] text-muted">Esto no te encierra en un número y empuja a la revisión (paso 1).</p>
+        <div class="rounded-xl bg-accentSoft/50 p-4 mt-4">
+          <p class="text-[14px] text-muted mb-1">Argumento anti-permanencia:</p>
+          <p class="text-[15px] text-ink italic">"No te atamos. La instalación se paga una vez y el mantenimiento es opcional. Te quedas porque te funciona, no porque hayas firmado nada."</p>
+        </div>
+      </section>
+
+      <!-- PARTE 8 -->
+      <section id="p8" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 8</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Guion de venta</h2>
+        <div class="space-y-4">
+          <div><p class="text-ink font-600">1. Abre con el dolor, no con el producto.</p>
+            <p class="text-[14.5px] mt-1"><span style="color:#b4452f">✗</span> "Vendemos chatbots con IA."<br><span class="text-accent">✓</span> "¿Cuántos mensajes de clientes se te quedan sin contestar al día?"</p></div>
+          <div><p class="text-ink font-600">2. Descubre (preguntas clave):</p>
+            <ul class="lead space-y-1.5 text-[14.5px] mt-1">
+              <li>¿Por dónde te escriben más los clientes?</li>
+              <li>¿Quién contesta esos mensajes? ¿Llegas a todo?</li>
+              <li>¿Qué tarea repetida te quita más tiempo cada semana?</li>
+              <li>¿Tienes web? ¿Te entra trabajo por ahí?</li>
+              <li>¿Qué pasa con los mensajes de fuera de horario?</li>
+            </ul></div>
+          <div><p class="text-ink font-600">3. Conecta su respuesta con un servicio.</p><p class="text-[14.5px] mt-1">(Usa la Parte 3.)</p></div>
+          <div><p class="text-ink font-600">4. Pinta el resultado, no la tecnología.</p>
+            <p class="text-[14.5px] mt-1"><span class="text-accent">✓</span> "Imagina que mañana cada cliente que escribe a las 11 de la noche ya recibe respuesta y reserva solo."</p></div>
+          <div class="rounded-xl border border-accent/40 bg-accentSoft/30 p-4"><p class="text-ink font-600">5. Cierra hacia la revisión (no hacia la compra):</p>
+            <p class="text-[15px] mt-1 italic text-ink">"Lo mejor es que lo veas en tu propio negocio. Te hago una revisión gratis, sin compromiso, y te digo qué tendría sentido instalar primero. ¿Te va bien esta semana?"</p></div>
+        </div>
+      </section>
+
+      <!-- PARTE 9 -->
+      <section id="p9" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 9</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Objeciones y cómo responderlas</h2>
+        <div class="overflow-hidden rounded-2xl border border-line">
+          <table class="w-full text-[14px] border-collapse">
+            <thead><tr class="bg-cream text-ink text-left">
+              <th class="p-3 font-600 border-b border-line w-2/5">Te dicen…</th>
+              <th class="p-3 font-600 border-b border-line">Respondes…</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="p-3 border-b border-line text-ink">"No entiendo de tecnología."</td><td class="p-3 border-b border-line">"Para eso estamos nosotros. Tú cuentas tu negocio y nosotros lo montamos. No aprendes nada."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink">"¿No sonará como un robot?"</td><td class="p-3 border-b border-line">"No. Lo entrenamos con tu forma de hablar. Notan que contestas rápido, no que es una máquina."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink">"Es caro / no sé si me vale."</td><td class="p-3 border-b border-line">"Por eso empezamos con revisión gratis y, si tiene sentido, una demo con tu negocio. Decides cuando lo veas."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink">"¿Y si quiero dejarlo?"</td><td class="p-3 border-b border-line">"Sin permanencia. Instalación única, mantenimiento opcional."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink">"¿Sustituye a un empleado?"</td><td class="p-3 border-b border-line">"No. Sustituye tareas repetidas, no a las personas. Las libera de lo mecánico."</td></tr>
+              <tr><td class="p-3 border-b border-line text-ink">"Ya uso Gmail, un CRM…"</td><td class="p-3 border-b border-line">"Mejor. Los conectamos para que trabajen juntos en vez de tener todo desperdigado."</td></tr>
+              <tr><td class="p-3 text-ink">"Déjame pensarlo."</td><td class="p-3">"Claro. La revisión es gratis, así piensas con datos. ¿Te la dejo agendada y luego decides?"</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PARTE 10 -->
+      <section id="p10" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 10</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Glosario rápido</h2>
+        <dl class="space-y-2.5 text-[14.5px]">
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">IA</dt><dd>Programas que entienden lenguaje y "deciden" respuestas, en vez de seguir botones fijos.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Chatbot</dt><dd>La IA que conversa con los clientes.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Automatización</dt><dd>Tarea que se ejecuta sola al cumplirse una condición.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Integración</dt><dd>Unir dos herramientas para que compartan información.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">CRM</dt><dd>Programa donde se guardan y gestionan los clientes.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Lead</dt><dd>Un contacto interesado que aún no es cliente.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Landing page</dt><dd>Web de una sola página enfocada a captar contactos.</dd></div>
+          <div class="flex gap-3"><dt class="text-ink font-600 w-44 shrink-0">Entrenar la IA</dt><dd>Darle la info del negocio para que responda bien.</dd></div>
+        </dl>
+      </section>
+
+      <!-- PARTE 11 -->
+      <section id="p11" class="print-block prose max-w-none mb-14 scroll-mt-24">
+        <p class="eyebrow mb-2">Parte 11</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Reglas de oro (qué NO hacer)</h2>
+        <ol class="space-y-2.5 text-[15px]">
+          <li class="flex gap-3"><span class="serif text-accent font-500">1.</span> No prometas lo que no sabes. Ante una duda técnica → "lo confirma el equipo en la revisión".</li>
+          <li class="flex gap-3"><span class="serif text-accent font-500">2.</span> No des precios cerrados al aire. → Lleva a la revisión.</li>
+          <li class="flex gap-3"><span class="serif text-accent font-500">3.</span> No vendas los 4 servicios de golpe. Empieza por uno.</li>
+          <li class="flex gap-3"><span class="serif text-accent font-500">4.</span> No vendas "tecnología". Vende tiempo, clientes y tranquilidad.</li>
+          <li class="flex gap-3"><span class="serif text-accent font-500">5.</span> No fuerces a un mal cliente. Quema tiempo y trae problemas.</li>
+        </ol>
+      </section>
+
+      <!-- CLAIMS -->
+      <section id="claims" class="print-block prose max-w-none mb-10 scroll-mt-24">
+        <p class="eyebrow mb-2">Chuleta</p>
+        <h2 class="serif text-ink font-500 text-[clamp(24px,3.4vw,34px)] leading-tight mb-5">Claims para mensajes y cierres</h2>
+        <div class="space-y-2.5">
+          <p class="serif text-ink text-lg italic">"Te instalamos la IA. Tú a lo tuyo."</p>
+          <p class="serif text-ink text-lg italic">"No necesitas otra app. Necesitas que alguien te lo deje funcionando."</p>
+          <p class="serif text-ink text-lg italic">"Una herramienta la tienes que aprender; una instalación solo la usas."</p>
+          <p class="serif text-ink text-lg italic">"Menos mensajes perdidos, menos tareas a mano, más negocio atendido."</p>
+        </div>
+      </section>
+
+      <p class="text-[12px] text-muted border-t border-line pt-6">Nodo23 · Playbook de ventas · Documento interno.</p>
+
+    </main>
+  </div>
+
+  <script>
+    // Resaltar sección activa en el índice
+    const links = [...document.querySelectorAll('.toc a')];
+    const map = {};
+    links.forEach(l => { const id = l.getAttribute('href').slice(1); const s = document.getElementById(id); if (s) map[id] = l; });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          if (map[e.target.id]) map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    Object.keys(map).forEach(id => obs.observe(document.getElementById(id)));
+  </script>
+</body>
+</html>
