@@ -7,3 +7,6 @@ coverage/
 .env*
 !.env.example
 .vercel
+
+# build artifacts / deploy packages
+*.zip
